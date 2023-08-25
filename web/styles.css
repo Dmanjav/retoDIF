@@ -1,23 +1,25 @@
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #F2F2F2;
+    font-family: Barlow, sans-serif;
+    color: #FFF;
 }
 
-nav {
-    background-color: #333;
+.nav {
+    background-color: #9F2141;
     overflow: hidden;
-    display: flex;
+    display: flex; 
+    justify-content: space-between;
 }
 
 .container {
+    margin-top: 28rem;
     margin-left: 10px;
     margin-right: 10px;
     padding: 0;
 }
 
-.columna {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
+.nav p {
+    text-align: center;
+    font-size: 2rem;
 }
+
