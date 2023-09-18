@@ -1,0 +1,21 @@
+Instrucciones para el manejo del repo 
+
+Crear el proyecto sobre la carpeta que ya clonaron
+
+para subir los cambios
+
+1. en terminal y en la carpeta del proyecto escribir git status, eso sirve para ver los cambios que ha habido en los archivos
+
+2. Comando "git add ." ,sirve para agregar todos los archivos que aparecieron en el comando anterior a lo que va a ser el commit
+
+3. git commit -m "cambios vista x", entre las comillas va un nombre para el commit
+
+4. git push
+
+Si van a cambiar de computadora y quieren pasar los cambios a la otra computadora que no está actualizada y ya está en el repo:
+
+1. Git fetch, en la carpeta del proyecto
+
+2. Git pull
+
+IMPORTANTE: ANTES DE BAJAR CAMBIOS, AÑADIR LOS QUE TIENEN O DESCARTARLOS Y LUEGO HACER EL PULL.
