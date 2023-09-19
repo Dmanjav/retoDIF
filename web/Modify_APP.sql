@@ -3,25 +3,25 @@ GO
 
 Insert into Comedor
 Values 
-('Cinco de Mayo', 'Porfirio Díaz', 27, '5 de Mayo', '230822'),
-('Monte María', 'Monte Real', 11, 'Lomas de Monte María', '230822'),
-('Cerro Grande', 'Teotihuacán', 15, 'Cerro Grande', '300123'),
-('Hogares', 'Retorno de la tranquilidad', 8, 'Hogares de Atizapán', '091222');
+('Cinco de Mayo', 'Porfirio Dï¿½az', 27, '5 de Mayo', '230822'),
+('Monte Marï¿½a', 'Monte Real', 11, 'Lomas de Monte Marï¿½a', '230822'),
+('Cerro Grande', 'Teotihuacï¿½n', 15, 'Cerro Grande', '300123'),
+('Hogares', 'Retorno de la tranquilidad', 8, 'Hogares de Atizapï¿½n', '091222');
 
 
 Insert Into 
 Comida
 Values
-('Ensalada', 'Bistec a la mexicana', 'Duraznos en almíbar'),
+('Ensalada', 'Bistec a la mexicana', 'Duraznos en almï¿½bar'),
 ('Sopa de fideo', 'Tacos dorados de pollo', 'Gelatina'),
-('Arroz', 'Pozole', 'Plátanos con crema');
+('Arroz', 'Pozole', 'Plï¿½tanos con crema');
 
 Insert Into
 Cliente
 Values
-('AAAA030125HDFLVLA2', 'Alan', 'Alcántara', 'Ávila', 'H', '2003-01-25', 'Sano'),
+('AAAA030125HDFLVLA2', 'Alan', 'Alcï¿½ntara', 'ï¿½vila', 'H', '2003-01-25', 'Sano'),
 ('MAVD030411HDFNVGA7', 'Diego', 'Manjarrez', 'Viveros', 'H', '2003-04-11', 'Sano'),
-('SACC030606HMCNLRA2', 'Carlos', 'Sánchez', 'Calderon', 'H', '2003-06-06', 'Cuatro Ojos');
+('SACC030606HMCNLRA2', 'Carlos', 'Sï¿½nchez', 'Calderon', 'H', '2003-06-06', 'Cuatro Ojos');
 
 Insert Into
 Dependencia
