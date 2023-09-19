@@ -27,7 +27,8 @@ CREATE TABLE Cliente (
 	apellidoM VARCHAR(50) NOT NULL,
 	sexo VARCHAR(1) NOT NULL,
 	fechaNacimiento DATE NOT NULL,
-	condicion VARCHAR(20)
+	condicion VARCHAR(20),
+	contrasena VARCHAR(50) NOT NULL
 );
 GO
 
