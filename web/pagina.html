@@ -12,12 +12,36 @@
 <body>
     <navbar class="nav">
         <p><img src="https://www.difatizapan.gob.mx/images/dae21140-87ad-4b93-a6a1-50a300632bbe1.png" alt="logo"
-            width="300" height="100" class="columna"></p>
-            <p>Monitor de datos</p>
+                width="300" height="100" class="columna"></p>
+        <p class="title">Monitor de datos</p>
     </navbar>
-
-    <canvas id="myChart" width="400" height="200"></canvas>
     
+    <div class="gfx-container">
+        <div class="grafico">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="grafico" >
+            <canvas id="myChart2"></canvas>
+        </div>
+        <div class="grafico">
+            <canvas id="myChart3"></canvas>
+        </div>
+        <div class="grafico" >
+            <canvas id="myChart4"></canvas>
+        </div>
+        <div class="grafico">
+            <canvas id="myChart5"></canvas>
+        </div>
+        <div class="grafico" >
+            <canvas id="myChart6"></canvas>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="graficas.js"></script>
+    </div>
+
+
     <div class="container">
         <p>
             What is Lorem Ipsum?
@@ -35,8 +59,6 @@
             desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a
             search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved
             over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
-
         </p>
     </div>
 </body>

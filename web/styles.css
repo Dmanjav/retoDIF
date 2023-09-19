@@ -1,7 +1,16 @@
 body {
     margin: 0;
     font-family: Barlow, sans-serif;
-    color: #FFF;
+    color: #000;
+}
+
+.columna {
+    margin: 10px;
+}
+
+.title {
+    margin: 10px;
+    align-items: center;
 }
 
 .nav {
@@ -9,10 +18,18 @@ body {
     overflow: hidden;
     display: flex; 
     justify-content: space-between;
+    color: #FFF;
+}
+
+.gfx-container {
+    margin: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .container {
-    margin-top: 28rem;
     margin-left: 10px;
     margin-right: 10px;
     padding: 0;
@@ -23,3 +40,7 @@ body {
     font-size: 2rem;
 }
 
+.grafico {
+    height: auto;
+    width: auto;
+}
