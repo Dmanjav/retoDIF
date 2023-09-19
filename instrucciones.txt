@@ -10,7 +10,7 @@ para subir los cambios
 
 3. git commit -m "cambios vista x", entre las comillas va un nombre para el commit
 
-4. git push
+4. git pusha
 
 Si van a cambiar de computadora y quieren pasar los cambios a la otra computadora que no está actualizada y ya está en el repo:
 
