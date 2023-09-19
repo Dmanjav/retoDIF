@@ -1,0 +1,102 @@
+Use master;
+GO
+
+IF EXISTS (SELECT 1 FROM sys.databases WHERE [name] = 'APP')
+BEGIN
+	ALTER DATABASE APP SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+	DROP DATABASE APP;
+END;
+
+CREATE DATABASE APP;
+GO
+
+USE APP;
+GO
+
+DROP TABLE IF EXISTS Cliente;
+DROP TABLE IF EXISTS Dependencia;
+DROP TABLE IF EXISTS Comedor;
+DROP TABLE IF EXISTS Comida;
+DROP TABLE IF EXISTS Pedido;
+
+CREATE TABLE Cliente (
+	curp VARCHAR(20) NOT NULL PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	apellidoP VARCHAR(50) NOT NULL,
+	apellidoM VARCHAR(50) NOT NULL,
+	sexo VARCHAR(1) NOT NULL,
+	fechaNacimiento DATE NOT NULL,
+	condicion VARCHAR(20)
+);
+GO
+
+CREATE TABLE Dependencia (
+	IdResponsable VARCHAR(20) NOT NULL,
+	CONSTRAINT FK_IdResponsable
+		FOREIGN KEY (IdResponsable)
+		REFERENCES Cliente (curp)
+		ON UPDATE NO ACTION
+		ON DELETE NO ACTION,
+	IdDependiente VARCHAR(20) NOT NULL,
+	CONSTRAINT FK_IdDependiente
+		FOREIGN KEY (IdDependiente)
+		REFERENCES Cliente (curp)
+		ON UPDATE NO ACTION
+		ON DELETE NO ACTION,
+	CONSTRAINT PK_LLAVEPRIMARIA PRIMARY KEY (IdResponsable, IdDependiente)
+);
+GO
+
+CREATE TABLE Comedor (
+	IdComedor INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	nombre VARCHAR(50),
+	calle VARCHAR(50),
+	numero INT,
+	colonia VARCHAR(50),
+	contrasena VARCHAR(50)
+);
+GO
+
+CREATE TABLE Comida (
+	IdComida INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	entrada VARCHAR(50),
+	plato VARCHAR(50),
+	postre VARCHAR(50)
+);
+GO
+
+CREATE TABLE Pedido (
+	IdPedido INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	fecha DATE NOT NULL,
+	donacion BIT NOT NULL DEFAULT 0,
+	responsable VARCHAR(20) NOT NULL,
+	CONSTRAINT FK_Responsable
+		FOREIGN KEY (Responsable)
+		REFERENCES Cliente (curp)
+		ON UPDATE NO ACTION
+		ON DELETE NO ACTION,
+	dependiente VARCHAR(20) NOT NULL,
+	CONSTRAINT FK_Dependiente
+		FOREIGN KEY (Dependiente)
+		REFERENCES Cliente (curp)
+		ON UPDATE NO ACTION
+		ON DELETE NO ACTION,
+	--CONSTRAINT FK_IdResponsableIdDependiente
+	--	FOREIGN KEY (IdResponsable,IdDependiente)
+	--	REFERENCES Dependencia (IdResponsable,IdDependiente)
+	--	ON UPDATE NO ACTION
+	--	ON DELETE NO ACTION,
+	IdComedor INT NOT NULL,
+	CONSTRAINT FK_IdComedor
+		FOREIGN KEY (IdComedor)
+		REFERENCES Comedor (IdComedor)
+		ON UPDATE NO ACTION
+		ON DELETE NO ACTION,
+	IdComida INT NOT NULL,
+	CONSTRAINT FK_IdComida
+		FOREIGN KEY (IdComida)
+		REFERENCES Comida (IdComida)
+		ON UPDATE NO ACTION
+		ON DELETE NO ACTION
+);
+GO
