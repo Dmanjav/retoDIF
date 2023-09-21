@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navegador"
+    app:startDestination="@id/inicioDeSesion">
+
+    <fragment
+        android:id="@+id/inicioDeSesion"
+        android:name="mx.itesm.difood.View.InicioDeSesion"
+        android:label="fragment_inicio_de_sesion"
+        tools:layout="@layout/fragment_inicio_de_sesion" >
+        <action
+            android:id="@+id/action_inicioDeSesion_to_principal"
+            app:destination="@id/principal" />
+    </fragment>
+    <fragment
+        android:id="@+id/principal"
+        android:name="mx.itesm.difood.View.Principal"
+        android:label="fragment_principal"
+        tools:layout="@layout/fragment_principal" >
+        <action
+            android:id="@+id/action_principal_to_registrarPedido"
+            app:destination="@id/registrarPedido" />
+        <action
+            android:id="@+id/action_principal_to_registrarMenu"
+            app:destination="@id/registrarMenu" />
+        <action
+            android:id="@+id/action_principal_to_registrarCliente"
+            app:destination="@id/registrarCliente" />
+        <action
+            android:id="@+id/action_principal_to_clientes"
+            app:destination="@id/clientes" />
+        <action
+            android:id="@+id/action_principal_to_inicioDeSesion"
+            app:destination="@id/inicioDeSesion" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrarPedido"
+        android:name="mx.itesm.difood.View.RegistrarPedido"
+        android:label="fragment_registrar_pedido"
+        tools:layout="@layout/fragment_registrar_pedido" >
+        <action
+            android:id="@+id/action_registrarPedido_to_principal"
+            app:destination="@id/principal" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrarMenu"
+        android:name="mx.itesm.difood.View.RegistrarMenu"
+        android:label="fragment_registrar_menu"
+        tools:layout="@layout/fragment_registrar_menu" >
+        <action
+            android:id="@+id/action_registrarMenu_to_principal"
+            app:destination="@id/principal" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrarCliente"
+        android:name="mx.itesm.difood.View.RegistrarCliente"
+        android:label="fragment_registrar_cliente"
+        tools:layout="@layout/fragment_registrar_cliente" >
+        <action
+            android:id="@+id/action_registrarCliente_to_principal"
+            app:destination="@id/principal" />
+    </fragment>
+    <fragment
+        android:id="@+id/clientes"
+        android:name="mx.itesm.difood.View.Clientes"
+        android:label="fragment_clientes"
+        tools:layout="@layout/fragment_clientes" >
+        <action
+            android:id="@+id/action_clientes_to_principal"
+            app:destination="@id/principal" />
+    </fragment>
+</navigation>

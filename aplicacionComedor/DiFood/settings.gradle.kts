@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "DiFood"
 include(":app")
+ 
