@@ -1,11 +1,18 @@
 from flask import Flask, render_template, url_for, request
 import pymssql
-from os import system
+from os import environ
 
-db = pymssql.connect(host='localhost', 
-                    user=system.DB_DIF_USER, 
-                    password=system.DB_DIF_PASS, 
+DB_USER = environ.get('DB_DIF_USER')
+DB_PASS = environ.get('DB_DIF_PASS')
+
+db = pymssql.connect(server='127.0.0.1', 
+                    user=DB_USER, 
+                    password=DB_PASS, 
                     database="APP")
+
+cursor = db.cursor()
+
+
 
 app = Flask(__name__)
 
@@ -29,5 +36,4 @@ def login_page():
 
 
 if __name__ == '__main__':
-
     app.run(debug=True)
