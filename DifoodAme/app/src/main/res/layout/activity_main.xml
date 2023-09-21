@@ -28,7 +28,7 @@
         app:layout_constraintVertical_bias="0.642" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textBienvenidos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
@@ -61,7 +61,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imgLogo"
         android:layout_width="282dp"
         android:layout_height="327dp"
         android:layout_marginStart="6dp"

@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.content.Intent
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.TextView
 import mx.itesm.difoodame.R
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +24,20 @@ class MainActivity : AppCompatActivity() {
         btnRegistrarse.setOnClickListener{
             val intent: Intent = Intent(this, RegistrarseView::class.java)
             startActivity(intent)
+
         }
+        val imageView = findViewById<ImageView>(R.id.imgLogo)
+        val animation: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate)
+        val txv = findViewById<TextView>(R.id.textBienvenidos)
+        imageView.startAnimation(animation)
+
+        btnRegistrarse.startAnimation(animation)
+        btnLogin.startAnimation(animation)
+        txv.startAnimation(animation)
+    }
+
+
+    fun iniciarEvento(){
+
     }
 }
