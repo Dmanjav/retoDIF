@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondologin"
     android:visibility="visible"
-    tools:context=".LoginView">
+    tools:context=".view.LoginView">
 
     <TextView
         android:id="@+id/textView"
@@ -49,6 +49,7 @@
         android:layout_marginTop="32dp"
         android:backgroundTint="#9F2141"
         android:text="Ingresar"
+        android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
@@ -79,5 +80,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/logodifood" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnCurp2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="#DC7E96"
+        android:clickable="true"
+        android:src="@android:drawable/ic_dialog_info"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

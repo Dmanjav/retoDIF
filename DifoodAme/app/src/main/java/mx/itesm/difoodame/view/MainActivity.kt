@@ -1,10 +1,10 @@
-package mx.itesm.difoodame
+package mx.itesm.difoodame.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.content.Intent
-import android.net.Uri
+import mx.itesm.difoodame.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
