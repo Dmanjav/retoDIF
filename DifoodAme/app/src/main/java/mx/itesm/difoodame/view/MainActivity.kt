@@ -14,7 +14,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        iniciarEvento()
+        animaciontext()
+    }
 
+
+    fun iniciarEvento(){
+        val animation: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate)
         val btnLogin: Button = findViewById(R.id.btnLogin)
         btnLogin.setOnClickListener {
             val intent: Intent = Intent(this, LoginView::class.java)
@@ -26,18 +32,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
+        btnRegistrarse.startAnimation(animation)
+        btnLogin.startAnimation(animation)
+
+    }
+    fun animaciontext(){
         val imageView = findViewById<ImageView>(R.id.imgLogo)
         val animation: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate)
         val txv = findViewById<TextView>(R.id.textBienvenidos)
         imageView.startAnimation(animation)
-
-        btnRegistrarse.startAnimation(animation)
-        btnLogin.startAnimation(animation)
         txv.startAnimation(animation)
-    }
-
-
-    fun iniciarEvento(){
-
     }
 }
