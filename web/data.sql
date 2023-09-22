@@ -24,7 +24,8 @@ DROP TABLE IF EXISTS `dbo.Admins`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `dbo.Admins` (
   `usuario` varchar(0) DEFAULT NULL,
-  `contrasena` varchar(0) DEFAULT NULL
+  `contrasena` varchar(0) DEFAULT NULL, 
+  `salt` varchar(0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -75,7 +76,8 @@ CREATE TABLE `dbo.Cliente` (
   `sexo` varchar(0) DEFAULT NULL,
   `fechaNacimiento` varchar(0) DEFAULT NULL,
   `condicion` varchar(0) DEFAULT NULL,
-  `contrasena` varchar(0) DEFAULT NULL
+  `contrasena` varchar(0) DEFAULT NULL,
+  `salt` varchar(0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -101,7 +103,8 @@ CREATE TABLE `dbo.Comedor` (
   `calle` varchar(0) DEFAULT NULL,
   `numero` varchar(0) DEFAULT NULL,
   `colonia` varchar(0) DEFAULT NULL,
-  `contrasena` varchar(0) DEFAULT NULL
+  `contrasena` varchar(0) DEFAULT NULL,
+  `salt` varchar(0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

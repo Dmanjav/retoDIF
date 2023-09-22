@@ -29,7 +29,8 @@ CREATE TABLE Cliente (
 	sexo VARCHAR(1) NOT NULL,
 	fechaNacimiento DATE NOT NULL,
 	condicion VARCHAR(20),
-	contrasena VARCHAR(50) NOT NULL
+	contrasena VARCHAR(50) NOT NULL,
+	salt VARCHAR(50)
 );
 GO
 
@@ -56,7 +57,8 @@ CREATE TABLE Comedor (
 	calle VARCHAR(50),
 	numero INT,
 	colonia VARCHAR(50),
-	contrasena VARCHAR(50)
+	contrasena VARCHAR(50),
+	salt VARCHAR(50)
 );
 GO
 
@@ -106,7 +108,8 @@ GO
 
 CREATE TABLE Admins (
 	usuario VARCHAR(50) NOT NULL PRIMARY KEY,
-	contrasena VARCHAR(50)
+	contrasena VARCHAR(50),
+	salt VARCHAR(50)
 );
 
 CREATE TABLE Anuncios (
