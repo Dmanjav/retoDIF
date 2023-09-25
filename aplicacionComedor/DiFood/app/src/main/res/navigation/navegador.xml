@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_principal_to_inicioDeSesion"
             app:destination="@id/inicioDeSesion" />
+        <action
+            android:id="@+id/action_principal_to_anuncio"
+            app:destination="@id/anuncio" />
     </fragment>
     <fragment
         android:id="@+id/registrarPedido"
@@ -69,6 +72,15 @@
         tools:layout="@layout/fragment_clientes" >
         <action
             android:id="@+id/action_clientes_to_principal"
+            app:destination="@id/principal" />
+    </fragment>
+    <fragment
+        android:id="@+id/anuncio"
+        android:name="mx.itesm.difood.View.Anuncio"
+        android:label="fragment_anuncio"
+        tools:layout="@layout/fragment_anuncio" >
+        <action
+            android:id="@+id/action_anuncio_to_principal"
             app:destination="@id/principal" />
     </fragment>
 </navigation>

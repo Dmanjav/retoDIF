@@ -6,77 +6,113 @@
     android:layout_height="match_parent"
     tools:context=".View.Principal">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="DiFood"
-        android:textSize="52sp"
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/frame_10"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Comida disponible para donar:  52"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <Button
-        android:id="@+id/btnPedido"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="Realizar Pedido"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <Button
-        android:id="@+id/btnRegCliente"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Registar Cliente"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="146dp"
+        android:layout_height="141dp"
+        android:src="@drawable/frame_9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPedido" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnPedido"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#D9D9D9"
+        android:fontFamily="@font/jockey_one"
+        android:text="Pedido"
+        android:textAlignment="textEnd"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnClientes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnRegCliente"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#D8D8D8"
+        android:fontFamily="@font/jockey_one"
+        android:text="Agregar Cliente"
+        android:textAlignment="textEnd"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnClientes"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Ver Clientes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegCliente" />
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#D8D8D8"
+        android:fontFamily="@font/jockey_one"
+        android:text="Clientes"
+        android:textAlignment="textEnd"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnAnuncio"
+        app:layout_constraintEnd_toEndOf="@+id/btnMenu"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnMenu"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Registrar Menú"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="260dp"
+        android:backgroundTint="#D8D8D8"
+        android:fontFamily="@font/jockey_one"
+        android:lineSpacingExtra="8sp"
+        android:text="Menú"
+        android:textAlignment="textEnd"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnClientes" />
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnAnuncio"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Crear Anuncio"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="164dp"
+        android:backgroundTint="#D8D8D8"
+        android:fontFamily="@font/jockey_one"
+        android:text="Anuncio"
+        android:textAlignment="textEnd"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView9"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMenu" />
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnSalir"
@@ -84,8 +120,127 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="240dp"
         android:layout_marginBottom="32dp"
-        android:text="Salir"
+        android:backgroundTint="#D7D7D7"
+        android:fontFamily="@font/jockey_one"
+        android:text="Regresar"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="302dp"
+        android:layout_height="291dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="68dp"
+        android:src="@drawable/frame_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="151dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/jockey_one"
+        android:text="Menú Principal"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnPedido"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="103dp"
+        android:layout_height="89dp"
+        android:layout_marginBottom="100dp"
+        android:fontFamily="@font/jockey_one"
+        android:lineSpacingExtra="0sp"
+        android:text="Comidas disponibles para donar"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.326"
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="88dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="132dp"
+        android:fontFamily="@font/jockey_one"
+        android:lineSpacingExtra="0sp"
+        android:text="50"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/pedidoicon"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPedido"
+        app:layout_constraintEnd_toEndOf="@+id/btnPedido"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toStartOf="@+id/btnPedido" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/listclientesicon"
+        app:layout_constraintBottom_toBottomOf="@+id/btnClientes"
+        app:layout_constraintEnd_toEndOf="@+id/btnClientes"
+        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintStart_toStartOf="@+id/btnClientes" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/anuncioicon"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAnuncio"
+        app:layout_constraintEnd_toEndOf="@+id/btnAnuncio"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toStartOf="@+id/btnAnuncio" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/menuicon"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMenu"
+        app:layout_constraintEnd_toEndOf="@+id/btnMenu"
+        app:layout_constraintHorizontal_bias="0.186"
+        app:layout_constraintStart_toStartOf="@+id/btnMenu" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/clienteicon"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRegCliente"
+        app:layout_constraintEnd_toEndOf="@+id/btnRegCliente"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toStartOf="@+id/btnRegCliente" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

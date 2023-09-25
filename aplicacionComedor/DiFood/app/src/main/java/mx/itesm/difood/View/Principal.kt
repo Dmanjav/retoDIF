@@ -64,6 +64,11 @@ class Principal : Fragment() {
             val accion = PrincipalDirections.actionPrincipalToInicioDeSesion()
             findNavController().navigate(accion)
         }
+
+        binding.btnAnuncio.setOnClickListener{
+            val accion = PrincipalDirections.actionPrincipalToAnuncio()
+            findNavController().navigate(accion)
+        }
     }
 
 }
