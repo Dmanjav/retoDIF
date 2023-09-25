@@ -1,3 +1,6 @@
+//import { genteHora } from './valores.js';
+
+// Crea un objeto gráfico
 var daysPerWeek = new Chart(document.getElementById("myChart"), {
     // Define el tipo de gráfico
     type: "bar",
@@ -68,3 +71,130 @@ function clickHandler(click) {
 }
 
 daysPerWeek.canvas.onclick = clickHandler;
+
+
+var top10ventas = new Chart(document.getElementById("myChart3"), {
+
+    type: "bar",
+    data: {
+        labels: [],
+        datasets: [{
+            label: "Top 10 Comedores x Ventas",
+            data: [],
+        }]
+    },
+    options: {
+        title: {
+            display: true,
+            text: "Top 10 ventas"
+        }
+    }
+});
+
+var poblacion = new Chart(document.getElementById("myChart4"), {
+    type: "doughnut",
+    data: {
+        labels: ["Hombres", "Mujeres"],
+        datasets: [{
+            label: "Población",
+            data: [47, 53],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 255, 64, 1)',
+            ]
+        }]
+    },
+    options: {
+        title: {
+            display: true,
+            text: "% Población"
+        }
+    }
+});
+
+var poblacion = new Chart(document.getElementById("myChart5"), {
+    type: "polarArea",
+    title: "Distribución de edades",
+    data: {
+        labels: ["10+", "20+", "30+", "40+", "50+", "60+", "70+", "80+", "90+"],
+        datasets: [{
+            label: "Población",
+            data: [3, 5, 7, 8, 6, 4, 2, 1, 0],
+        }]
+    },
+});
+
+var donacions = new Chart(document.getElementById("myChart6"), {
+    type: "doughnut",
+    title: "Donaciones",
+    data: {
+        labels: ["Si", "No"],
+        datasets: [{
+            label: "Donaciones",
+            data: [30, 150],
+            backgroundColor: [
+                'rgba(255, 0, 255, 1)',
+                'rgba(150, 225, 64, 1)',
+            ]
+        }]
+    },
+});
+
+var dependencias = new Chart(document.getElementById("myChart7"), {
+    type: "bar",
+    title: "Dependencias",
+    data: {
+        labels: ["Dependientes", "Independientes"],
+        datasets: [{
+            label: "Dependencias", 
+            data: [23, 41],
+            backgroundColor: [
+                'rgba(0, 255, 10, 1)',
+                'rgba(0, 255, 200, 1)',
+            ]
+        }]
+    },
+});
+
+var cierres = new Chart(document.getElementById("myChart8"), {
+    type: "polarArea",
+    title: "Cierres por sucursal",
+    data: {
+        labels: ["Comedor 1", "Comedor 2", "Comedor 3", "Comedor 4", "Comedor 5"],
+        datasets: [{
+            label: "Cierres",
+            data: [5, 3, 4, 2, 7],
+            backgroundColor: [
+                'rgba(255, 0, 0, 1)',
+                'rgba(255, 255, 0, 1)',
+                'rgba(0, 255, 0, 1)',
+                'rgba(0, 255, 255, 1)',
+                'rgba(0, 0, 255, 1)',
+            ],
+        }]
+    },
+});
+
+var metas = new Chart(document.getElementById("myChart9"), {
+    data: {
+        datasets: [{
+            type: 'line',
+            label: "Objetivo de la Meta",
+            data: [50, 50, 50, 50, 50, 50],
+            backgroundColor: 'rgba(130, 250, 80, 1)',
+        }, 
+        {
+            type: 'bar',
+            label: "Venta",
+            data: [43, 51, 50, 49, 48, 47],
+            backgroundColor: 'rgba(100, 95, 182, 1)',
+        }],
+        labels: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+    },
+    options: {
+        title: {
+            display: true,
+            text: "Metas"
+        }
+    }
+});

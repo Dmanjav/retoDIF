@@ -15,50 +15,82 @@
                 width="300" height="100" class="columna"></p>
         <p class="title">Monitor de datos</p>
     </navbar>
-    
-    <div class="gfx-container">
-        <div class="grafico">
-            <canvas id="myChart"></canvas>
-        </div>
-        <div class="grafico" >
-            <canvas id="myChart2"></canvas>
-        </div>
-        <div class="grafico">
-            <canvas id="myChart3"></canvas>
-        </div>
-        <div class="grafico" >
-            <canvas id="myChart4"></canvas>
-        </div>
-        <div class="grafico">
-            <canvas id="myChart5"></canvas>
-        </div>
-        <div class="grafico" >
-            <canvas id="myChart6"></canvas>
-        </div>
 
+    <div>
+        <h1 class="subtitle">Información General</h1>
+        <div class="gfx-container">
+            <div class="grafico">
+                <h2 class="gr-title">Comedores con más Ventas</h2>
+                <canvas id="myChart3"></canvas>
+            </div>
+            <div class="grafico">
+                <h2 class="gr-title">Comedores con más Cierres</h2>
+                <canvas id="myChart8"></canvas>
+            </div>
+        </div>
+        <p class="descriptions">Haz click sobre alguna sucursal para mostrar los datos en sección <i>"Información por
+                comedor"</i></p>
+    </div>
+
+    <div>
+        <h1 class="subtitle">Información por comedor</h1>
+        <div class="gfx-container">
+            <div class="grafico">
+                <h2 class="gr-title">Ventas por día</h2>
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="grafico">
+                <h2 class="gr-title">Cantidad de Clientes por Hora</h2>
+                <canvas id="myChart2"></canvas>
+            </div>
+            <div class="grafico">
+                <h2 class="gr-title">Estado de los Clientes</h2>
+                <canvas id="myChart7"></canvas>
+            </div>
+            <div class="grafico">
+                <h2 class="gr-title">Edades de los Clientes</h2>
+                <canvas id="myChart5"></canvas>
+            </div>
+            <div class="grafico">
+                <h2 class="gr-title">Cantidad de Donaciones</h2>
+                <canvas id="myChart6"></canvas>
+            </div>
+            <div class="grafico">
+                <h2 class="gr-title">Sexo de los Clientes</h2>
+                <canvas id="myChart4"></canvas>
+            </div>
+            <div class="grafico">
+                <h2 class="gr-title">Cumplimiento de metas</h2>
+                <canvas id="myChart9"></canvas>
+            </div>
+            
+        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="graficas.js"></script>
     </div>
 
+    <br>
 
+    <hr>
     <div class="container">
         <p>
-            What is Lorem Ipsum?
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum.
+            <b>Aviso importante:</b>
 
-            Why do we use it?
-            It is a long established fact that a reader will be distracted by the readable content of a page when
-            looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
-            letters, as opposed to using 'Content here, content here', making it look like readable English. Many
-            desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a
-            search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved
-            over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+            Prohibido filtrar datos.
+
+            Los datos que se encuentran en este dashboard son propiedad del DIF ATIZAPÁN y están protegidos por la ley.
+            El leakeo
+            de estos datos es un delito que puede conllevar penas de prisión.
+
+            Todas las personas que tengan acceso a estos datos están obligadas a mantenerlos en secreto y a no
+            compartirlos con terceros.
+
+            Si usted tiene alguna duda o pregunta sobre este aviso, no dude en ponerse en contacto con nosotros por <a
+                href="https://www.difatizapan.gob.mx" target="_blank">nuestra página oficial</a>.
+
+            Gracias por su colaboración.
+
         </p>
     </div>
 </body>
