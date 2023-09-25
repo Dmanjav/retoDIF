@@ -3,5 +3,7 @@
     <style name="Base.Theme.DifoodAme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">#C8637C</item>
+        <item name="android:statusBarColor">#9F2141</item>
     </style>
 </resources>
