@@ -1,17 +1,15 @@
 from flask import Flask, render_template, url_for, request
-import pymssql
+import mysql.connector
 from os import environ
 
 DB_USER = environ.get('DB_DIF_USER')
 DB_PASS = environ.get('DB_DIF_PASS')
 
-db = pymssql.connect(server='127.0.0.1', 
-                    user=DB_USER, 
-                    password=DB_PASS, 
-                    database="APP")
+connection = mysql.connector.connect(host='localhost',user=DB_USER,password=DB_PASS,database="APPDIF")
+cursor = connection.cursor()
 
-cursor = db.cursor()
-
+if connection.is_connected():
+    print('Base de datos conectada', connection.get_server_info())
 
 
 app = Flask(__name__)
