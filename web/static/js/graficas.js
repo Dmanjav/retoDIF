@@ -1,4 +1,4 @@
-//import { genteHora } from './valores.js';
+// import { genteHora, diasPorSem } from "./valores";
 
 // Crea un objeto gráfico
 var daysPerWeek = new Chart(document.getElementById("myChart"), {
@@ -74,13 +74,12 @@ daysPerWeek.canvas.onclick = clickHandler;
 
 
 var top10ventas = new Chart(document.getElementById("myChart3"), {
-
     type: "bar",
     data: {
-        labels: [],
+        labels: ["Comedor 1", "Comedor 2", "Comedor 3", "Comedor 4", "Comedor 5", "Comedor 6", "Comedor 7", "Comedor 8", "Comedor 9", "Comedor 10"],
         datasets: [{
             label: "Top 10 Comedores x Ventas",
-            data: [],
+            data: [150, 140, 130, 120, 110, 100, 90, 80, 70, 60],
         }]
     },
     options: {
@@ -112,7 +111,7 @@ var poblacion = new Chart(document.getElementById("myChart4"), {
     }
 });
 
-var poblacion = new Chart(document.getElementById("myChart5"), {
+var edades = new Chart(document.getElementById("myChart5"), {
     type: "polarArea",
     title: "Distribución de edades",
     data: {
@@ -195,6 +194,29 @@ var metas = new Chart(document.getElementById("myChart9"), {
         title: {
             display: true,
             text: "Metas"
+        }
+    }
+});
+
+var comedores = new Chart(document.getElementById("myChart10"), {
+    type: "polarArea",
+    title: "Selector de comedores",
+    data: {
+        labels: ["Cinco de Mayo", "Mexico 86", "Monte María"],
+        datasets: [{
+            data: [1,1,1],
+        }]
+    },
+    options: {
+        labels: {
+            display: false,
+        },
+        
+        tooltips: {
+            enabled: true,
+            custom: function(tooltipItem) {
+                return tooltipItem.yLabel;
+            }
         }
     }
 });
