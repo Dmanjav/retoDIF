@@ -1,0 +1,238 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost
+-- Tiempo de generación: 26-09-2023 a las 01:18:48
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "-06:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `APPDIF`
+--
+
+DROP DATABASE IF EXISTS APPDIF;
+CREATE DATABASE APPDIF;
+USE APPDIF;
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Admins`
+--
+
+CREATE TABLE `Admins` (
+  `usuario` varchar(50) NOT NULL,
+  `contrasena` varchar(50) NOT NULL,
+  `salt` varchar(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Anuncios`
+--
+
+CREATE TABLE `Anuncios` (
+  `idAnuncio` int(11) NOT NULL,
+  `idComedor` int(11) NOT NULL,
+  `fechaHora` datetime NOT NULL,
+  `contenido` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Cliente`
+--
+
+CREATE TABLE `Cliente` (
+  `curp` varchar(18) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellidoP` varchar(50) NOT NULL,
+  `apellidoM` varchar(50) NOT NULL,
+  `sexo` varchar(1) NOT NULL,
+  `fechaNacimiento` date NOT NULL,
+  `condicion` int(11) NOT NULL,
+  `contrasena` varchar(50) NOT NULL,
+  `salt` varchar(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Comedor`
+--
+
+CREATE TABLE `Comedor` (
+  `idComedor` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `calle` varchar(64) NOT NULL,
+  `numero` varchar(10) NOT NULL,
+  `colonia` varchar(50) NOT NULL,
+  `contrasena` varchar(50) NOT NULL,
+  `salt` varchar(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Comida`
+--
+
+CREATE TABLE `Comida` (
+  `idComida` int(11) NOT NULL,
+  `entrada` varchar(50) NOT NULL,
+  `plato` varchar(50) NOT NULL,
+  `postre` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Dependencia`
+--
+
+CREATE TABLE `Dependencia` (
+  `idResponsable` varchar(18) NOT NULL,
+  `idDependiente` varchar(18) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Pedido`
+--
+
+CREATE TABLE `Pedido` (
+  `idPedido` int(11) NOT NULL,
+  `fechaHora` datetime NOT NULL,
+  `donacion` tinyint(1) NOT NULL,
+  `responsable` varchar(18) NOT NULL,
+  `dependiente` varchar(18) NOT NULL,
+  `idComedor` int(11) NOT NULL,
+  `idComida` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `Admins`
+--
+ALTER TABLE `Admins`
+  ADD PRIMARY KEY (`usuario`);
+
+--
+-- Indices de la tabla `Anuncios`
+--
+ALTER TABLE `Anuncios`
+  ADD PRIMARY KEY (`idAnuncio`),
+  ADD KEY `idComedor` (`idComedor`);
+
+--
+-- Indices de la tabla `Cliente`
+--
+ALTER TABLE `Cliente`
+  ADD PRIMARY KEY (`curp`);
+
+--
+-- Indices de la tabla `Comedor`
+--
+ALTER TABLE `Comedor`
+  ADD PRIMARY KEY (`idComedor`);
+
+--
+-- Indices de la tabla `Comida`
+--
+ALTER TABLE `Comida`
+  ADD PRIMARY KEY (`idComida`);
+
+--
+-- Indices de la tabla `Dependencia`
+--
+ALTER TABLE `Dependencia`
+  ADD PRIMARY KEY (`idResponsable`,`idDependiente`),
+  ADD KEY `idResponsable` (`idResponsable`),
+  ADD KEY `idDependiente` (`idDependiente`);
+
+--
+-- Indices de la tabla `Pedido`
+--
+ALTER TABLE `Pedido`
+  ADD PRIMARY KEY (`idPedido`),
+  ADD KEY `responsable` (`responsable`),
+  ADD KEY `dependiente` (`dependiente`),
+  ADD KEY `idComedor` (`idComedor`),
+  ADD KEY `idComida` (`idComida`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `Anuncios`
+--
+ALTER TABLE `Anuncios`
+  MODIFY `idAnuncio` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `Comedor`
+--
+ALTER TABLE `Comedor`
+  MODIFY `idComedor` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `Comida`
+--
+ALTER TABLE `Comida`
+  MODIFY `idComida` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `Pedido`
+--
+ALTER TABLE `Pedido`
+  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `Anuncios`
+--
+ALTER TABLE `Anuncios`
+  ADD CONSTRAINT `Anuncios_ibfk_1` FOREIGN KEY (`idComedor`) REFERENCES `Comedor` (`idComedor`);
+
+--
+-- Filtros para la tabla `Dependencia`
+--
+ALTER TABLE `Dependencia`
+  ADD CONSTRAINT `Dependencia_ibfk_1` FOREIGN KEY (`idResponsable`) REFERENCES `Cliente` (`curp`),
+  ADD CONSTRAINT `Dependencia_ibfk_2` FOREIGN KEY (`idDependiente`) REFERENCES `Cliente` (`curp`);
+
+--
+-- Filtros para la tabla `Pedido`
+--
+ALTER TABLE `Pedido`
+  ADD CONSTRAINT `Pedido_ibfk_1` FOREIGN KEY (`responsable`) REFERENCES `Cliente` (`curp`),
+  ADD CONSTRAINT `Pedido_ibfk_2` FOREIGN KEY (`dependiente`) REFERENCES `Cliente` (`curp`),
+  ADD CONSTRAINT `Pedido_ibfk_3` FOREIGN KEY (`idComedor`) REFERENCES `Comedor` (`idComedor`),
+  ADD CONSTRAINT `Pedido_ibfk_4` FOREIGN KEY (`idComida`) REFERENCES `Comida` (`idComida`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
