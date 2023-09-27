@@ -34,8 +34,7 @@ USE APPDIF;
 
 CREATE TABLE `Admins` (
   `usuario` varchar(50) NOT NULL,
-  `contrasena` varchar(50) NOT NULL,
-  `salt` varchar(16) NOT NULL
+  `contrasena` varchar(102) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -64,9 +63,8 @@ CREATE TABLE `Cliente` (
   `apellidoM` varchar(50) NOT NULL,
   `sexo` varchar(1) NOT NULL,
   `fechaNacimiento` date NOT NULL,
-  `condicion` int(11) NOT NULL,
-  `contrasena` varchar(50) NOT NULL,
-  `salt` varchar(16) NOT NULL
+  `condicion` varchar(50) NOT NULL,
+  `contrasena` varchar(102) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -81,8 +79,7 @@ CREATE TABLE `Comedor` (
   `calle` varchar(64) NOT NULL,
   `numero` varchar(10) NOT NULL,
   `colonia` varchar(50) NOT NULL,
-  `contrasena` varchar(50) NOT NULL,
-  `salt` varchar(16) NOT NULL
+  `contrasena` varchar(102) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
