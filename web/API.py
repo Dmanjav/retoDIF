@@ -1,5 +1,5 @@
-from flask import Flask, render_template, url_for, request
-from flask_login import LoginManager, login_user
+from flask import Flask, render_template, url_for, request, redirect
+from flask_login import LoginManager, login_user, login_required
 import connection
 from secrets import token_hex
 import User
@@ -33,12 +33,19 @@ def login_page():
         if USER_DB_INFO:
             if USER_DB_INFO[0] == FORM_USER and check_password_hash(USER_DB_INFO[1],FORM_PASS):
                 login_user(load_user(FORM_USER))
-                return render_template('pagina.html')
+                return redirect('/dashboard')
             
         return 'Not valid user or password, try again.',401
 
 
     return render_template('login.html', stylesheet=url_for('static', filename='css/login.css'))
+
+
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    return render_template('pagina.html',stylesheet=url_for('static', filename='css/styles.css'),
+                           graficasjs=url_for('static',filename='js/graficas.js'))
     
 
 
