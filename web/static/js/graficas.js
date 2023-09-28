@@ -1,5 +1,3 @@
-// import { genteHora, diasPorSem } from "./valores";
-
 const lsComedores = {
     comedores: [
         ["Cinco de Mayo"],
@@ -8,7 +6,7 @@ const lsComedores = {
     ],
 };
 
-const genteHora = {
+const genteHora = { 
     cantidad: [
         [2, 5, 3, 7, 1, 2, 3], //the total is 23
         [1, 4, 7, 8, 6, 4, 2], //the total is 32
@@ -93,6 +91,24 @@ var comedores = new Chart(document.getElementById("myChart10"), {
         },
     },
 });
+
+//FUNCIÓN QUE VA A SACAR LOS DATOS DEL API
+function clickHandler(click) {
+    //console.log('clicks');
+    const points = comedores.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
+    if (points.length) {
+        console.log(points[0].index);// Esta cosa saca a que lugar está apuntando de la gráfica
+        //horarios.data.datasets[0].data = genteHora.com1[points[0].index];
+        //horarios.update();
+        /*
+
+        AQUI SE HACE LA LLAMDA AL API QUE ACTUALICE LOS VALORES DE LAS LISTA Y LUEGO VAN LOS
+        GRAFICA.UPDATE() PARA QUE SE ACTUALICEN LOS DATOS DE LA GRAFICA
+
+        */
+    }
+}
+comedores.canvas.onclick = clickHandler;
 
 //Comedores con más Ventas
 var top10ventas = new Chart(document.getElementById("myChart3"), {
@@ -207,37 +223,6 @@ var horarios = new Chart(document.getElementById("myChart2"), {
     },
 });
 
-function clickHandler(click) {
-    const points = daysPerWeek.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
-    if (points.length) {
-        //console.log(points[0].index); Esta cosa saca a que lugar está apuntando de la gráfica
-        horarios.data.datasets[0].data = genteHora.com1[points[0].index];
-        horarios.update();
-    }
-}
-
-daysPerWeek.canvas.onclick = clickHandler;
-
-// function clickHandler(click) {
-//     const points = comedores.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
-//     if (points.length) {
-//         // Obtén el comedor en el que se hizo clic
-//         const comedor = points[0].index;
-//         console.log(comedor);
-
-//         // Actualiza los datos del gráfico de `daysPerWeek` con los datos de ventas del comedor seleccionado
-//         daysPerWeek.data.datasets[0].data = lsVentas[comedor][0][0]; //EL ERROR ESTÁ AQUÍ
-//         daysPerWeek.update();
-
-//         // Actualiza los datos del gráfico de `horarios` con los datos de clientes por hora del comedor seleccionado
-//         horarios.data.datasets[0].data = genteHora[comedor][0][points[0].index];
-//         horarios.update();
-//     }
-// }
-
-// comedores.canvas.onclick = clickHandler;
-
-
 //Sexo de los clientes
 var poblacion = new Chart(document.getElementById("myChart4"), {
     type: "doughnut",
@@ -332,6 +317,3 @@ var metas = new Chart(document.getElementById("myChart9"), {
         },
     },
 });
-
-//asdasd
-
