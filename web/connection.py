@@ -15,3 +15,8 @@ class connection():
         query = 'SELECT * FROM Admins where usuario = %s'
         self.cursor.execute(query,[user])
         return self.cursor.fetchone()
+    
+    def get_comedores(self):
+        query = 'SELECT idComedor,nombre FROM Comedor'
+        self.cursor.execute(query)
+        return self.cursor.fetchall()

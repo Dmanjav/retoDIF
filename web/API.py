@@ -46,6 +46,18 @@ def login_page():
 def dashboard():
     return render_template('pagina.html',stylesheet=url_for('static', filename='css/styles.css'),
                            graficasjs=url_for('static',filename='js/graficas.js'))
+
+
+@app.route('/queries/get-comedores')
+@login_required
+def get_comedor():
+    lista_comedores = db_connection.get_comedores()
+    dict_comedores = {}
+
+    for register in lista_comedores:
+        dict_comedores[register[1]] = register[0]
+
+    return dict_comedores
     
 
 
