@@ -1,4 +1,62 @@
-//Doctypes: js
+// import { genteHora, diasPorSem } from "./valores";
+
+const lsComedores = {
+    comedores: [
+        ["Cinco de Mayo"],
+        ["Mexico 86"],
+        ["Monte María"]
+    ],
+};
+
+const genteHora = {
+    cantidad: [
+        [2, 5, 3, 7, 1, 2, 3], //the total is 23
+        [1, 4, 7, 8, 6, 4, 2], //the total is 32
+        [3, 4, 2, 3, 12, 5, 4], //the total is 26
+        [1, 2, 2, 3, 4, 5, 6], //the total is 23
+        [1, 3, 2, 6, 3, 6, 5], //the total is 16
+        [0, 4, 2, 8, 9, 4, 3], //the total is 30
+        [1, 0, 2, 6, 3, 6, 5], //the total is 15
+
+        //     [
+    //         [2, 5, 3, 7, 1, 2, 3], //the total is 23
+    //         [1, 4, 7, 8, 6, 4, 2], //the total is 32
+    //         [3, 4, 2, 3, 12, 5, 4], //the total is 26
+    //         [1, 2, 2, 3, 4, 5, 6], //the total is 23
+    //         [1, 3, 2, 6, 3, 6, 5], //the total is 16
+    //         [0, 4, 2, 8, 9, 4, 3], //the total is 30
+    //         [1, 0, 2, 6, 3, 6, 5], //the total is 15
+    //     ], //Cinco de Mayo
+    //     [
+    //         [1, 0, 2, 6, 3, 6, 5], //the total is 15
+    //         [0, 4, 2, 8, 9, 4, 3], //the total is 30
+    //         [1, 3, 2, 6, 3, 6, 5], //the total is 16
+    //         [1, 2, 2, 3, 4, 5, 6], //the total is 23
+    //         [3, 4, 2, 3, 12, 5, 4], //the total is 26
+    //         [1, 4, 7, 8, 6, 4, 2], //the total is 32
+    //         [2, 5, 3, 7, 1, 2, 3], //the total is 23
+    //     ], //Mexico 86
+    //     [
+    //         [1, 2, 3, 2, 1, 0, 0], //the total is 10
+    //         [2, 4, 6, 4, 2, 1, 1], //the total is 20
+    //         [1, 3, 5, 7, 9, 11, 13], //the total is 30
+    //         [6, 6, 6, 6, 6, 6, 4], //the total is 40
+    //         [7, 7, 7, 7, 7, 7, 8], //the total is 50
+    //         [12, 12, 13, 9, 5, 6, 3], //the total is 60
+    //         [10, 10, 10, 10, 10, 10, 10], //the total is 70
+    //     ]], //Monte María
+    ]
+    
+};
+
+const lsVentas = {
+    com1: [
+        [23, 32, 26, 23, 16, 30, 15]
+        // [[23, 32, 26, 23, 16, 30, 15]], //Cinco de Mayo
+        // [[15, 30, 16, 23, 26, 32, 23]], //Mexico 86
+        // [[10, 20, 30, 40, 50, 60, 70]], //Monte María
+    ],
+};
 
 //Información General
 
@@ -86,51 +144,6 @@ var cierres = new Chart(document.getElementById("myChart8"), {
 });
 
 
-const lsComedores = {
-    comedores: [["Cinco de Mayo"], ["Mexico 86"], ["Monte María"]],
-};
-
-const genteHora = {
-    cantidad: [
-        [
-            [2, 5, 3, 7, 1, 2, 3], //the total is 23
-            [1, 4, 7, 8, 6, 4, 2], //the total is 32
-            [3, 4, 2, 3, 12, 5, 4], //the total is 26
-            [1, 2, 2, 3, 4, 5, 6], //the total is 23
-            [1, 3, 2, 6, 3, 6, 5], //the total is 16
-            [0, 4, 2, 8, 9, 4, 3], //the total is 30
-            [1, 0, 2, 6, 3, 6, 5], //the total is 15
-        ], //Cinco de Mayo
-        [
-            [1, 0, 2, 6, 3, 6, 5], //the total is 15
-            [0, 4, 2, 8, 9, 4, 3], //the total is 30
-            [1, 3, 2, 6, 3, 6, 5], //the total is 16
-            [1, 2, 2, 3, 4, 5, 6], //the total is 23
-            [3, 4, 2, 3, 12, 5, 4], //the total is 26
-            [1, 4, 7, 8, 6, 4, 2], //the total is 32
-            [2, 5, 3, 7, 1, 2, 3], //the total is 23
-        ], //Mexico 86
-        [
-            [1, 2, 3, 2, 1, 0, 0], //the total is 10
-            [2, 4, 6, 4, 2, 1, 1], //the total is 20
-            [1, 3, 5, 7, 9, 11, 13], //the total is 30
-            [6, 6, 6, 6, 6, 6, 4], //the total is 40
-            [7, 7, 7, 7, 7, 7, 8], //the total is 50
-            [12, 12, 13, 9, 5, 6, 3], //the total is 60
-            [10, 10, 10, 10, 10, 10, 10], //the total is 70
-        ]], //Monte María
-};
-
-const lsVentas = {
-    com1: [
-        [[23, 32, 26, 23, 16, 30, 15]], //Cinco de Mayo
-        [[15, 30, 16, 23, 26, 32, 23]], //Mexico 86
-        [[10, 20, 30, 40, 50, 60, 70]], //Monte María
-    ],
-};
-
-
-
 //Información Por Comedor
 
 //Ventas por día
@@ -151,7 +164,7 @@ var daysPerWeek = new Chart(document.getElementById("myChart"), {
         datasets: [
             {
                 label: "Cantidad de Clientes",
-                data: lsVentas.com1[0][0],
+                data: lsVentas.com1[0],
                 backgroundColor: [
                     "rgba(255, 99, 132, 0.5)",
                     "rgba(255, 255, 64, 0.5)",
@@ -182,7 +195,7 @@ var horarios = new Chart(document.getElementById("myChart2"), {
         datasets: [
             {
                 label: "# Clientes",
-                data: genteHora.cantidad[0][0],
+                data: genteHora.cantidad[0],
             },
         ],
     },
@@ -194,35 +207,35 @@ var horarios = new Chart(document.getElementById("myChart2"), {
     },
 });
 
-// function clickHandler(click) {
-//     const points = daysPerWeek.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
-//     if (points.length) {
-//         //console.log(points[0].index); Esta cosa saca a que lugar está apuntando de la gráfica
-//         horarios.data.datasets[0].data = genteHora.com1[points[0].index];
-//         horarios.update();
-//     }
-// }
-
-// daysPerWeek.canvas.onclick = clickHandler;
-
 function clickHandler(click) {
-    const points = comedores.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
+    const points = daysPerWeek.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
     if (points.length) {
-        // Obtén el comedor en el que se hizo clic
-        const comedor = points[0].index;
-        console.log(comedor);
-
-        // Actualiza los datos del gráfico de `daysPerWeek` con los datos de ventas del comedor seleccionado
-        daysPerWeek.data.datasets[0].data = lsVentas[comedor][0][0]; //EL ERROR ESTÁ AQUÍ
-        daysPerWeek.update();
-
-        // Actualiza los datos del gráfico de `horarios` con los datos de clientes por hora del comedor seleccionado
-        horarios.data.datasets[0].data = genteHora[comedor][0][points[0].index];
+        //console.log(points[0].index); Esta cosa saca a que lugar está apuntando de la gráfica
+        horarios.data.datasets[0].data = genteHora.com1[points[0].index];
         horarios.update();
     }
 }
 
-comedores.canvas.onclick = clickHandler;
+daysPerWeek.canvas.onclick = clickHandler;
+
+// function clickHandler(click) {
+//     const points = comedores.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
+//     if (points.length) {
+//         // Obtén el comedor en el que se hizo clic
+//         const comedor = points[0].index;
+//         console.log(comedor);
+
+//         // Actualiza los datos del gráfico de `daysPerWeek` con los datos de ventas del comedor seleccionado
+//         daysPerWeek.data.datasets[0].data = lsVentas[comedor][0][0]; //EL ERROR ESTÁ AQUÍ
+//         daysPerWeek.update();
+
+//         // Actualiza los datos del gráfico de `horarios` con los datos de clientes por hora del comedor seleccionado
+//         horarios.data.datasets[0].data = genteHora[comedor][0][points[0].index];
+//         horarios.update();
+//     }
+// }
+
+// comedores.canvas.onclick = clickHandler;
 
 
 //Sexo de los clientes
@@ -319,3 +332,6 @@ var metas = new Chart(document.getElementById("myChart9"), {
         },
     },
 });
+
+//asdasd
+
