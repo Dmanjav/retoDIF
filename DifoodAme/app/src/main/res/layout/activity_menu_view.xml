@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/logodifood" />
 
     <Button
-        android:id="@+id/btnMapa"
+        android:id="@+id/btnMenu"
         android:layout_width="114dp"
         android:layout_height="108dp"
         android:layout_marginStart="60dp"
@@ -26,14 +26,14 @@
         android:background="@drawable/boton_redondo"
 
         android:fontFamily="@font/roboto_medium"
-        android:text="Mapa"
+        android:text="Menu"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
-        android:id="@+id/btnMenu"
+        android:id="@+id/btnMapas"
         android:layout_width="114dp"
         android:layout_height="108dp"
         android:layout_marginTop="50dp"
@@ -41,7 +41,7 @@
         android:background="@drawable/boton_redondo"
         android:backgroundTint="#E3ADAD"
         android:fontFamily="@font/roboto_medium"
-        android:text="Menú"
+        android:text="Mapa"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -149,7 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="¿Estas discapacitado?"
+        android:text="¿Sufres alguna condición?"
         android:textColor="#9F2141"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
