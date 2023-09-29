@@ -1,12 +1,28 @@
-const lsComedores = {
-    comedores: [
-        ["Cinco de Mayo"],
-        ["Mexico 86"],
-        ["Monte María"]
-    ],
-};
+function getComedores() {
+    fetch("http://localhost:5000/queries/get-comedores", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
 
-const genteHora = { 
+const lsComedores = [getComedores()];
+
+const genteHora = {
     cantidad: [
         [2, 5, 3, 7, 1, 2, 3], //the total is 23
         [1, 4, 7, 8, 6, 4, 2], //the total is 32
@@ -17,34 +33,34 @@ const genteHora = {
         [1, 0, 2, 6, 3, 6, 5], //the total is 15
 
         //     [
-    //         [2, 5, 3, 7, 1, 2, 3], //the total is 23
-    //         [1, 4, 7, 8, 6, 4, 2], //the total is 32
-    //         [3, 4, 2, 3, 12, 5, 4], //the total is 26
-    //         [1, 2, 2, 3, 4, 5, 6], //the total is 23
-    //         [1, 3, 2, 6, 3, 6, 5], //the total is 16
-    //         [0, 4, 2, 8, 9, 4, 3], //the total is 30
-    //         [1, 0, 2, 6, 3, 6, 5], //the total is 15
-    //     ], //Cinco de Mayo
-    //     [
-    //         [1, 0, 2, 6, 3, 6, 5], //the total is 15
-    //         [0, 4, 2, 8, 9, 4, 3], //the total is 30
-    //         [1, 3, 2, 6, 3, 6, 5], //the total is 16
-    //         [1, 2, 2, 3, 4, 5, 6], //the total is 23
-    //         [3, 4, 2, 3, 12, 5, 4], //the total is 26
-    //         [1, 4, 7, 8, 6, 4, 2], //the total is 32
-    //         [2, 5, 3, 7, 1, 2, 3], //the total is 23
-    //     ], //Mexico 86
-    //     [
-    //         [1, 2, 3, 2, 1, 0, 0], //the total is 10
-    //         [2, 4, 6, 4, 2, 1, 1], //the total is 20
-    //         [1, 3, 5, 7, 9, 11, 13], //the total is 30
-    //         [6, 6, 6, 6, 6, 6, 4], //the total is 40
-    //         [7, 7, 7, 7, 7, 7, 8], //the total is 50
-    //         [12, 12, 13, 9, 5, 6, 3], //the total is 60
-    //         [10, 10, 10, 10, 10, 10, 10], //the total is 70
-    //     ]], //Monte María
+        //         [2, 5, 3, 7, 1, 2, 3], //the total is 23
+        //         [1, 4, 7, 8, 6, 4, 2], //the total is 32
+        //         [3, 4, 2, 3, 12, 5, 4], //the total is 26
+        //         [1, 2, 2, 3, 4, 5, 6], //the total is 23
+        //         [1, 3, 2, 6, 3, 6, 5], //the total is 16
+        //         [0, 4, 2, 8, 9, 4, 3], //the total is 30
+        //         [1, 0, 2, 6, 3, 6, 5], //the total is 15
+        //     ], //Cinco de Mayo
+        //     [
+        //         [1, 0, 2, 6, 3, 6, 5], //the total is 15
+        //         [0, 4, 2, 8, 9, 4, 3], //the total is 30
+        //         [1, 3, 2, 6, 3, 6, 5], //the total is 16
+        //         [1, 2, 2, 3, 4, 5, 6], //the total is 23
+        //         [3, 4, 2, 3, 12, 5, 4], //the total is 26
+        //         [1, 4, 7, 8, 6, 4, 2], //the total is 32
+        //         [2, 5, 3, 7, 1, 2, 3], //the total is 23
+        //     ], //Mexico 86
+        //     [
+        //         [1, 2, 3, 2, 1, 0, 0], //the total is 10
+        //         [2, 4, 6, 4, 2, 1, 1], //the total is 20
+        //         [1, 3, 5, 7, 9, 11, 13], //the total is 30
+        //         [6, 6, 6, 6, 6, 6, 4], //the total is 40
+        //         [7, 7, 7, 7, 7, 7, 8], //the total is 50
+        //         [12, 12, 13, 9, 5, 6, 3], //the total is 60
+        //         [10, 10, 10, 10, 10, 10, 10], //the total is 70
+        //     ]], //Monte María
     ]
-    
+
 };
 
 const lsVentas = {
@@ -63,7 +79,7 @@ var comedores = new Chart(document.getElementById("myChart10"), {
     type: "pie",
     title: "Selector de comedores",
     data: {
-        labels: lsComedores.comedores,
+        labels: lsComedores,
         datasets: [
             {
                 data: [1, 1, 1],
