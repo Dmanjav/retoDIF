@@ -9,10 +9,10 @@ body {
 }
 
 .title {
-    margin: 10px;
-    top: 50%;
-    bottom: 50%;
-
+    margin-top: 4%;
+    margin-bottom: 5%;
+    margin-right: 3rem;
+    font-weight: 700;
 }
 
 .subtitle {
@@ -29,7 +29,7 @@ body {
 }
 
 .nav {
-    background-color: #e13d66;
+    background-color: #9F2141;
     overflow: hidden;
     display: flex; 
     justify-content: space-between;
