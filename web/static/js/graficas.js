@@ -1,5 +1,5 @@
-function getComedores() {
-    fetch("http://localhost:5000/queries/get-comedores", {
+async function getComedores() {
+    await fetch("http://localhost:5000/queries/get-comedores", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -12,7 +12,10 @@ function getComedores() {
             return response.json();
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
+            for (key in data) {
+                llaves.push(key)
+            }
             return data;
         })
         .catch(error => {
@@ -20,7 +23,23 @@ function getComedores() {
         });
 }
 
-const lsComedores = [getComedores()];
+generar_datos()
+// getComedores();
+const llaves = []
+const datos = []
+
+async function contar_llaves() {
+    await getComedores()
+    tamaño = llaves.length
+    for (let i = 0; i < tamaño; i++) {
+        datos.push(1);
+    }
+}
+
+async function generar_datos() {
+    await contar_llaves();
+    generar_graficas()
+}
 
 const genteHora = {
     cantidad: [
@@ -74,262 +93,264 @@ const lsVentas = {
 
 //Información General
 
-//Selector De comedores
-var comedores = new Chart(document.getElementById("myChart10"), {
-    type: "pie",
-    title: "Selector de comedores",
-    data: {
-        labels: lsComedores,
-        datasets: [
-            {
-                data: [1, 1, 1],
-                backgroundColor: [
-                    "rgba(255, 0, 0, 1)",
-                    "rgba(255, 255, 0, 1)",
-                    "rgba(0, 255, 0, 1)",
-                    "rgba(0, 255, 255, 1)",
-                    "rgba(0, 0, 255, 1)",
-                ],
-            },
-        ],
-    },
-    options: {
-        plugins: {
-            legend: {
-                display: false
-            }
+function generar_graficas() {
+    //Selector De comedores
+    var comedores = new Chart(document.getElementById("myChart10"), {
+        type: "pie",
+        title: "Selector de comedores",
+        data: {
+            labels: llaves,
+            datasets: [
+                {
+                    data: datos,
+                    backgroundColor: [
+                        "rgba(255, 0, 0, 1)",
+                        "rgba(255, 255, 0, 1)",
+                        "rgba(0, 255, 0, 1)",
+                        "rgba(0, 255, 255, 1)",
+                        "rgba(0, 0, 255, 1)",
+                    ],
+                },
+            ],
         },
-        tooltips: {
-            enabled: true,
-            custom: function (tooltipItem) {
-                return tooltipItem.yLabel;
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            tooltips: {
+                enabled: true,
+                custom: function (tooltipItem) {
+                    return tooltipItem.yLabel;
+                },
             },
         },
-    },
-});
+    });
 
-//FUNCIÓN QUE VA A SACAR LOS DATOS DEL API
-function clickHandler(click) {
-    //console.log('clicks');
-    const points = comedores.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
-    if (points.length) {
-        console.log(points[0].index);// Esta cosa saca a que lugar está apuntando de la gráfica
-        //horarios.data.datasets[0].data = genteHora.com1[points[0].index];
-        //horarios.update();
-        /*
+    //FUNCIÓN QUE VA A SACAR LOS DATOS DEL API
+    function clickHandler(click) {
+        //console.log('clicks');
+        const points = comedores.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
+        if (points.length) {
+            console.log(points[0].index);// Esta cosa saca a que lugar está apuntando de la gráfica
+            //horarios.data.datasets[0].data = genteHora.com1[points[0].index];
+            //horarios.update();
+            /*
 
-        AQUI SE HACE LA LLAMDA AL API QUE ACTUALICE LOS VALORES DE LAS LISTA Y LUEGO VAN LOS
-        GRAFICA.UPDATE() PARA QUE SE ACTUALICEN LOS DATOS DE LA GRAFICA
+            AQUI SE HACE LA LLAMDA AL API QUE ACTUALICE LOS VALORES DE LAS LISTA Y LUEGO VAN LOS
+            GRAFICA.UPDATE() PARA QUE SE ACTUALICEN LOS DATOS DE LA GRAFICA
 
-        */
+            */
+        }
     }
+    comedores.canvas.onclick = clickHandler;
+
+    //Comedores con más Ventas
+    var top10ventas = new Chart(document.getElementById("myChart3"), {
+        type: "bar",
+        data: {
+            labels: llaves,
+            datasets: [
+                {
+                    label: "Top 10 Comedores x Ventas",
+                    data: [150, 140, 130, 120, 110, 100, 90, 80, 70, 60],
+                    backgroundColor: [
+                        "rgba(255, 0, 0, 1)",
+                        "rgba(255, 255, 0, 1)",
+                        "rgba(0, 255, 0, 1)",
+                        "rgba(0, 255, 255, 1)",
+                        "rgba(0, 0, 255, 1)",
+                    ],
+                },
+            ],
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Top 10 ventas",
+            },
+        },
+    });
+
+    //Más cierres
+    var cierres = new Chart(document.getElementById("myChart8"), {
+        type: "polarArea",
+        title: "Cierres por sucursal",
+        data: {
+            labels: llaves,
+            datasets: [
+                {
+                    label: "Cierres",
+                    data: [5, 3, 4],
+                    backgroundColor: [
+                        "rgba(255, 0, 0, 1)",
+                        "rgba(255, 255, 0, 1)",
+                        "rgba(0, 255, 0, 1)",
+                        "rgba(0, 255, 255, 1)",
+                        "rgba(0, 0, 255, 1)",
+                    ],
+                },
+            ],
+        },
+    });
+
+
+    //Información Por Comedor
+
+    //Ventas por día
+    var daysPerWeek = new Chart(document.getElementById("myChart"), {
+        // Define el tipo de gráfico
+        type: "bar",
+        // Define los datos
+        data: {
+            labels: [
+                "Lunes",
+                "Martes",
+                "Miércoles",
+                "Jueves",
+                "Viernes",
+                "Sábado",
+                "Domingo",
+            ],
+            datasets: [
+                {
+                    label: "Cantidad de Clientes",
+                    data: lsVentas.com1[0],
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.5)",
+                        "rgba(255, 255, 64, 0.5)",
+                        "rgba(54, 162, 235, 0.5)",
+                        "rgba(100, 255, 255, 0.5)",
+                        "rgba(200, 140, 255, 0.5)",
+                        "rgba(180, 47, 202, 0.5)",
+                        "rgba(20, 150, 102, 0.5)",
+                    ],
+                },
+            ],
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Ventas por día",
+            },
+        },
+    });
+
+    //Cantidad de clientes por horario
+    var horarios = new Chart(document.getElementById("myChart2"), {
+        // Define el tipo de gráfico
+        type: "line",
+        // Define los datos
+        data: {
+            labels: ["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00"],
+            datasets: [
+                {
+                    label: "# Clientes",
+                    data: genteHora.cantidad[0],
+                },
+            ],
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Clientes por Horario",
+            },
+        },
+    });
+
+    //Sexo de los clientes
+    var poblacion = new Chart(document.getElementById("myChart4"), {
+        type: "doughnut",
+        data: {
+            labels: ["Hombres", "Mujeres"],
+            datasets: [
+                {
+                    label: "Población",
+                    data: [47, 53],
+                    backgroundColor: ["rgba(255, 99, 132, 1)", "rgba(255, 255, 64, 1)"],
+                },
+            ],
+        },
+        options: {
+            title: {
+                display: true,
+                text: "% Población",
+            },
+        },
+    });
+
+    //Edades de los CLientes
+    var edades = new Chart(document.getElementById("myChart5"), {
+        type: "polarArea",
+        title: "Distribución de edades",
+        data: {
+            labels: ["10+", "20+", "30+", "40+", "50+", "60+", "70+", "80+", "90+"],
+            datasets: [
+                {
+                    label: "Población",
+                    data: [3, 5, 7, 8, 6, 4, 2, 1, 0],
+                },
+            ],
+        },
+    });
+
+    //Cantida de donaciones
+    var donacions = new Chart(document.getElementById("myChart6"), {
+        type: "doughnut",
+        title: "Donaciones",
+        data: {
+            labels: ["Si", "No"],
+            datasets: [
+                {
+                    label: "Donaciones",
+                    data: [30, 150],
+                    backgroundColor: ["rgba(255, 0, 255, 1)", "rgba(150, 225, 64, 1)"],
+                },
+            ],
+        },
+    });
+
+    //Estado de los clientes
+    var dependencias = new Chart(document.getElementById("myChart7"), {
+        type: "bar",
+        title: "Dependencias",
+        data: {
+            labels: ["Dependientes", "Independientes"],
+            datasets: [
+                {
+                    label: "Dependencias",
+                    data: [23, 41],
+                    backgroundColor: ["rgba(0, 255, 10, 1)", "rgba(0, 255, 200, 1)"],
+                },
+            ],
+        },
+    });
+
+    //Cumplimiento de metas
+    var metas = new Chart(document.getElementById("myChart9"), {
+        data: {
+            datasets: [
+                {
+                    type: "line",
+                    label: "Objetivo de la Meta",
+                    data: [50, 50, 50, 50, 50, 50],
+                    backgroundColor: "rgba(130, 250, 80, 1)",
+                },
+                {
+                    type: "bar",
+                    label: "Venta",
+                    data: [43, 51, 50, 49, 48, 47],
+                    backgroundColor: "rgba(100, 95, 182, 1)",
+                },
+            ],
+            labels: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Metas",
+            },
+        },
+    });
 }
-comedores.canvas.onclick = clickHandler;
-
-//Comedores con más Ventas
-var top10ventas = new Chart(document.getElementById("myChart3"), {
-    type: "bar",
-    data: {
-        labels: lsComedores.comedores,
-        datasets: [
-            {
-                label: "Top 10 Comedores x Ventas",
-                data: [150, 140, 130, 120, 110, 100, 90, 80, 70, 60],
-                backgroundColor: [
-                    "rgba(255, 0, 0, 1)",
-                    "rgba(255, 255, 0, 1)",
-                    "rgba(0, 255, 0, 1)",
-                    "rgba(0, 255, 255, 1)",
-                    "rgba(0, 0, 255, 1)",
-                ],
-            },
-        ],
-    },
-    options: {
-        title: {
-            display: true,
-            text: "Top 10 ventas",
-        },
-    },
-});
-
-//Más cierres
-var cierres = new Chart(document.getElementById("myChart8"), {
-    type: "polarArea",
-    title: "Cierres por sucursal",
-    data: {
-        labels: lsComedores.comedores,
-        datasets: [
-            {
-                label: "Cierres",
-                data: [5, 3, 4],
-                backgroundColor: [
-                    "rgba(255, 0, 0, 1)",
-                    "rgba(255, 255, 0, 1)",
-                    "rgba(0, 255, 0, 1)",
-                    "rgba(0, 255, 255, 1)",
-                    "rgba(0, 0, 255, 1)",
-                ],
-            },
-        ],
-    },
-});
-
-
-//Información Por Comedor
-
-//Ventas por día
-var daysPerWeek = new Chart(document.getElementById("myChart"), {
-    // Define el tipo de gráfico
-    type: "bar",
-    // Define los datos
-    data: {
-        labels: [
-            "Lunes",
-            "Martes",
-            "Miércoles",
-            "Jueves",
-            "Viernes",
-            "Sábado",
-            "Domingo",
-        ],
-        datasets: [
-            {
-                label: "Cantidad de Clientes",
-                data: lsVentas.com1[0],
-                backgroundColor: [
-                    "rgba(255, 99, 132, 0.5)",
-                    "rgba(255, 255, 64, 0.5)",
-                    "rgba(54, 162, 235, 0.5)",
-                    "rgba(100, 255, 255, 0.5)",
-                    "rgba(200, 140, 255, 0.5)",
-                    "rgba(180, 47, 202, 0.5)",
-                    "rgba(20, 150, 102, 0.5)",
-                ],
-            },
-        ],
-    },
-    options: {
-        title: {
-            display: true,
-            text: "Ventas por día",
-        },
-    },
-});
-
-//Cantidad de clientes por horario
-var horarios = new Chart(document.getElementById("myChart2"), {
-    // Define el tipo de gráfico
-    type: "line",
-    // Define los datos
-    data: {
-        labels: ["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00"],
-        datasets: [
-            {
-                label: "# Clientes",
-                data: genteHora.cantidad[0],
-            },
-        ],
-    },
-    options: {
-        title: {
-            display: true,
-            text: "Clientes por Horario",
-        },
-    },
-});
-
-//Sexo de los clientes
-var poblacion = new Chart(document.getElementById("myChart4"), {
-    type: "doughnut",
-    data: {
-        labels: ["Hombres", "Mujeres"],
-        datasets: [
-            {
-                label: "Población",
-                data: [47, 53],
-                backgroundColor: ["rgba(255, 99, 132, 1)", "rgba(255, 255, 64, 1)"],
-            },
-        ],
-    },
-    options: {
-        title: {
-            display: true,
-            text: "% Población",
-        },
-    },
-});
-
-//Edades de los CLientes
-var edades = new Chart(document.getElementById("myChart5"), {
-    type: "polarArea",
-    title: "Distribución de edades",
-    data: {
-        labels: ["10+", "20+", "30+", "40+", "50+", "60+", "70+", "80+", "90+"],
-        datasets: [
-            {
-                label: "Población",
-                data: [3, 5, 7, 8, 6, 4, 2, 1, 0],
-            },
-        ],
-    },
-});
-
-//Cantida de donaciones
-var donacions = new Chart(document.getElementById("myChart6"), {
-    type: "doughnut",
-    title: "Donaciones",
-    data: {
-        labels: ["Si", "No"],
-        datasets: [
-            {
-                label: "Donaciones",
-                data: [30, 150],
-                backgroundColor: ["rgba(255, 0, 255, 1)", "rgba(150, 225, 64, 1)"],
-            },
-        ],
-    },
-});
-
-//Estado de los clientes
-var dependencias = new Chart(document.getElementById("myChart7"), {
-    type: "bar",
-    title: "Dependencias",
-    data: {
-        labels: ["Dependientes", "Independientes"],
-        datasets: [
-            {
-                label: "Dependencias",
-                data: [23, 41],
-                backgroundColor: ["rgba(0, 255, 10, 1)", "rgba(0, 255, 200, 1)"],
-            },
-        ],
-    },
-});
-
-//Cumplimiento de metas
-var metas = new Chart(document.getElementById("myChart9"), {
-    data: {
-        datasets: [
-            {
-                type: "line",
-                label: "Objetivo de la Meta",
-                data: [50, 50, 50, 50, 50, 50],
-                backgroundColor: "rgba(130, 250, 80, 1)",
-            },
-            {
-                type: "bar",
-                label: "Venta",
-                data: [43, 51, 50, 49, 48, 47],
-                backgroundColor: "rgba(100, 95, 182, 1)",
-            },
-        ],
-        labels: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
-    },
-    options: {
-        title: {
-            display: true,
-            text: "Metas",
-        },
-    },
-});
