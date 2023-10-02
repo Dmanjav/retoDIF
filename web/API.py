@@ -13,15 +13,16 @@ login_manager.init_app(app)
 
 db_connection = connection.connection()
 
+
 @login_manager.user_loader
 def load_user(user_id):
     admin_info = db_connection.get_admin(user_id)
-    user = User.User(admin_info[0],admin_info[1])
+    user = User.User(admin_info[0], admin_info[1])
     return user
 
 
 # Login admin page
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login_page():
 
     if request.method == 'POST':
@@ -31,12 +32,11 @@ def login_page():
         USER_DB_INFO = db_connection.get_admin(FORM_USER)
 
         if USER_DB_INFO:
-            if USER_DB_INFO[0] == FORM_USER and check_password_hash(USER_DB_INFO[1],FORM_PASS):
+            if USER_DB_INFO[0] == FORM_USER and check_password_hash(USER_DB_INFO[1], FORM_PASS):
                 login_user(load_user(FORM_USER))
                 return redirect('/dashboard')
-            
-        return 'Not valid user or password, try again.',401
 
+        return 'Not valid user or password, try again.', 401
 
     return render_template('login.html', stylesheet=url_for('static', filename='css/login.css'))
 
@@ -44,8 +44,8 @@ def login_page():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('pagina.html',stylesheet=url_for('static', filename='css/styles.css'),
-                           graficasjs=url_for('static',filename='js/graficas.js'))
+    return render_template('pagina.html', stylesheet=url_for('static', filename='css/styles.css'),
+                           graficasjs=url_for('static', filename='js/graficas.js'))
 
 
 @app.route('/queries/get-comedores')
@@ -58,7 +58,13 @@ def get_comedor():
         dict_comedores[register[1]] = register[0]
 
     return dict_comedores
-    
+
+
+@app.route('/queries/get-top-ventas')
+@login_required
+def get_top_ventas():
+    print(db_connection.get_top_ventas())
+    return 'Hecho'
 
 
 if __name__ == '__main__':
