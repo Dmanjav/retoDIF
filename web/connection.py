@@ -1,6 +1,7 @@
 import mysql.connector
 from os import environ
 
+# Environment variables for DB connection
 DB_USER = environ.get('DB_DIF_USER')
 DB_PASS = environ.get('DB_DIF_PASS')
 
@@ -13,16 +14,19 @@ class connection():
         self.cursor = self.connect.cursor()
 
     def get_admin(self, user):
+        '''Returns a user from the DB'''
         query = 'SELECT * FROM Admins where usuario = %s'
         self.cursor.execute(query, [user])
         return self.cursor.fetchone()
 
     def get_comedores(self):
+        '''Returns id and name of all community kitchens in DB'''
         query = 'SELECT idComedor,nombre FROM Comedor'
         self.cursor.execute(query)
         return self.cursor.fetchall()
 
     def get_top_ventas(self):
+        '''Top 10 number of sales per kitchen'''
         query = '''SELECT Pedido.idComedor,Comedor.nombre,COUNT(Pedido.idPedido)
             AS \'numeroVentas\'
             FROM Pedido,Comedor WHERE Pedido.idComedor = Comedor.idComedor 

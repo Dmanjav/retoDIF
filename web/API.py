@@ -10,21 +10,21 @@ app.secret_key = token_hex()
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-
+# Connection with database
 db_connection = connection.connection()
 
 
 @login_manager.user_loader
 def load_user(user_id):
+    '''Returns object user given the user_id in the DB'''
     admin_info = db_connection.get_admin(user_id)
     user = User.User(admin_info[0], admin_info[1])
     return user
 
 
-# Login admin page
 @app.route('/', methods=['GET', 'POST'])
 def login_page():
-
+    '''Login admin page and login method'''
     if request.method == 'POST':
         FORM_USER = request.form.get('usuario')
         FORM_PASS = request.form.get('contraseña')
@@ -44,6 +44,7 @@ def login_page():
 @app.route('/dashboard')
 @login_required
 def dashboard():
+    '''Admin dashboard page'''
     return render_template('pagina.html', stylesheet=url_for('static', filename='css/styles.css'),
                            graficasjs=url_for('static', filename='js/graficas.js'))
 
@@ -51,6 +52,7 @@ def dashboard():
 @app.route('/queries/get-comedores')
 @login_required
 def get_comedor():
+    '''Returns name and id of all community kitchens'''
     lista_comedores = db_connection.get_comedores()
     dict_comedores = {}
 
@@ -63,6 +65,7 @@ def get_comedor():
 @app.route('/queries/get-top-ventas')
 @login_required
 def get_top_ventas():
+    '''Top 10 sales number per community kitchen'''
     print(db_connection.get_top_ventas())
     return 'Hecho'
 
