@@ -48,7 +48,7 @@ CREATE TABLE `Anuncios` (
   `idComedor` int(11) NOT NULL,
   `fechaHora` datetime NOT NULL,
   `contenido` text NOT NULL,
-  `cierre` tinyint(1) NOT NULL DEFAULT 0
+  `cierre` BOOLEAN NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -116,7 +116,7 @@ CREATE TABLE `Dependencia` (
 CREATE TABLE `Pedido` (
   `idPedido` int(11) NOT NULL,
   `fechaHora` datetime NOT NULL,
-  `donacion` tinyint(1) NOT NULL,
+  `donacion` BOOLEAN NOT NULL DEFAULT 0,
   `responsable` varchar(18) NOT NULL,
   `dependiente` varchar(18) NOT NULL,
   `idComedor` int(11) NOT NULL,
