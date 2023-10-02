@@ -47,7 +47,8 @@ CREATE TABLE `Anuncios` (
   `idAnuncio` int(11) NOT NULL,
   `idComedor` int(11) NOT NULL,
   `fechaHora` datetime NOT NULL,
-  `contenido` text NOT NULL
+  `contenido` text NOT NULL,
+  `cierre` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
