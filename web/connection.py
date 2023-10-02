@@ -39,11 +39,9 @@ class connection():
         '''
         Returns number of sales of one kitchen by day of the week
         '''
-        query = '''SELECT DAYOFWEEK(fechaHora) AS dia_de_la_semana,
-            COUNT(*) AS ventas 
-            FROM Pedido WHERE idComedor = %s 
-            GROUP BY DAYOFWEEK(fechaHora) 
-            ORDER BY dia_de_la_semana;'''
+        query = '''SELECT DAYNAME(fechaHora) AS dia_de_la_semana,
+            COUNT(*) AS ventas FROM Pedido WHERE idComedor = %s 
+            GROUP BY dia_de_la_semana ORDER BY dia_de_la_semana;'''
         self.cursor.execute(query, [idComedor])
         return self.cursor.fetchall()
 
@@ -66,3 +64,39 @@ class connection():
             GROUP BY tipo_de_usuario ORDER BY tipo_de_usuario;'''
         self.cursor.execute(query)
         return self.cursor.fetchall()
+    
+    def get_sexo_clientes(self):
+        '''Returns the number of male and females'''
+        query = '''SELECT sexo, COUNT(*) FROM cliente GROUP BY sexo;'''
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+    
+    def get_cantidad_donaciones_comedor(self,idComedor):
+        '''Returns the number of orders that are donations of one kitchen'''
+        query = '''SELECT COUNT(*) FROM pedido, comedor 
+            WHERE pedido.donacion = 1 AND comedor.idComedor = %s;'''
+        self.cursor.execute(query,[idComedor])
+        return self.cursor.fetchall()
+    
+    def get_rangos_edades_comedor(self):
+        '''Returns the number of people grouped by a range of ages'''
+        query = '''SELECT CASE WHEN TIMESTAMPDIFF(YEAR,fechaNacimiento,CURDATE()) <= 11
+            THEN 'Niños' WHEN TIMESTAMPDIFF(YEAR, fechaNacimiento,CURDATE()) 
+            BETWEEN 12 AND 19 THEN 'Estudiantes adolescentes (12 - 19)' 
+            WHEN TIMESTAMPDIFF(YEAR, fechaNacimiento,CURDATE()) 
+            BETWEEN 20 AND 65 THEN 'Adultos (20 - 65)'
+            ELSE 'Adultos Mayores (65+)' END AS rango_edad,
+            COUNT(*) AS cantidad FROM Cliente GROUP BY rango_edad ORDER BY COUNT(*) DESC LIMIT 25;'''
+        
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+    
+    def get_metas_comedor(self, idComedor):
+        '''Returns the number of sales in the las 30 days of a kitchen'''
+        query = '''SELECT Date(fechaHora) AS fecha, COUNT(*) AS ventas
+            FROM Pedido WHERE idComedor = %s 
+            GROUP BY fecha ORDER BY fecha DESC LIMIT 30;'''
+        
+        self.cursor.execute(query,[idComedor])
+        return self.cursor.fetchall()
+    
