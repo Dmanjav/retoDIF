@@ -266,22 +266,10 @@ function generar_graficas() {
 
     //FUNCIÓN QUE VA A SACAR LOS DATOS DEL API
     async function clickHandler(click) {
-        //console.log('clicks');
         const points = comedores.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
         if (points.length) {
             const name = comedores.data.labels[points[0].index];
             console.log(name);
-            comSelec = await getComedores();
-            console.log(comSelec);
-            // Esta cosa saca a que lugar está apuntando de la gráfica
-            //horarios.data.datasets[0].data = genteHora.com1[points[0].index];
-            //horarios.update();
-            /*
-
-            AQUI SE HACE LA LLAMDA AL API QUE ACTUALICE LOS VALORES DE LAS LISTA Y LUEGO VAN LOS
-            GRAFICA.UPDATE() PARA QUE SE ACTUALICEN LOS DATOS DE LA GRAFICA
-
-            */
         }
     }
     comedores.canvas.onclick = clickHandler;
