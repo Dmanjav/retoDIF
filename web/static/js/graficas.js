@@ -12,7 +12,6 @@ async function getComedores() {
             return response.json();
         })
         .then(data => {
-            // console.log(data);
             for (key in data) {
                 llaves.push(key)
             }
@@ -23,7 +22,7 @@ async function getComedores() {
         });
 }
 
-async function getVentas() {
+async function getTopVentas() {
     await fetch("http://localhost:5000/queries/get-top-ventas", {
         method: "GET",
         headers: {
@@ -37,18 +36,150 @@ async function getVentas() {
             return response.json();
         })
         .then(data => {
-            console.log(data);
-            // return data;
+            for (elem in data){
+                top10labels.push(elem)
+                top10data.push(data[elem])
+            }
         })
         .catch(error => {
             console.log('Hubo un error: ', error);
         });
 }
 
+async function getCierres() {
+    await fetch("http://localhost:5000/queries/get-cierres", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (elem in data){
+                cierreslabels.push(elem)
+                cierresdata.push(data[elem])
+            }
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
+
+async function getDependencias() {
+    await fetch("http://localhost:5000/queries/get-numDependencias", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (elem in data){
+                dependata.push(data[elem])
+            }
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
+
+async function getSexos() {
+    await fetch("http://localhost:5000/queries/get-cantSexos", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (elem in data){
+                sexodata.push(data[elem])
+            }
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
+
+async function getEdades() {
+    await fetch("http://localhost:5000/queries/get-edades", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (elem in data){
+                edadlabels.push(elem)
+                edaddata.push(data[elem])
+            }
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
+
+// async function getVentasDia() {
+//     await fetch("http://localhost:5000/queries/get-ventas-x-dia", {
+//         method: "GET",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         // body: JSON.stringify({ idComedor: 1 })
+//     })
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error("HTTP error " + response.status);
+//             }
+//             return response.json();
+//         })
+//         .then(data => {
+//             console.log(data);
+//             // for (elem in data){
+//             //     top10labels.push(elem)
+//             //     top10data.push(data[elem])
+//             // }
+//         })
+//         .catch(error => {
+//             console.log('Hubo un error: ', error);
+//         });
+// }
+
+
 generar_datos()
-// getComedores();
+
 const llaves = []
 const datos = []
+const top10data = []
+const top10labels = []
+const cierresdata = []
+const cierreslabels = []
+const dependata = []
+const sexodata = []
+const edaddata = []
+const edadlabels = []
+
 
 async function contar_llaves() {
     await getComedores()
@@ -60,7 +191,18 @@ async function contar_llaves() {
 
 async function generar_datos() {
     await contar_llaves();
-    await getVentas();
+    await getTopVentas();
+    await getCierres();
+    // await getVentasDia();
+    // await getVentasHora();
+    await getDependencias();
+    await getSexos();
+    // await getDonaciones();
+    await getEdades();
+    // await getMetas();
+
+    // console.log(edaddata)
+    // console.log(edadlabels)
     generar_graficas()
 }
 
@@ -173,11 +315,11 @@ function generar_graficas() {
     var top10ventas = new Chart(document.getElementById("myChart3"), {
         type: "bar",
         data: {
-            labels: llaves,
+            labels: top10labels,
             datasets: [
                 {
                     label: "Top 10 Comedores x Ventas",
-                    data: [150, 140, 130, 120, 110, 100, 90, 80, 70, 60],
+                    data: top10data,
                     backgroundColor: [
                         "rgba(255, 0, 0, 1)",
                         "rgba(255, 255, 0, 1)",
@@ -201,11 +343,11 @@ function generar_graficas() {
         type: "polarArea",
         title: "Cierres por sucursal",
         data: {
-            labels: llaves,
+            labels: cierreslabels,
             datasets: [
                 {
                     label: "Cierres",
-                    data: [5, 3, 4],
+                    data: cierresdata,
                     backgroundColor: [
                         "rgba(255, 0, 0, 1)",
                         "rgba(255, 255, 0, 1)",
@@ -286,11 +428,11 @@ function generar_graficas() {
     var poblacion = new Chart(document.getElementById("myChart4"), {
         type: "doughnut",
         data: {
-            labels: ["Hombres", "Mujeres"],
+            labels: ["Mujeres", "Hombres"],
             datasets: [
                 {
                     label: "Población",
-                    data: [47, 53],
+                    data: sexodata,
                     backgroundColor: ["rgba(255, 99, 132, 1)", "rgba(255, 255, 64, 1)"],
                 },
             ],
@@ -308,11 +450,11 @@ function generar_graficas() {
         type: "polarArea",
         title: "Distribución de edades",
         data: {
-            labels: ["10+", "20+", "30+", "40+", "50+", "60+", "70+", "80+", "90+"],
+            labels: edadlabels,
             datasets: [
                 {
                     label: "Población",
-                    data: [3, 5, 7, 8, 6, 4, 2, 1, 0],
+                    data: edaddata,
                 },
             ],
         },
@@ -343,7 +485,7 @@ function generar_graficas() {
             datasets: [
                 {
                     label: "Dependencias",
-                    data: [23, 41],
+                    data: dependata,
                     backgroundColor: ["rgba(0, 255, 10, 1)", "rgba(0, 255, 200, 1)"],
                 },
             ],
