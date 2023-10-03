@@ -156,6 +156,17 @@ def get_metas():
 
     return dict_comedores
 
+@app.route('/queries/get-cierres')
+@login_required
+def get_cierres():
+    '''Returns the number of times different kitchens closed'''
+    resultado = db_connection.get_cierres()
+    dict_comedores = {}
+
+    for register in resultado:
+        dict_comedores[register[0]] = register[1]
+
+    return dict_comedores
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -100,3 +100,12 @@ class connection():
         self.cursor.execute(query,[idComedor])
         return self.cursor.fetchall()
     
+    def get_cierres(self):
+        '''Returns the times a kitchen closed'''
+        query = '''SELECT Comedor.nombre, COUNT(*) 
+            FROM Comedor ,Anuncios 
+            WHERE Anuncios.cierre = 1 AND Anuncios.idComedor = Comedor.idComedor 
+            GROUP BY Comedor.nombre;'''
+        
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
