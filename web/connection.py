@@ -67,16 +67,16 @@ class connection():
     
     def get_sexo_clientes(self):
         '''Returns the number of male and females'''
-        query = '''SELECT sexo, COUNT(*) FROM cliente GROUP BY sexo;'''
+        query = '''SELECT sexo, COUNT(*) FROM Cliente GROUP BY sexo;'''
         self.cursor.execute(query)
         return self.cursor.fetchall()
     
     def get_cantidad_donaciones_comedor(self,idComedor):
         '''Returns the number of orders that are donations of one kitchen'''
-        query = '''SELECT COUNT(*) FROM pedido, comedor 
-            WHERE pedido.donacion = 1 AND comedor.idComedor = %s;'''
+        query = '''SELECT COUNT(*) FROM Pedido, Comedor 
+            WHERE Pedido.donacion = 1 AND Comedor.idComedor = %s;'''
         self.cursor.execute(query,[idComedor])
-        return self.cursor.fetchall()
+        return self.cursor.fetchone()
     
     def get_rangos_edades_comedor(self):
         '''Returns the number of people grouped by a range of ages'''

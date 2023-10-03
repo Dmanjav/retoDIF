@@ -4,15 +4,6 @@ INSERT INTO Admins (`usuario`, `contrasena`) VALUES
 ('Aldehil', 'pbkdf2:sha256:600000$FAhTzalCnmY15ljn$ba493709f7fce005ec3f1334003e3dc072f5d061026d4709b87dbae5aeaaa4df'),
 ('Manja', 'pbkdf2:sha256:600000$qMhpBtIjN4BsozZt$030807f82615243981fed0e4da4d6cd035fa1f6d522839bd082c652017f099f7');
 
---
--- Volcado de datos para la tabla `anuncios`
---
-
-INSERT INTO Anuncios (`idAnuncio`, `idComedor`, `fechaHora`, `contenido`) VALUES
-(1, 4, '2023-09-29 23:55:59', 'Cierre de Sucursal el próximo lunes, no venir por favor'),
-(2, 3, '2023-09-29 23:59:08', 'Cierre de sucursal, no vengan'),
-(3, 6, '2023-09-29 23:59:51', 'Cierre de sucursal el martes'),
-(4, 3, '2023-09-30 00:01:59', 'Cierre de nuevo');
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -39,6 +30,16 @@ INSERT INTO Comedor (`idComedor`, `nombre`, `calle`, `numero`, `colonia`, `contr
 (8, 'San Jose Jaral 2', 'Jazmín', '22', 'San José el Jaral 2', 'pbkdf2:sha256:600000$OQaxiH1X8iCuUnWS$164a72d33fc9a705416768d818ed49576ee092ea564070fd65d6bab3cfb2b5b0'),
 (9, 'Amp. Emiliano Zapata', 'Ejército Mexicano', 's/n', 'Ampliación Emiliano Zapata', 'pbkdf2:sha256:600000$waTdmz86qHpE6sET$e16b85ee788b5e4501f29e3068c27e082aec4ff4026a6908019c8b7dec2aa21a'),
 (10, 'DIF Central', 'Ruiz Cortines esq. Acambay ', 's/n', 'Lomas de Atizapán', 'pbkdf2:sha256:600000$V4DrSxfHeCZJjlUw$629090baa528f14473eda37b941d8d09bde95e7f85c8fc42578edc08acee5872');
+
+--
+-- Volcado de datos para la tabla `anuncios`
+--
+
+INSERT INTO Anuncios (`idAnuncio`, `idComedor`, `fechaHora`, `contenido`) VALUES
+(1, 4, '2023-09-29 23:55:59', 'Cierre de Sucursal el próximo lunes, no venir por favor'),
+(2, 3, '2023-09-29 23:59:08', 'Cierre de sucursal, no vengan'),
+(3, 6, '2023-09-29 23:59:51', 'Cierre de sucursal el martes'),
+(4, 3, '2023-09-30 00:01:59', 'Cierre de nuevo');
 
 --
 -- Volcado de datos para la tabla `comida`

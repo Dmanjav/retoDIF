@@ -69,7 +69,7 @@ def get_top_ventas():
     print(db_connection.get_top_ventas())
     return 'Hecho'
 
-@app.route('/queries/get-ventas-x-dia/')
+@app.route('/queries/get-ventas-x-dia')
 @login_required
 def get_ventas_x_dia():
     idComedor = request.args.get('idComedor')
@@ -117,18 +117,16 @@ def get_tipoPoblacion():
     for register in resultado:
         dict_comedores[register[0]] = register[1]
 
+    return dict_comedores
+
 @app.route('/queries/get-donaciones')
 @login_required
 def get_donaciones():
     '''Returns the number of donations of a community kitchen'''
     idComedor = request.args.get('idComedor')
     resultado = db_connection.get_cantidad_donaciones_comedor(idComedor)
-    dict_comedores = {}
+    return {"Donaciones": resultado[0]}
 
-    for register in resultado:
-        dict_comedores[register[0]] = register[1]
-
-    return dict_comedores
 
 @app.route('/queries/get-edades')
 @login_required
@@ -140,6 +138,8 @@ def get_rangosEdades():
     for register in resultado:
         dict_comedores[register[0]] = register[1]
 
+    return dict_comedores
+
 @app.route('/queries/get-metas')
 @login_required
 def get_metas():
@@ -149,7 +149,7 @@ def get_metas():
     dict_comedores = {}
 
     for register in resultado:
-        dict_comedores[register[0]] = register[1]
+        dict_comedores[str(register[0])] = register[1]
 
     return dict_comedores
 

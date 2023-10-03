@@ -23,6 +23,28 @@ async function getComedores() {
         });
 }
 
+async function getVentas() {
+    await fetch("http://localhost:5000/queries/get-top-ventas", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            // return data;
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
+
 generar_datos()
 // getComedores();
 const llaves = []
@@ -38,6 +60,7 @@ async function contar_llaves() {
 
 async function generar_datos() {
     await contar_llaves();
+    await getVentas();
     generar_graficas()
 }
 
