@@ -66,8 +66,11 @@ def get_comedor():
 @login_required
 def get_top_ventas():
     '''Top 10 sales number per community kitchen'''
-    print(db_connection.get_top_ventas())
-    return 'Hecho'
+    result = db_connection.get_top_ventas()
+    dict_ventas = {}
+    for register in result:
+        dict_ventas[register[1]] = register[2]
+    return dict_ventas
 
 @app.route('/queries/get-ventas-x-dia')
 @login_required
