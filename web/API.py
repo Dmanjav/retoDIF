@@ -72,62 +72,62 @@ def get_top_ventas():
         dict_ventas[register[1]] = register[2]
     return dict_ventas
 
-@app.route('/queries/get-ventas-x-dia')
+@app.route('/queries/get-ventas-dia')
 @login_required
 def get_ventas_x_dia():
-    idComedor = request.args.get('idComedor')
-    resultado = db_connection.get_ventasDia_comedor(int(idComedor))
+    id_comedor = request.args.get('idComedor')
+    resultado = db_connection.get_ventasDia_comedor(int(id_comedor))
     '''Returns the sales per day given a specific "Comedor"'''
-    dict_comedores = {}
+    dict_ventas_dia = {}
 
     for register in resultado:
-        dict_comedores[register[0]] = register[1]
+        dict_ventas_dia[register[0]] = register[1]
 
-    return dict_comedores
+    return dict_ventas_dia
 
-@app.route('/queries/get-ventasHora')
+@app.route('/queries/get-ventas-hora')
 @login_required
 def get_ventasHora():
     '''Returns the number of sales by hour of a community kitchen'''
-    idComedor = request.args.get('idComedor')
-    resultado = db_connection.get_ventasHora_comedor(idComedor)
-    dict_comedores = {}
+    id_comedor = request.args.get('idComedor')
+    resultado = db_connection.get_ventasHora_comedor(id_comedor)
+    dict_ventas_hora = {}
 
     for register in resultado:
-        dict_comedores[register[0]] = register[1]
+        dict_ventas_hora[register[0]] = register[1]
 
-    return dict_comedores
+    return dict_ventas_hora
 
-@app.route('/queries/get-numDependencias')
+@app.route('/queries/get-num-dependencias')
 @login_required
 def get_dependencias():
     '''Returns the number of dependants'''
     dependencias = db_connection.get_num_dependencia()
-    dict_comedores = {}
+    dict_num_dependencias = {}
 
     for register in dependencias:
-        dict_comedores[register[0]] = register[1]
+        dict_num_dependencias[register[0]] = register[1]
 
-    return dict_comedores
+    return dict_num_dependencias
 
-@app.route('/queries/get-cantSexos')
+@app.route('/queries/get-cant-sexos')
 @login_required
 def get_tipoPoblacion():
     '''Returns the sex of the clients of a "Comedor"'''
     resultado = db_connection.get_sexo_clientes()
-    dict_comedores = {}
+    dict_sexos = {}
 
     for register in resultado:
-        dict_comedores[register[0]] = register[1]
+        dict_sexos[register[0]] = register[1]
 
-    return dict_comedores
+    return dict_sexos
 
 @app.route('/queries/get-donaciones')
 @login_required
 def get_donaciones():
     '''Returns the number of donations of a community kitchen'''
-    idComedor = request.args.get('idComedor')
-    resultado = db_connection.get_cantidad_donaciones_comedor(idComedor)
+    id_comedor = request.args.get('idComedor')
+    resultado = db_connection.get_cantidad_donaciones_comedor(id_comedor)
     return {"Donaciones": resultado[0]}
 
 
@@ -136,37 +136,37 @@ def get_donaciones():
 def get_rangosEdades():
     '''Returns the ranges and the quantity of clients per age range'''
     resultado = db_connection.get_rangos_edades_comedor()
-    dict_comedores = {}
+    dict_edades = {}
 
     for register in resultado:
-        dict_comedores[register[0]] = register[1]
+        dict_edades[register[0]] = register[1]
 
-    return dict_comedores
+    return dict_edades
 
 @app.route('/queries/get-metas')
 @login_required
 def get_metas():
     '''Returns the number of sales in the last 30 days of a community kitchen'''
-    idComedor = request.args.get('idComedor')
-    resultado = db_connection.get_metas_comedor(idComedor)
-    dict_comedores = {}
+    id_comedor = request.args.get('idComedor')
+    resultado = db_connection.get_metas_comedor(id_comedor)
+    dict_metas = {}
 
     for register in resultado:
-        dict_comedores[str(register[0])] = register[1]
+        dict_metas[str(register[0])] = register[1]
 
-    return dict_comedores
+    return dict_metas
 
 @app.route('/queries/get-cierres')
 @login_required
 def get_cierres():
     '''Returns the number of times different kitchens closed'''
     resultado = db_connection.get_cierres()
-    dict_comedores = {}
+    dict_cierres = {}
 
     for register in resultado:
-        dict_comedores[register[0]] = register[1]
+        dict_cierres[register[0]] = register[1]
 
-    return dict_comedores
+    return dict_cierres
 
 if __name__ == '__main__':
     app.run(debug=True)
