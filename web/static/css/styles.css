@@ -11,8 +11,8 @@ body {
 .title {
     margin-top: 4%;
     margin-bottom: 5%;
-    margin-right: 3rem;
     font-weight: 700;
+    color: #000;
 }
 
 .subtitle {
@@ -29,12 +29,20 @@ body {
 }
 
 .nav {
-    background-color: #9F2141;
+    background-color: #e5e5e5;
     overflow: hidden;
-    display: flex; 
+    display: flex;
     justify-content: space-between;
     color: #FFF;
-    border-radius: 0px 0px 15px 15  px;
+    border-radius: 0px 0px 15px 15px;
+    border-image: linear-gradient(90deg, #a68097, #6a78b8) 1;
+    border-style: solid;
+    border-width: 0 0 20px 0;
+  }  
+
+.nav p {
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 .gfx-container {
@@ -49,9 +57,14 @@ body {
 }
 
 .container {
-    margin-left: 10px;
-    margin-right: 10px;
-    padding: 0;
+    margin-left: 0px;
+    margin-right: 0px;
+    bottom: 0;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    background: linear-gradient(45deg, #cdfffc, #fbeced);
 }
 
 .nav p {
