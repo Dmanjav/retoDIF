@@ -25,21 +25,20 @@ INSERT INTO Comedor (`idComedor`, `nombre`, `calle`, `numero`, `colonia`, `contr
 (3, 'Cerro Grande', 'Teotihuacán', '15', 'Cerro Grande', 'pbkdf2:sha256:600000$uycMlFrCgeweTaYQ$424303a1a01e2a74ce3a719593459dc3e8ea27ec328978615628a1c1024c71ba'),
 (4, 'Hogares', 'Retorno de la tranquilidad', '8', 'Hogares de Atizapán', 'pbkdf2:sha256:600000$ICVMgfsSIMOCX5A1$26f30c4d681abd06a8386f7d231e745054ca2431febe61c79f59174dff7b3c2f'),
 (5, 'Margarita Maza', 'Francisco Javier Mina', '12', 'Margarita Maza de Juárez', 'pbkdf2:sha256:600000$MI81Eje2l2AJuuaD$159c7d9d41c4004720b1530074ca3b9bdcd13e2a79b4da2833b74ff53f11a3c8'),
-(6, 'Cerro Grande', 'Teotihuacan', '15', 'Cerro Grande', 'pbkdf2:sha256:600000$CKgYmrNeOIw7Mfic$fb2da4a27152e06b12f3beafadec96be682883b1ba175cced4539a393a82196d'),
-(7, 'Amp. Peñitas', 'Cerrada Gardenias', '3', 'Ampliación Peñitas', 'pbkdf2:sha256:600000$cFeg206nLQdHTLZU$bc0d1d237e06c0964ec9b1ec5bdfd978da547e4341dc3b41052a95ec3be5f780'),
-(8, 'San Jose Jaral 2', 'Jazmín', '22', 'San José el Jaral 2', 'pbkdf2:sha256:600000$OQaxiH1X8iCuUnWS$164a72d33fc9a705416768d818ed49576ee092ea564070fd65d6bab3cfb2b5b0'),
-(9, 'Amp. Emiliano Zapata', 'Ejército Mexicano', 's/n', 'Ampliación Emiliano Zapata', 'pbkdf2:sha256:600000$waTdmz86qHpE6sET$e16b85ee788b5e4501f29e3068c27e082aec4ff4026a6908019c8b7dec2aa21a'),
-(10, 'DIF Central', 'Ruiz Cortines esq. Acambay ', 's/n', 'Lomas de Atizapán', 'pbkdf2:sha256:600000$V4DrSxfHeCZJjlUw$629090baa528f14473eda37b941d8d09bde95e7f85c8fc42578edc08acee5872');
+(6, 'Amp. Peñitas', 'Cerrada Gardenias', '3', 'Ampliación Peñitas', 'pbkdf2:sha256:600000$cFeg206nLQdHTLZU$bc0d1d237e06c0964ec9b1ec5bdfd978da547e4341dc3b41052a95ec3be5f780'),
+(7, 'San Jose Jaral 2', 'Jazmín', '22', 'San José el Jaral 2', 'pbkdf2:sha256:600000$OQaxiH1X8iCuUnWS$164a72d33fc9a705416768d818ed49576ee092ea564070fd65d6bab3cfb2b5b0'),
+(8, 'Amp. Emiliano Zapata', 'Ejército Mexicano', 's/n', 'Ampliación Emiliano Zapata', 'pbkdf2:sha256:600000$waTdmz86qHpE6sET$e16b85ee788b5e4501f29e3068c27e082aec4ff4026a6908019c8b7dec2aa21a'),
+(9, 'DIF Central', 'Ruiz Cortines esq. Acambay ', 's/n', 'Lomas de Atizapán', 'pbkdf2:sha256:600000$V4DrSxfHeCZJjlUw$629090baa528f14473eda37b941d8d09bde95e7f85c8fc42578edc08acee5872');
 
 --
 -- Volcado de datos para la tabla `anuncios`
 --
 
-INSERT INTO Anuncios (`idAnuncio`, `idComedor`, `fechaHora`, `contenido`) VALUES
-(1, 4, '2023-09-29 23:55:59', 'Cierre de Sucursal el próximo lunes, no venir por favor'),
-(2, 3, '2023-09-29 23:59:08', 'Cierre de sucursal, no vengan'),
-(3, 6, '2023-09-29 23:59:51', 'Cierre de sucursal el martes'),
-(4, 3, '2023-09-30 00:01:59', 'Cierre de nuevo');
+INSERT INTO Anuncios (`idAnuncio`, `idComedor`, `fechaHora`, `contenido`, `cierre`) VALUES
+(1, 4, '2023-09-29 23:55:59', 'Cierre de Sucursal el próximo lunes, no venir por favor', 1),
+(2, 3, '2023-09-29 23:59:08', 'Cierre de sucursal, no vengan', 1),
+(3, 6, '2023-09-29 23:59:51', 'Cierre de sucursal el martes', 1),
+(4, 3, '2023-09-30 00:01:59', 'Cambio de horario de apertura',0);
 
 --
 -- Volcado de datos para la tabla `comida`
@@ -74,5 +73,5 @@ INSERT INTO Dependencia (`idResponsable`, `idDependiente`) VALUES
 INSERT INTO Pedido (`idPedido`, `fechaHora`, `donacion`, `responsable`, `dependiente`, `idComedor`, `idComida`) VALUES
 (1, '2023-09-27 12:25:48', 0, 'AAAA030125HDFLVLA2', 'MAVD030411HDFNVGA7', 3, 2),
 (2, '2023-09-27 12:25:48', 1, 'SACC030606HMCNLRA2', 'SACC030606HMCNLRA2', 1, 1),
-(3, '2023-09-30 16:09:30', 0, 'MAVD030411HDFNVGA7', 'AAAA030125HDFLVLA2', 6, 8),
+(3, '2023-09-30 16:09:30', 0, 'MAVD030411HDFNVGA7', 'AAAA030125HDFLVLA2', 2, 8),
 (4, '2023-09-30 00:09:29', 1, 'GAHI020228MMCRRNA7', 'GAHI020228MMCRRNA7', 1, 8);
