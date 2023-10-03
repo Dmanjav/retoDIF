@@ -35,17 +35,17 @@ class connection():
         self.cursor.execute(query)
         return self.cursor.fetchall()
 
-    def get_ventasDia_comedor(self, idComedor):
+    def get_ventasDia_comedor(self, id_comedor):
         '''
         Returns number of sales of one kitchen by day of the week
         '''
         query = '''SELECT DAYNAME(fechaHora) AS dia_de_la_semana,
             COUNT(*) AS ventas FROM Pedido WHERE idComedor = %s 
             GROUP BY dia_de_la_semana ORDER BY dia_de_la_semana;'''
-        self.cursor.execute(query, [idComedor])
+        self.cursor.execute(query, [id_comedor])
         return self.cursor.fetchall()
 
-    def get_ventasHora_comedor(self, idComedor):
+    def get_ventasHora_comedor(self, id_comedor):
         '''
         Returns number of sales of one kitchen by hour of the day
         '''
@@ -53,7 +53,7 @@ class connection():
             COUNT(*) AS ventas FROM Pedido 
             WHERE idComedor = %s GROUP BY HOUR(fechaHora)
             ORDER BY hora_del_dia;'''
-        self.cursor.execute(query, [idComedor])
+        self.cursor.execute(query, [id_comedor])
         return self.cursor.fetchall()
 
     def get_num_dependencia(self):
@@ -71,11 +71,11 @@ class connection():
         self.cursor.execute(query)
         return self.cursor.fetchall()
     
-    def get_cantidad_donaciones_comedor(self,idComedor):
+    def get_cantidad_donaciones_comedor(self,id_comedor):
         '''Returns the number of orders that are donations of one kitchen'''
         query = '''SELECT COUNT(*) FROM Pedido, Comedor 
             WHERE Pedido.donacion = 1 AND Comedor.idComedor = %s;'''
-        self.cursor.execute(query,[idComedor])
+        self.cursor.execute(query,[id_comedor])
         return self.cursor.fetchone()
     
     def get_rangos_edades_comedor(self):
@@ -91,13 +91,13 @@ class connection():
         self.cursor.execute(query)
         return self.cursor.fetchall()
     
-    def get_metas_comedor(self, idComedor):
+    def get_metas_comedor(self, id_comedor):
         '''Returns the number of sales in the las 30 days of a kitchen'''
         query = '''SELECT Date(fechaHora) AS fecha, COUNT(*) AS ventas
             FROM Pedido WHERE idComedor = %s 
             GROUP BY fecha ORDER BY fecha DESC LIMIT 30;'''
         
-        self.cursor.execute(query,[idComedor])
+        self.cursor.execute(query,[id_comedor])
         return self.cursor.fetchall()
     
     def get_cierres(self):
