@@ -36,7 +36,7 @@ async function getTopVentas() {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 top10labels.push(elem)
                 top10data.push(data[elem])
             }
@@ -60,7 +60,7 @@ async function getCierres() {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 cierreslabels.push(elem)
                 cierresdata.push(data[elem])
             }
@@ -71,7 +71,7 @@ async function getCierres() {
 }
 
 async function getDependencias() {
-    await fetch("http://localhost:5000/queries/get-numDependencias", {
+    await fetch("http://localhost:5000/queries/get-num-dependencias", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -84,7 +84,7 @@ async function getDependencias() {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 dependata.push(data[elem])
             }
         })
@@ -94,7 +94,7 @@ async function getDependencias() {
 }
 
 async function getSexos() {
-    await fetch("http://localhost:5000/queries/get-cantSexos", {
+    await fetch("http://localhost:5000/queries/get-cant-sexos", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -107,7 +107,7 @@ async function getSexos() {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 sexodata.push(data[elem])
             }
         })
@@ -130,7 +130,7 @@ async function getEdades() {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 edadlabels.push(elem)
                 edaddata.push(data[elem])
             }
@@ -215,6 +215,34 @@ const genteHora = {
         [1, 3, 2, 6, 3, 6, 5], //the total is 16
         [0, 4, 2, 8, 9, 4, 3], //the total is 30
         [1, 0, 2, 6, 3, 6, 5], //the total is 15
+
+        //     [
+        //         [2, 5, 3, 7, 1, 2, 3], //the total is 23
+        //         [1, 4, 7, 8, 6, 4, 2], //the total is 32
+        //         [3, 4, 2, 3, 12, 5, 4], //the total is 26
+        //         [1, 2, 2, 3, 4, 5, 6], //the total is 23
+        //         [1, 3, 2, 6, 3, 6, 5], //the total is 16
+        //         [0, 4, 2, 8, 9, 4, 3], //the total is 30
+        //         [1, 0, 2, 6, 3, 6, 5], //the total is 15
+        //     ], //Cinco de Mayo
+        //     [
+        //         [1, 0, 2, 6, 3, 6, 5], //the total is 15
+        //         [0, 4, 2, 8, 9, 4, 3], //the total is 30
+        //         [1, 3, 2, 6, 3, 6, 5], //the total is 16
+        //         [1, 2, 2, 3, 4, 5, 6], //the total is 23
+        //         [3, 4, 2, 3, 12, 5, 4], //the total is 26
+        //         [1, 4, 7, 8, 6, 4, 2], //the total is 32
+        //         [2, 5, 3, 7, 1, 2, 3], //the total is 23
+        //     ], //Mexico 86
+        //     [
+        //         [1, 2, 3, 2, 1, 0, 0], //the total is 10
+        //         [2, 4, 6, 4, 2, 1, 1], //the total is 20
+        //         [1, 3, 5, 7, 9, 11, 13], //the total is 30
+        //         [6, 6, 6, 6, 6, 6, 4], //the total is 40
+        //         [7, 7, 7, 7, 7, 7, 8], //the total is 50
+        //         [12, 12, 13, 9, 5, 6, 3], //the total is 60
+        //         [10, 10, 10, 10, 10, 10, 10], //the total is 70
+        //     ]], //Monte María
     ]
 };
 
