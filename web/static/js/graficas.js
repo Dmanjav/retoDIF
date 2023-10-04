@@ -14,6 +14,7 @@ async function getComedores() {
         .then(data => {
             for (key in data) {
                 llaves.push(key)
+                ids.push(data[key])
             }
             return data;
         })
@@ -140,35 +141,36 @@ async function getEdades() {
         });
 }
 
-// async function getVentasDia() {
-//     await fetch("http://localhost:5000/queries/get-ventas-x-dia", {
-//         method: "GET",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         // body: JSON.stringify({ idComedor: 1 })
-//     })
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error("HTTP error " + response.status);
-//             }
-//             return response.json();
-//         })
-//         .then(data => {
-//             console.log(data);
-//             // for (elem in data){
-//             //     top10labels.push(elem)
-//             //     top10data.push(data[elem])
-//             // }
-//         })
-//         .catch(error => {
-//             console.log('Hubo un error: ', error);
-//         });
-// }
+async function getVentasDia() {
+    await fetch("http://localhost:5000/queries/get-ventas-x-dia", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        // body: JSON.stringify({ idComedor: 1 })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            // for (elem in data){
+            //     top10labels.push(elem)
+            //     top10data.push(data[elem])
+            // }
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
 
 
 generar_datos()
 
+const ids = []
 const llaves = []
 const datos = []
 const top10data = []
@@ -297,7 +299,10 @@ function generar_graficas() {
         const points = comedores.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
         if (points.length) {
             const name = comedores.data.labels[points[0].index];
-            console.log(name);
+            const idSeleccionado = ids[points[0].index];
+            console.log(name)
+            console.log(idSeleccionado)
+            // async function getVentasDia()
         }
     }
     comedores.canvas.onclick = clickHandler;
