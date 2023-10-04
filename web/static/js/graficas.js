@@ -141,13 +141,12 @@ async function getEdades() {
         });
 }
 
-async function getVentasDia() {
-    await fetch("http://localhost:5000/queries/get-ventas-x-dia", {
+async function getVentasDia(id) {
+    await fetch("http://localhost:5000/queries/get-ventas-dia?idComedor=" + [id], {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
         },
-        // body: JSON.stringify({ idComedor: 1 })
     })
         .then(response => {
             if (!response.ok) {
@@ -302,7 +301,7 @@ function generar_graficas() {
             const idSeleccionado = ids[points[0].index];
             console.log(name)
             console.log(idSeleccionado)
-            // async function getVentasDia()
+            getVentasDia(idSeleccionado)
         }
     }
     comedores.canvas.onclick = clickHandler;
