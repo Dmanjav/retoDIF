@@ -16,6 +16,7 @@ class MenuView : AppCompatActivity() {
 
         val btnQr: Button = findViewById(R.id.btnQR)
         val btnMenu: Button = findViewById(R.id.btnMapas)
+        val btnMenus: Button = findViewById(R.id.btnMenu)
 
         btnQr.setOnClickListener{
             val intent: Intent = Intent(this, GenerarQRView::class.java)
@@ -26,6 +27,11 @@ class MenuView : AppCompatActivity() {
             val url = Uri.parse("https://www.google.com/maps/d/u/1/edit?mid=1mPXVsc0gXxL5diInaNvG9tZfGEKKLZg&usp=sharing")
             val navegador = Intent(Intent.ACTION_VIEW,url)
             startActivity(navegador)
+        }
+
+        btnMenus.setOnClickListener{
+            val intent = Intent(this, MenuComidaView::class.java)
+            startActivity(intent)
         }
     }
 }

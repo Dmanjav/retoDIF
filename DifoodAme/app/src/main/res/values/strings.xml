@@ -2,11 +2,49 @@
     <string name="app_name">DifoodAme</string>
 
     <string-array name="arrCondiciones">
-        <item>Discapacitad1</item>
-        <item>Discapacitad2</item>
-        <item>Discapacitad3</item>
-        <item>Discapacitad4</item>
-        <item>Discapacitad5</item>
-        <item>Discapacitad6</item>
+        <item>Discapacitado</item>
+        <item>Enfermedad Cronica</item>
+        <item>Comunidad indigena</item>
+        <item>Migrantes</item>
+        <item>No</item>
+        
+    </string-array>
+
+    <string-array name="arrComedores">
+        <item>Cinco de Mayo</item>
+        <item>México 86</item>
+        <item>Monte María</item>
+        <item>Cerro Grande</item>
+        <item>AMP Peñitas</item>
+        <item>San Jose Jaral 2</item>
+        <item>AMP Emiliano Zapata</item>
+        <item>DIF Central</item>
+        <item>Los Olivos</item>
+        <item>Adolfo Lopez Mateos</item>
+        <item>Hogares</item>
+        <item>Rinconada Bonfil</item>
+        <item>San Juan Bosco</item>
+        <item>Las Peñitas</item>
+        <item>Rancho Castro</item>
+        <item>Villa de las Palmas</item>
+        <item>UAM</item>
+        <item>Bosques de Ixtacala</item>
+        <item>Lomas de Tepalcapa</item>
+        <item>Villa de las Torres</item>
+        <item>Cristobal Higuera</item>
+        <item>Lomas de Guadalupe</item>
+        <item>Lazaro Cardenas</item>
+        <item>El Chaparral</item>
+        <item>Primero de Septiembre</item>
+        <item>Las Aguilas</item>
+        <item>El Cerrito</item>
+        <item>Seguridad Publica</item>
+        <item>San Juan Ixtacala Plano Norte 1</item>
+        <item>Prados de Ixtacala 2a secc.</item>
+        <item>Villa Jaridn</item>
+        <item>AMP. Cristobal Higuera</item>
+        <item>AMP. Adolfo Lopez Mateos</item>
+        <item>Lomas de San Miguel</item>
+        <item>San Juan Ixtacala Plano Norte 2</item>
     </string-array>
 </resources>
