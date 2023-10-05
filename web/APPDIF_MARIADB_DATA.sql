@@ -12,7 +12,8 @@ INSERT INTO Cliente (`curp`, `nombre`, `apellidoP`, `apellidoM`, `sexo`, `fechaN
 ('AAAA030125HDFLVLA2', 'Alan', 'Alcántara', 'Ávila', 'H', '2003-01-25', 'Sano', 'pbkdf2:sha256:600000$i5qVgZPSoL293JLe$4a376c123c0f367450d75f23c134bcf72f2094b5ab408abb6984db18f172f11f'),
 ('GAHI020228MMCRRNA7', 'Ingrid', 'García', 'Hernández', 'F', '2002-02-28', '', 'pbkdf2:sha256:600000$b8xYYER1mdI0Vnhr$44cb8a8021f8ad5bfcdbf489ee7e281017a62267410e01e0e49bbe2de97efad3'),
 ('MAVD030411HDFNVGA7', 'Diego', 'Manjarrez', 'Viveros', 'H', '2003-04-11', 'Sano', 'pbkdf2:sha256:600000$ONOocJRfINGSEPz0$6138532be9c4c17ee944708175873dccd8cc3caed384a65f2c214503b5a7f8ff'),
-('SACC030606HMCNLRA2', 'Carlos', 'Sánchez', 'Calderon', 'H', '2003-06-06', 'Cuatro Ojos', 'pbkdf2:sha256:600000$LqBV7P8cylf6YXyb$4bb0cbff5ac485a97d714a2c3c413103910e7640f945b042d17e6752bfdb80b4');
+('SACC030606HMCNLRA2', 'Carlos', 'Sánchez', 'Calderon', 'H', '2003-06-06', 'Cuatro Ojos', 'pbkdf2:sha256:600000$LqBV7P8cylf6YXyb$4bb0cbff5ac485a97d714a2c3c413103910e7640f945b042d17e6752bfdb80b4'),
+('SILP030314HDFPPBA3', 'Pablo', 'Spínola', 'López', 'H', '2003-04-14', 'Cuatro Ojos', 'pbkdf2:sha256:600000$AilSViF3yYUSxAyz$21bacc4088c0a781a6af788ba1b7daf2d5084c14059080301d2d42558c18c1b0');
 
 --
 -- Volcado de datos para la tabla `comedor`
@@ -65,7 +66,27 @@ INSERT INTO Anuncios (`idAnuncio`, `idComedor`, `fechaHora`, `contenido`, `cierr
 (1, 4, '2023-09-29 23:55:59', 'Cierre de Sucursal el próximo lunes, no venir por favor', 1),
 (2, 3, '2023-09-29 23:59:08', 'Cierre de sucursal, no vengan', 1),
 (3, 6, '2023-09-29 23:59:51', 'Cierre de sucursal el martes', 1),
-(4, 3, '2023-09-30 00:01:59', 'Cambio de horario de apertura',0);
+(4, 3, '2023-09-30 00:01:59', 'Cambio de horario de apertura', 0),
+(5, 23, '2023-09-10 08:23:23', 'No tenemos agua', 0),
+(6, 16, '2023-09-09  00:03:59', 'La comida es deliciosa, vengan ya!', 0),
+(7, 1, '2023-10-05 08:24:22', 'Falta personal, cerraremos', 1),
+(8, 5, '2023-10-05 08:24:23', 'Tenemos nuevos postres esta semana', 0),
+(9, 12, '2023-10-05 08:24:24', 'La sucursal se inundó, cerrada', 1),
+(10, 20, '2023-10-05 08:24:25', 'Recuerden que la comida siempre cuesta 13 pesos', 0),
+(11, 2, '2023-10-05 08:24:26', '¡Reapertura de sucursal! Ven a visitarnos', 0),
+(12, 3, '2023-10-05 08:24:27', 'Nos falta personal, cerrada por lo mismo', 1),
+(13, 1, '2023-10-05 09:24:22', '¡Nuevas bebidas! Prueba nuestro agua de horchata', 0),
+(14, 5, '2023-10-05 09:24:23', 'Cerrado por cucas', 1),
+(15, 12, '2023-10-05 09:24:24', '¡Tenemos servicio de valet parking!', 0),
+(16, 22, '2023-10-05 09:24:25', 'Cerrada por hoy', 1),
+(17, 8, '2023-10-05 09:24:26', '¡Concierto de rock en vivo!', 0),
+(18, 10, '2023-10-05 09:24:27', '¡Reapertura del área de juegos infantiles!', 0),
+(19, 11, '2023-10-05 10:24:22', 'Cerrado por falta de ingredientes', 1),
+(20, 7, '2023-10-05 10:24:23', 'Cerrado por falta de ingredientes', 1),
+(21, 12, '2023-10-05 10:24:24', '¡Concierto de salsa gratis este sábado!', 0),
+(22, 38, '2023-10-05 10:24:25', '¡Oferta de 30% de descuento en la comida para llevar!', 0),
+(23, 32, '2023-10-05 10:24:26', '¡Reapertura de la sucursal!', 0),
+(24, 38, '2023-10-05 10:24:27', 'Cerrado porque queremos', 1),
 
 --
 -- Volcado de datos para la tabla `comida`
