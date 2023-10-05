@@ -280,26 +280,7 @@ async function generar_datos() {
     generar_graficas()
 }
 
-// const genteHora = {
-//     cantidad: [
-//         [2, 5, 3, 7, 1, 2, 3], //the total is 23
-//         [1, 4, 7, 8, 6, 4, 2], //the total is 32
-//         [3, 4, 2, 3, 12, 5, 4], //the total is 26
-//         [1, 2, 2, 3, 4, 5, 6], //the total is 23
-//         [1, 3, 2, 6, 3, 6, 5], //the total is 16
-//         [0, 4, 2, 8, 9, 4, 3], //the total is 30
-//         [1, 0, 2, 6, 3, 6, 5], //the total is 15
-//     ]
-// };
-
-// const lsVentas = {
-//     com1: [
-//         [23, 32, 26, 23, 16, 30, 15]
-//     ],
-// };
-
 //Información General
-
 function generar_graficas() {
     //Selector De comedores
     var comedores = new Chart(document.getElementById("myChart10"), {
@@ -343,6 +324,10 @@ function generar_graficas() {
             const idSeleccionado = ids[points[0].index];
             console.log(name)
             console.log(idSeleccionado)
+
+            activeSelection = { name, id: idSeleccionado };
+            console.log(activeSelection)
+            
             await getVentasDia(idSeleccionado)
             top10ventas.update();
             await getVentasHora(idSeleccionado);
