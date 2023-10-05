@@ -77,7 +77,7 @@ INSERT INTO Anuncios (`idAnuncio`, `idComedor`, `fechaHora`, `contenido`, `cierr
 (12, 3, '2023-10-05 08:24:27', 'Nos falta personal, cerrada por lo mismo', 1),
 (13, 1, '2023-10-05 09:24:22', '¡Nuevas bebidas! Prueba nuestro agua de horchata', 0),
 (14, 5, '2023-10-05 09:24:23', 'Cerrado por cucas', 1),
-(15, 12, '2023-10-05 09:24:24', '¡Tenemos servicio de valet parking!', 0),
+(15, 12, '2023-10-05 09:24:24', '¡Tenemos servicio de valet parking!', 0),  
 (16, 22, '2023-10-05 09:24:25', 'Cerrada por hoy', 1),
 (17, 8, '2023-10-05 09:24:26', '¡Concierto de rock en vivo!', 0),
 (18, 10, '2023-10-05 09:24:27', '¡Reapertura del área de juegos infantiles!', 0),
@@ -86,7 +86,7 @@ INSERT INTO Anuncios (`idAnuncio`, `idComedor`, `fechaHora`, `contenido`, `cierr
 (21, 12, '2023-10-05 10:24:24', '¡Concierto de salsa gratis este sábado!', 0),
 (22, 38, '2023-10-05 10:24:25', '¡Oferta de 30% de descuento en la comida para llevar!', 0),
 (23, 32, '2023-10-05 10:24:26', '¡Reapertura de la sucursal!', 0),
-(24, 38, '2023-10-05 10:24:27', 'Cerrado porque queremos', 1),
+(24, 38, '2023-10-05 10:24:27', 'Cerrado porque queremos', 1);
 
 --
 -- Volcado de datos para la tabla `comida`
