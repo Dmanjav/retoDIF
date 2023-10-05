@@ -13,6 +13,9 @@
         android:theme="@style/Theme.DifoodAme"
         tools:targetApi="31">
         <activity
+            android:name=".view.MenuComidaView"
+            android:exported="false" />
+        <activity
             android:name=".view.GenerarQRView"
             android:exported="false" />
         <activity

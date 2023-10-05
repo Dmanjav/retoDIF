@@ -14,6 +14,7 @@ async function getComedores() {
         .then(data => {
             for (key in data) {
                 llaves.push(key)
+                ids.push(data[key])
             }
             return data;
         })
@@ -36,7 +37,7 @@ async function getTopVentas() {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 top10labels.push(elem)
                 top10data.push(data[elem])
             }
@@ -60,7 +61,7 @@ async function getCierres() {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 cierreslabels.push(elem)
                 cierresdata.push(data[elem])
             }
@@ -71,7 +72,7 @@ async function getCierres() {
 }
 
 async function getDependencias() {
-    await fetch("http://localhost:5000/queries/get-numDependencias", {
+    await fetch("http://localhost:5000/queries/get-num-dependencias", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -84,7 +85,7 @@ async function getDependencias() {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 dependata.push(data[elem])
             }
         })
@@ -94,7 +95,7 @@ async function getDependencias() {
 }
 
 async function getSexos() {
-    await fetch("http://localhost:5000/queries/get-cantSexos", {
+    await fetch("http://localhost:5000/queries/get-cant-sexos", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -107,7 +108,7 @@ async function getSexos() {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 sexodata.push(data[elem])
             }
         })
@@ -130,7 +131,7 @@ async function getEdades() {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 edadlabels.push(elem)
                 edaddata.push(data[elem])
             }
@@ -140,35 +141,105 @@ async function getEdades() {
         });
 }
 
-// async function getVentasDia() {
-//     await fetch("http://localhost:5000/queries/get-ventas-x-dia", {
-//         method: "GET",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         // body: JSON.stringify({ idComedor: 1 })
-//     })
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error("HTTP error " + response.status);
-//             }
-//             return response.json();
-//         })
-//         .then(data => {
-//             console.log(data);
-//             // for (elem in data){
-//             //     top10labels.push(elem)
-//             //     top10data.push(data[elem])
-//             // }
-//         })
-//         .catch(error => {
-//             console.log('Hubo un error: ', error);
-//         });
-// }
+async function getVentasDia(id) {
+    await fetch("http://localhost:5000/queries/get-ventas-dia?idComedor=" + [id], {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (elem in data){
+                ventaslabels.push(elem)
+                ventasdata.push(data[elem])
+            }
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
 
+async function getVentasHora(id) {
+    await fetch("http://localhost:5000/queries/get-ventas-hora?idComedor=" + [id], {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (elem in data){
+                ventaHoralabels.push(elem)
+                ventaHoradata.push(data[elem])
+            }
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
+
+async function getDonaciones(id) {
+    await fetch("http://localhost:5000/queries/get-donaciones?idComedor=" + [id], {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (elem in data){
+                donacioneslabels.push(elem)
+                donacionesdata.push(data[elem])
+            }
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
+
+async function getMetas(id) {
+    await fetch("http://localhost:5000/queries/get-metas?idComedor=" + [id], {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (elem in data){
+                metaslabels.push(elem)
+                metasdata.push(data[elem])
+            }
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
 
 generar_datos()
 
+const ids = []
 const llaves = []
 const datos = []
 const top10data = []
@@ -179,6 +250,15 @@ const dependata = []
 const sexodata = []
 const edaddata = []
 const edadlabels = []
+const ventasdata = []
+const ventaslabels = []
+const ventaHoradata = []
+const ventaHoralabels = []
+const donacionesdata = []
+const donacioneslabels = []
+const metasdata = []
+const metaslabels = []
+const objetivos = []
 
 
 async function contar_llaves() {
@@ -189,72 +269,34 @@ async function contar_llaves() {
     }
 }
 
+
 async function generar_datos() {
     await contar_llaves();
     await getTopVentas();
     await getCierres();
-    // await getVentasDia();
-    // await getVentasHora();
     await getDependencias();
     await getSexos();
-    // await getDonaciones();
     await getEdades();
-    // await getMetas();
-
-    // console.log(edaddata)
-    // console.log(edadlabels)
     generar_graficas()
 }
 
-const genteHora = {
-    cantidad: [
-        [2, 5, 3, 7, 1, 2, 3], //the total is 23
-        [1, 4, 7, 8, 6, 4, 2], //the total is 32
-        [3, 4, 2, 3, 12, 5, 4], //the total is 26
-        [1, 2, 2, 3, 4, 5, 6], //the total is 23
-        [1, 3, 2, 6, 3, 6, 5], //the total is 16
-        [0, 4, 2, 8, 9, 4, 3], //the total is 30
-        [1, 0, 2, 6, 3, 6, 5], //the total is 15
+// const genteHora = {
+//     cantidad: [
+//         [2, 5, 3, 7, 1, 2, 3], //the total is 23
+//         [1, 4, 7, 8, 6, 4, 2], //the total is 32
+//         [3, 4, 2, 3, 12, 5, 4], //the total is 26
+//         [1, 2, 2, 3, 4, 5, 6], //the total is 23
+//         [1, 3, 2, 6, 3, 6, 5], //the total is 16
+//         [0, 4, 2, 8, 9, 4, 3], //the total is 30
+//         [1, 0, 2, 6, 3, 6, 5], //the total is 15
+//     ]
+// };
 
-        //     [
-        //         [2, 5, 3, 7, 1, 2, 3], //the total is 23
-        //         [1, 4, 7, 8, 6, 4, 2], //the total is 32
-        //         [3, 4, 2, 3, 12, 5, 4], //the total is 26
-        //         [1, 2, 2, 3, 4, 5, 6], //the total is 23
-        //         [1, 3, 2, 6, 3, 6, 5], //the total is 16
-        //         [0, 4, 2, 8, 9, 4, 3], //the total is 30
-        //         [1, 0, 2, 6, 3, 6, 5], //the total is 15
-        //     ], //Cinco de Mayo
-        //     [
-        //         [1, 0, 2, 6, 3, 6, 5], //the total is 15
-        //         [0, 4, 2, 8, 9, 4, 3], //the total is 30
-        //         [1, 3, 2, 6, 3, 6, 5], //the total is 16
-        //         [1, 2, 2, 3, 4, 5, 6], //the total is 23
-        //         [3, 4, 2, 3, 12, 5, 4], //the total is 26
-        //         [1, 4, 7, 8, 6, 4, 2], //the total is 32
-        //         [2, 5, 3, 7, 1, 2, 3], //the total is 23
-        //     ], //Mexico 86
-        //     [
-        //         [1, 2, 3, 2, 1, 0, 0], //the total is 10
-        //         [2, 4, 6, 4, 2, 1, 1], //the total is 20
-        //         [1, 3, 5, 7, 9, 11, 13], //the total is 30
-        //         [6, 6, 6, 6, 6, 6, 4], //the total is 40
-        //         [7, 7, 7, 7, 7, 7, 8], //the total is 50
-        //         [12, 12, 13, 9, 5, 6, 3], //the total is 60
-        //         [10, 10, 10, 10, 10, 10, 10], //the total is 70
-        //     ]], //Monte María
-    ]
-
-};
-
-const lsVentas = {
-    com1: [
-        [23, 32, 26, 23, 16, 30, 15]
-        // [[23, 32, 26, 23, 16, 30, 15]], //Cinco de Mayo
-        // [[15, 30, 16, 23, 26, 32, 23]], //Mexico 86
-        // [[10, 20, 30, 40, 50, 60, 70]], //Monte María
-    ],
-};
+// const lsVentas = {
+//     com1: [
+//         [23, 32, 26, 23, 16, 30, 15]
+//     ],
+// };
 
 //Información General
 
@@ -294,19 +336,21 @@ function generar_graficas() {
     });
 
     //FUNCIÓN QUE VA A SACAR LOS DATOS DEL API
-    function clickHandler(click) {
-        //console.log('clicks');
+    async function clickHandler(click) {
         const points = comedores.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
         if (points.length) {
-            console.log(points[0].index);// Esta cosa saca a que lugar está apuntando de la gráfica
-            //horarios.data.datasets[0].data = genteHora.com1[points[0].index];
-            //horarios.update();
-            /*
-
-            AQUI SE HACE LA LLAMDA AL API QUE ACTUALICE LOS VALORES DE LAS LISTA Y LUEGO VAN LOS
-            GRAFICA.UPDATE() PARA QUE SE ACTUALICEN LOS DATOS DE LA GRAFICA
-
-            */
+            const name = comedores.data.labels[points[0].index];
+            const idSeleccionado = ids[points[0].index];
+            console.log(name)
+            console.log(idSeleccionado)
+            await getVentasDia(idSeleccionado)
+            await getVentasHora(idSeleccionado);
+            await getDonaciones(idSeleccionado);    //CHECAR
+            await getMetas(idSeleccionado);
+            dias = metaslabels.length
+            for (let i = 0; i < dias; i++) {
+                objetivos.push(50);
+            }
         }
     }
     comedores.canvas.onclick = clickHandler;
@@ -369,19 +413,21 @@ function generar_graficas() {
         type: "bar",
         // Define los datos
         data: {
-            labels: [
-                "Lunes",
-                "Martes",
-                "Miércoles",
-                "Jueves",
-                "Viernes",
-                "Sábado",
-                "Domingo",
-            ],
+            // labels: [
+            //     "Lunes",
+            //     "Martes",
+            //     "Miércoles",
+            //     "Jueves",
+            //     "Viernes",
+            //     "Sábado",
+            //     "Domingo",
+            // ],
+            labels: ventaslabels,
             datasets: [
                 {
                     label: "Cantidad de Clientes",
-                    data: lsVentas.com1[0],
+                    // data: lsVentas.com1[0],
+                    data: ventasdata,
                     backgroundColor: [
                         "rgba(255, 99, 132, 0.5)",
                         "rgba(255, 255, 64, 0.5)",
@@ -408,11 +454,12 @@ function generar_graficas() {
         type: "line",
         // Define los datos
         data: {
-            labels: ["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00"],
+            // labels: ["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00"],
+            labels: ventaHoralabels,
             datasets: [
                 {
                     label: "# Clientes",
-                    data: genteHora.cantidad[0],
+                    data: ventaHoradata,
                 },
             ],
         },
@@ -461,15 +508,15 @@ function generar_graficas() {
     });
 
     //Cantida de donaciones
-    var donacions = new Chart(document.getElementById("myChart6"), {
+    var donaciones = new Chart(document.getElementById("myChart6"), {
         type: "doughnut",
         title: "Donaciones",
         data: {
-            labels: ["Si", "No"],
+            labels: donacioneslabels,
             datasets: [
                 {
-                    label: "Donaciones",
-                    data: [30, 150],
+                    label: "Ventas",
+                    data: donacionesdata,
                     backgroundColor: ["rgba(255, 0, 255, 1)", "rgba(150, 225, 64, 1)"],
                 },
             ],
@@ -499,17 +546,17 @@ function generar_graficas() {
                 {
                     type: "line",
                     label: "Objetivo de la Meta",
-                    data: [50, 50, 50, 50, 50, 50],
+                    data: objetivos,
                     backgroundColor: "rgba(130, 250, 80, 1)",
                 },
                 {
                     type: "bar",
                     label: "Venta",
-                    data: [43, 51, 50, 49, 48, 47],
+                    data: metasdata,
                     backgroundColor: "rgba(100, 95, 182, 1)",
                 },
             ],
-            labels: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+            labels: metaslabels,
         },
         options: {
             title: {

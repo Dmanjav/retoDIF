@@ -73,10 +73,10 @@ class connection():
     
     def get_cantidad_donaciones_comedor(self,id_comedor):
         '''Returns the number of orders that are donations of one kitchen'''
-        query = '''SELECT COUNT(*) FROM Pedido, Comedor 
-            WHERE Pedido.donacion = 1 AND Comedor.idComedor = %s;'''
+        query = '''SELECT COUNT(*) FROM Pedido 
+            WHERE Pedido.idComedor = %s GROUP BY Pedido.donacion;'''
         self.cursor.execute(query,[id_comedor])
-        return self.cursor.fetchone()
+        return self.cursor.fetchall()
     
     def get_rangos_edades_comedor(self):
         '''Returns the number of people grouped by a range of ages'''
