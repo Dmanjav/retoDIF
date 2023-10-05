@@ -31,17 +31,6 @@ USE APPDIF;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Admins`
---
-
-CREATE TABLE `Admins` (
-  `usuario` varchar(50) NOT NULL,
-  `contrasena` varchar(102) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `Anuncios`
 --
 
@@ -128,12 +117,6 @@ CREATE TABLE `Pedido` (
 --
 -- Índices para tablas volcadas
 --
-
---
--- Indices de la tabla `Admins`
---
-ALTER TABLE `Admins`
-  ADD PRIMARY KEY (`usuario`);
 
 --
 -- Indices de la tabla `Anuncios`
