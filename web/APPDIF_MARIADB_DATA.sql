@@ -27,14 +27,14 @@ INSERT INTO Comedor (`idComedor`, `nombre`, `calle`, `numero`, `colonia`, `contr
 (6, 'Amp. Peñitas', 'Cerrada Gardenias', '3', 'Ampliación Peñitas', 'pbkdf2:sha256:600000$AH6wfF9s2JO5Qodh$d9426b9efb5204f64951bcb7f4f039ada314e0903919f51b2826e9d9c74e1fa1'), -- Amp. Peñitas
 (7, 'San Jose Jaral 2', 'Jazmín', '22', 'San José el Jaral 2', 'pbkdf2:sha256:600000$BdugPaLSwE3XDjLq$0a121892aa53da7e8204de8bf1aaba87301272c47d49ea8157c41de3c599a337'), -- San Jose Jaral 2
 (8, 'Amp. Emiliano Zapata', 'Avenida Ejército Mexicano', 's/n', 'Ampliación Emiliano Zapata', 'pbkdf2:sha256:600000$ATNpxCHgpWc2OixT$194ada05792f9e2c83502d82869f1d6ab3a6dd83aaf27eb79c47486591e5575a'), -- Amp. Emiliano Zapata
-(9, 'DIF Central', 'Avenida Ruiz Cortines esq. Acambay ', 's/n', 'Lomas de Atizapán', 'pbkdf2:sha256:600000$VjI3WjkzTNPT87QB$5e29c5a9fdaee3ea89f13a06978589df8b526edf08cc4cc1057f1bc5462cc408'); -- DIF Central
-(10, 'Adolfo López Mateos' 'Avenida Adolfo López Mateos', '6', 'Privada Zacatecas', 'pbkdf2:sha256:600000$emSkITzTCZzJursr$35906242380ce08228b16165b939cbae32c1549b1ad90b2615e23518bbd38014'), -- Adolfo López Mateos
+(9, 'DIF Central', 'Avenida Ruiz Cortines esq. Acambay ', 's/n', 'Lomas de Atizapán', 'pbkdf2:sha256:600000$VjI3WjkzTNPT87QB$5e29c5a9fdaee3ea89f13a06978589df8b526edf08cc4cc1057f1bc5462cc408'), -- DIF Central
+(10, 'Adolfo López Mateos', 'Avenida Adolfo López Mateos', '6', 'Privada Zacatecas', 'pbkdf2:sha256:600000$emSkITzTCZzJursr$35906242380ce08228b16165b939cbae32c1549b1ad90b2615e23518bbd38014'), -- Adolfo López Mateos
 (11, 'Mexico 86', 'Italia', '53', 'México 86', 'pbkdf2:sha256:600000$txT6IwqXwwJrA4gP$79cb74711732c3edcba04f32ab6d0e9ec71fa1c0ab7532932ba49b69e2995229'), -- Mexico 86
 (12, 'Rinconada Bonfil', 'Rosas Mz 4', 'Lt 15', 'Rinconada Bonfil', 'pbkdf2:sha256:600000$WiNyea3ngANlT1iA$05f18b9b776a7148422558352d754d9d52ae718dc99021bd8d0c0e930d2eb62d'), -- Rinconada Bonfil
 (13, 'San Juan Bosco', 'Profesor ROberto Barrio', '2', 'San Juan Bosco', 'pbkdf2:sha256:600000$hbFrOs6FCbc5JQM6$ce07ff8326c8d51dfea61fccf19ac6dd2f9bee1379153c76f348e66aec27f906'), -- San Juan Bosco
 (14, 'Las Peñitas', 'Mirador', '100', 'Las Peñitas', 'pbkdf2:sha256:600000$8smvIfNGq6xU3qYr$2b55ef5e756dd3fdb56970a6dbdfbd75cda5781066eb88270f89fa96c47464fb'), -- Las Peñitas
 (15, 'Rancho Castro', 'Del Puerto', 's/n', 'Rancho Castro', 'pbkdf2:sha256:600000$05xC0X675PmNTohU$57d527ad87ccfac7cb4a0fe2455f26180a3ce8db343fd40b929ac9ee6a02d461'), -- Rancho Castro
-(16, 'Villas de las Palmas', 'Avena Mz 5', 'Lt 12', 'Ampliación Villa de las Palas', 'pbkdf2:sha256:600000$8VmtPHZymmRFzOJx$14a88347f9ca38e15c25d8dcda686e32b2c79f3d0d1c0c379c8c3916e0c583c2') -- Villas de las Palmas
+(16, 'Villas de las Palmas', 'Avena Mz 5', 'Lt 12', 'Ampliación Villa de las Palas', 'pbkdf2:sha256:600000$8VmtPHZymmRFzOJx$14a88347f9ca38e15c25d8dcda686e32b2c79f3d0d1c0c379c8c3916e0c583c2'), -- Villas de las Palmas
 (17, 'UAM', 'Ingenieria Industrial Mz 24', 'Lt 45', 'UAM', 'pbkdf2:sha256:600000$ieyzXm5xn8ePnblG$ba8575756436c9b42dd53c4a1f4dfeb62e57d0c7b31292264af509773f6a93c5'), -- UAM
 (19, 'Bosques de Ixtacala', 'Cerrada Sauces Mz 12' ,'Lt 13-C 6', 'Bosques de Ixtacala', 'pbkdf2:sha256:600000$xlKkbZTUYfZXkp9Z$bca64977384ebcdaab333a461d466269ce15e2fdd6ad9373e01b1d80587140e2'), -- Bosques de Ixtacala
 (20, 'Lomas de Tepalcapa', 'Seis', '14', 'Lomas de Tepalcapa', 'pbkdf2:sha256:600000$pXpdP0e5K4BNuHN6$ea1690f1d1e513bf9b2c6d14c3d76b467774a878e15f63e88db164eaf83ae2c6'), -- Lomas de Tepalcapa
@@ -46,11 +46,11 @@ INSERT INTO Comedor (`idComedor`, `nombre`, `calle`, `numero`, `colonia`, `contr
 (26, 'Primero de Septiembre', 'Belisario Domínguez', '44', 'Primero de Septiembre', 'pbkdf2:sha256:600000$Zwxuh0cpMIEK1aiP$a22683ca0edc02ce237ebbcafb4264de40311caa887c793f162faab258e67ccf'), -- Primero de Septiembre
 (27, 'Las Águilas', 'Pavo Real', '18', 'Las Águilas', 'pbkdf2:sha256:600000$2T7kJkypak0TAkKq$17e7f9a13ced24fe49757cf0819036b8c8b95dd1863042302e8c34b776b199ba'), -- Las Águilas
 (28, 'El Cerrito', 'Paseo Buenavista', '1', 'El Cerrito', 'pbkdf2:sha256:600000$M139tXpbQQt9h8dn$38291842598bccb36aabf7d28a3f2c8f9b9a9038acfee362e3e978ae47451500'), -- El Cerrito
-(29, 'Villas de la Hacienda', 'De las Chaparreras', '5', 'Villas de la Hacienda', 'pbkdf2:sha256:600000$ESYXMgeBVDaGTebT$0c1d71e1f9bf592875a87f3f7a312f938f5ab43010cd5333f76978cf96a892fb'); -- Villas de la Hacienda
+(29, 'Villas de la Hacienda', 'De las Chaparreras', '5', 'Villas de la Hacienda', 'pbkdf2:sha256:600000$ESYXMgeBVDaGTebT$0c1d71e1f9bf592875a87f3f7a312f938f5ab43010cd5333f76978cf96a892fb'), -- Villas de la Hacienda
 (30, 'San Juan Ixtacala Plano Norte 1', 'Loma San Juan', '194', 'San Juan Ixtacala Plano Norte', 'pbkdf2:sha256:600000$1JQ8xnGGtkAEvDhX$5091d67d421d9e0b60675e410da79daf468e804e4c39a2c23fc0791d85cb109f'), -- San Juan Ixtacala Plano Norte 1
 (31, 'Prados de Ixtacala 2da. Secc.', 'Clavel Mz 13', 'lt 17 13','Prados Ixtacala 2da. secc.', 'pbkdf2:sha256:600000$YetdCLhwW6C2A3np$361e52ef69b12be34ab8752bbcb6e2865f36033b2d2374bf99362928bd64fc6d'), -- Prados de Ixtacala 2da. Secc.
 (32, 'Villa Jardin', 'Cerrada Francisco Villa', 's/n.', 'Villa Jardin', 'pbkdf2:sha256:600000$K2M7QgixrHdM6KIf$7e3503726008dea5ebe64ee96c6894d74d43d8b6a4bfc9ff687cd9956ee8e42e'),
-(33, 'Amp. Crsitobal Higuera', 'Aldama', '#17', 'Amp. Cristobal Higuera', 'pbkdf2:sha256:600000$73VIUkhgc4C5SF5v$c88bfdf5aaff6db0cfd88820577f5ee4ffd32315e5832d39d82f2f0a4c0a2931'),
+(33, 'Amp. Cristobal Higuera', 'Aldama', '#17', 'Amp. Cristobal Higuera', 'pbkdf2:sha256:600000$73VIUkhgc4C5SF5v$c88bfdf5aaff6db0cfd88820577f5ee4ffd32315e5832d39d82f2f0a4c0a2931'),
 (34, 'Amp. Adolfo Lopez Mateos', 'Calle Leon', '#1', 'Amp.Adolfo López Mateos', 'pbkdf2:sha256:600000$eoYjoREkMHhD9uXX$d8afb12d341780f765cb81fa08e6f2d0d3f2e83240816616cb16a3fd9bd413ba'),
 (35, 'Lomas de San Miguel', 'Jacarandas', '#5', 'Lomas de San Miguel', 'pbkdf2:sha256:600000$XlzLRUG1GGYE9yjN$2035950773bf94399c2fa8093ecc019ccd87a2bf0c4e1e18871849fdd1e0e507'),
 (36, 'San Juan Ixtacala Plano Norte 2', 'Boulevar Ignacio Zaragoza', '82', 'San Juan Ixtacala Plano Norte', 'pbkdf2:sha256:600000$3d6TAYaGDNXuLv8N$976a25bba4f523516eff229cb62e54c22ae4086ae5a60b642fe3b7461ee7f888'),
@@ -101,4 +101,5 @@ INSERT INTO Pedido (`idPedido`, `fechaHora`, `donacion`, `responsable`, `dependi
 (1, '2023-09-27 12:25:48', 0, 'AAAA030125HDFLVLA2', 'MAVD030411HDFNVGA7', 3, 2),
 (2, '2023-09-27 12:25:48', 1, 'SACC030606HMCNLRA2', 'SACC030606HMCNLRA2', 1, 1),
 (3, '2023-09-30 16:09:30', 0, 'MAVD030411HDFNVGA7', 'AAAA030125HDFLVLA2', 2, 8),
-(4, '2023-09-30 00:09:29', 1, 'GAHI020228MMCRRNA7', 'GAHI020228MMCRRNA7', 1, 8);
+(4, '2023-09-30 00:09:29', 1, 'GAHI020228MMCRRNA7', 'GAHI020228MMCRRNA7', 1, 8),
+(5, '2023-10-02 02:45:29', 0, 'MAVD030411HDFNVGA7', 'MAVD030411HDFNVGA7', 1, 6);
