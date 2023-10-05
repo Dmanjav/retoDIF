@@ -4,6 +4,7 @@ import connection
 from secrets import token_hex
 import User
 from werkzeug.security import check_password_hash
+import secrets
 
 app = Flask(__name__)
 app.secret_key = token_hex()
@@ -39,6 +40,18 @@ def login_page():
         return 'Not valid user or password, try again.', 401
 
     return render_template('login.html', stylesheet=url_for('static', filename='css/login.css'))
+
+
+@app.route('/app/comedor/login', methods = ['POST'])
+def app_user_login():
+    JSON = request.get_json()
+
+    if 'usuario' not in JSON or 'contraseña' not in JSON:
+        return 'Not valid user or password, try again.', 401
+    
+    JSON_USER = JSON['usuario']
+    JSON_PASSW = JSON['contraseña']
+    
 
 
 @app.route('/dashboard')
