@@ -250,15 +250,16 @@ const dependata = []
 const sexodata = []
 const edaddata = []
 const edadlabels = []
-const ventasdata = []
-const ventaslabels = []
-const ventaHoradata = []
-const ventaHoralabels = []
-const donacionesdata = []
-const donacioneslabels = []
-const metasdata = []
-const metaslabels = []
-const objetivos = []
+
+var ventasdata = []
+var ventaslabels = []
+var ventaHoradata = []
+var ventaHoralabels = []
+var donacionesdata = []
+var donacioneslabels = []
+var metasdata = []
+var metaslabels = []
+var objetivos = []
 
 
 async function contar_llaves() {
@@ -327,13 +328,41 @@ function generar_graficas() {
 
             activeSelection = { name, id: idSeleccionado };
             console.log(activeSelection)
-            
+
+            // Gráfica 1
+            while(ventasdata.length > 0) {
+                ventasdata.pop();
+            }
+            while(ventaslabels.length > 0) {
+                ventaslabels.pop();
+            }
             await getVentasDia(idSeleccionado)
-            top10ventas.update();
-            await getVentasHora(idSeleccionado);
             daysPerWeek.update();
-            await getDonaciones(idSeleccionado);    //CHECAR
+            // Gráfica 2
+            while(ventaHoradata.length > 0) {
+                ventaHoradata.pop();
+            }
+            while(ventaHoralabels.length > 0) {
+                ventaHoralabels.pop();
+            }
+            await getVentasHora(idSeleccionado);
+            horarios.update();
+            // Gráfica 3
+            while(donacionesdata.length > 0) {
+                donacionesdata.pop();
+            }
+            while(donacioneslabels.length > 0) {
+                donacioneslabels.pop();
+            }
+            await getDonaciones(idSeleccionado);
             donaciones.update();
+            // Gráfica 4
+            while(metasdata.length > 0) {
+                metasdata.pop();
+            }
+            while(metaslabels.length > 0) {
+                metaslabels.pop();
+            }
             await getMetas(idSeleccionado);
             metas.update();
             dias = metaslabels.length
