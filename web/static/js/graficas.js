@@ -179,7 +179,6 @@ async function getVentasHora(id) {
             return response.json();
         })
         .then(data => {
-            console.log(data);
             for (elem in data){
                 ventaHoralabels.push(elem)
                 ventaHoradata.push(data[elem])
@@ -190,6 +189,53 @@ async function getVentasHora(id) {
         });
 }
 
+async function getDonaciones(id) {
+    await fetch("http://localhost:5000/queries/get-donaciones?idComedor=" + [id], {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (elem in data){
+                donacioneslabels.push(elem)
+                donacionesdata.push(data[elem])
+            }
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
+
+async function getMetas(id) {
+    await fetch("http://localhost:5000/queries/get-metas?idComedor=" + [id], {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (elem in data){
+                metaslabels.push(elem)
+                metasdata.push(data[elem])
+            }
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
 
 generar_datos()
 
@@ -206,10 +252,13 @@ const edaddata = []
 const edadlabels = []
 const ventasdata = []
 const ventaslabels = []
-
 const ventaHoradata = []
 const ventaHoralabels = []
-
+const donacionesdata = []
+const donacioneslabels = []
+const metasdata = []
+const metaslabels = []
+const objetivos = []
 
 
 async function contar_llaves() {
@@ -219,6 +268,7 @@ async function contar_llaves() {
         datos.push(1);
     }
 }
+
 
 async function generar_datos() {
     await contar_llaves();
@@ -295,10 +345,12 @@ function generar_graficas() {
             console.log(idSeleccionado)
             await getVentasDia(idSeleccionado)
             await getVentasHora(idSeleccionado);
-            // await getDonaciones();
-            // await getMetas();
-            console.log(ventaHoralabels)
-            console.log(ventaHoradata)
+            await getDonaciones(idSeleccionado);    //CHECAR
+            await getMetas(idSeleccionado);
+            dias = metaslabels.length
+            for (let i = 0; i < dias; i++) {
+                objetivos.push(50);
+            }
         }
     }
     comedores.canvas.onclick = clickHandler;
@@ -456,15 +508,15 @@ function generar_graficas() {
     });
 
     //Cantida de donaciones
-    var donacions = new Chart(document.getElementById("myChart6"), {
+    var donaciones = new Chart(document.getElementById("myChart6"), {
         type: "doughnut",
         title: "Donaciones",
         data: {
-            labels: ["Si", "No"],
+            labels: donacioneslabels,
             datasets: [
                 {
-                    label: "Donaciones",
-                    data: [30, 150],
+                    label: "Ventas",
+                    data: donacionesdata,
                     backgroundColor: ["rgba(255, 0, 255, 1)", "rgba(150, 225, 64, 1)"],
                 },
             ],
@@ -494,17 +546,17 @@ function generar_graficas() {
                 {
                     type: "line",
                     label: "Objetivo de la Meta",
-                    data: [50, 50, 50, 50, 50, 50],
+                    data: objetivos,
                     backgroundColor: "rgba(130, 250, 80, 1)",
                 },
                 {
                     type: "bar",
                     label: "Venta",
-                    data: [43, 51, 50, 49, 48, 47],
+                    data: metasdata,
                     backgroundColor: "rgba(100, 95, 182, 1)",
                 },
             ],
-            labels: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+            labels: metaslabels,
         },
         options: {
             title: {

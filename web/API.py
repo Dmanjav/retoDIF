@@ -128,8 +128,8 @@ def get_donaciones():
     '''Returns the number of donations of a community kitchen'''
     id_comedor = request.args.get('idComedor')
     resultado = db_connection.get_cantidad_donaciones_comedor(id_comedor)
-    return {"Donaciones": resultado[0]}
 
+    return {"No donaciones": resultado[0][0], "Donaciones": resultado[1][0]}
 
 @app.route('/queries/get-edades')
 @login_required
