@@ -344,9 +344,13 @@ function generar_graficas() {
             console.log(name)
             console.log(idSeleccionado)
             await getVentasDia(idSeleccionado)
+            top10ventas.update();
             await getVentasHora(idSeleccionado);
+            daysPerWeek.update();
             await getDonaciones(idSeleccionado);    //CHECAR
+            donaciones.update();
             await getMetas(idSeleccionado);
+            metas.update();
             dias = metaslabels.length
             for (let i = 0; i < dias; i++) {
                 objetivos.push(50);
