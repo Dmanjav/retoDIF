@@ -1,5 +1,5 @@
 async function getComedores() {
-    await fetch("http://localhost:5000/queries/get-comedores", {
+    await fetch("/queries/get-comedores", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -24,7 +24,7 @@ async function getComedores() {
 }
 
 async function getTopVentas() {
-    await fetch("http://localhost:5000/queries/get-top-ventas", {
+    await fetch("/queries/get-top-ventas", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -48,7 +48,7 @@ async function getTopVentas() {
 }
 
 async function getCierres() {
-    await fetch("http://localhost:5000/queries/get-cierres", {
+    await fetch("/queries/get-cierres", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -72,7 +72,7 @@ async function getCierres() {
 }
 
 async function getDependencias() {
-    await fetch("http://localhost:5000/queries/get-num-dependencias", {
+    await fetch("/queries/get-num-dependencias", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -95,7 +95,7 @@ async function getDependencias() {
 }
 
 async function getSexos() {
-    await fetch("http://localhost:5000/queries/get-cant-sexos", {
+    await fetch("/queries/get-cant-sexos", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -118,7 +118,7 @@ async function getSexos() {
 }
 
 async function getEdades() {
-    await fetch("http://localhost:5000/queries/get-edades", {
+    await fetch("/queries/get-edades", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -142,7 +142,7 @@ async function getEdades() {
 }
 
 async function getVentasDia(id) {
-    await fetch("http://localhost:5000/queries/get-ventas-dia?idComedor=" + [id], {
+    await fetch("/queries/get-ventas-dia?idComedor=" + [id], {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -166,7 +166,7 @@ async function getVentasDia(id) {
 }
 
 async function getVentasHora(id) {
-    await fetch("http://localhost:5000/queries/get-ventas-hora?idComedor=" + [id], {
+    await fetch("/queries/get-ventas-hora?idComedor=" + [id], {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -190,7 +190,7 @@ async function getVentasHora(id) {
 }
 
 async function getDonaciones(id) {
-    await fetch("http://localhost:5000/queries/get-donaciones?idComedor=" + [id], {
+    await fetch("/queries/get-donaciones?idComedor=" + [id], {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -214,7 +214,7 @@ async function getDonaciones(id) {
 }
 
 async function getMetas(id) {
-    await fetch("http://localhost:5000/queries/get-metas?idComedor=" + [id], {
+    await fetch("/queries/get-metas?idComedor=" + [id], {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
