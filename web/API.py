@@ -5,9 +5,12 @@ from secrets import token_hex
 import User
 from werkzeug.security import check_password_hash
 from datetime import date, timedelta
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 app.secret_key = token_hex()
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -65,6 +68,7 @@ def dashboard():
 
 @app.route('/queries/get-comedores')
 @login_required
+@cross_origin()
 def get_comedor():
     '''Returns name and id of all community kitchens'''
     lista_comedores = db_connection.get_comedores()
@@ -78,6 +82,7 @@ def get_comedor():
 
 @app.route('/queries/get-top-ventas')
 @login_required
+@cross_origin()
 def get_top_ventas():
     '''Top 10 sales number per community kitchen'''
     result = db_connection.get_top_ventas()
@@ -88,6 +93,7 @@ def get_top_ventas():
 
 @app.route('/queries/get-ventas-dia')
 @login_required
+@cross_origin()
 def get_ventas_x_dia():
     '''Returns the sales per day given a specific "Comedor"'''
     id_comedor = request.args.get('idComedor')
@@ -108,6 +114,7 @@ def get_ventas_x_dia():
 
 @app.route('/queries/get-ventas-hora')
 @login_required
+@cross_origin()
 def get_ventasHora():
     '''Returns the number of sales by hour of a community kitchen'''
     id_comedor = request.args.get('idComedor')
@@ -125,6 +132,7 @@ def get_ventasHora():
 
 @app.route('/queries/get-num-dependencias')
 @login_required
+@cross_origin()
 def get_dependencias():
     '''Returns the number of dependants'''
     dependencias = db_connection.get_num_dependencia()
@@ -137,6 +145,7 @@ def get_dependencias():
 
 @app.route('/queries/get-cant-sexos')
 @login_required
+@cross_origin()
 def get_tipoPoblacion():
     '''Returns the sex of the clients of all kitchens'''
     resultado = db_connection.get_sexo_clientes()
@@ -149,6 +158,7 @@ def get_tipoPoblacion():
 
 @app.route('/queries/get-donaciones')
 @login_required
+@cross_origin()
 def get_donaciones():
     '''Returns the number of donations of a community kitchen'''
     id_comedor = request.args.get('idComedor')
@@ -177,6 +187,7 @@ def get_donaciones():
 
 @app.route('/queries/get-edades')
 @login_required
+@cross_origin()
 def get_rangosEdades():
     '''Returns the ranges and the quantity of clients per age range'''
     resultado = db_connection.get_rangos_edades_comedor()
@@ -190,6 +201,7 @@ def get_rangosEdades():
 
 @app.route('/queries/get-metas')
 @login_required
+@cross_origin()
 def get_metas():
     '''Returns the number of sales in the last 30 days of a community kitchen'''
     id_comedor = request.args.get('idComedor')
@@ -211,6 +223,7 @@ def get_metas():
 
 @app.route('/queries/get-cierres')
 @login_required
+@cross_origin()
 def get_cierres():
     '''Returns the number of times different kitchens closed'''
     resultado = db_connection.get_cierres()
