@@ -15,7 +15,6 @@ class Admin_connection():
         query = '''SELECT * FROM Admins WHERE usuario = ?;'''
         self.cursor.execute(query,[user])
         result = self.cursor.fetchone()
-        print(result)
         return result
 
 
@@ -88,7 +87,7 @@ class connection():
         query = '''SELECT COUNT(*) FROM Pedido 
             WHERE Pedido.idComedor = %s GROUP BY Pedido.donacion;'''
         self.cursor.execute(query,[id_comedor])
-        return self.cursor.fetchall()
+        return self.cursor.fetchone()
     
     def get_rangos_edades_comedor(self):
         '''Returns the number of people grouped by a range of ages'''
