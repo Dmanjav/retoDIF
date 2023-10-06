@@ -143,7 +143,22 @@ def get_donaciones():
     id_comedor = request.args.get('idComedor')
     resultado = db_connection.get_cantidad_donaciones_comedor(id_comedor)
 
-    return {"No donaciones": resultado[0][0], "Donaciones": resultado[1][0]}
+    if not resultado:
+        resultado = []
+
+    try:
+        num1 = resultado[0]
+    except IndexError:
+        num1 = 0
+
+    try:
+        num2 = resultado[1]
+    except IndexError:
+        num2 = 0
+
+    resultado = [num1,num2]
+
+    return {"No donaciones": resultado[0], "Donaciones": resultado[1]}
 
 @app.route('/queries/get-edades')
 @login_required
