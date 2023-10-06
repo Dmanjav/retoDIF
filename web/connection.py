@@ -87,7 +87,7 @@ class connection():
         query = '''SELECT COUNT(*) FROM Pedido 
             WHERE Pedido.idComedor = %s GROUP BY Pedido.donacion;'''
         self.cursor.execute(query,[id_comedor])
-        return self.cursor.fetchone()
+        return self.cursor.fetchall()
     
     def get_rangos_edades_comedor(self):
         '''Returns the number of people grouped by a range of ages'''
@@ -104,9 +104,10 @@ class connection():
     
     def get_metas_comedor(self, id_comedor):
         '''Returns the number of sales in the las 30 days of a kitchen'''
-        query = '''SELECT Date(fechaHora) AS fecha, COUNT(*) AS ventas
-            FROM Pedido WHERE idComedor = %s 
-            GROUP BY fecha ORDER BY fecha DESC LIMIT 30;'''
+        query = '''SELECT DATE(fechaHora) AS fecha, COUNT(*) AS ventas 
+            FROM Pedido WHERE idComedor = %s AND 
+            fechaHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) 
+            GROUP BY fecha ORDER BY fecha DESC;'''
         
         self.cursor.execute(query,[id_comedor])
         return self.cursor.fetchall()

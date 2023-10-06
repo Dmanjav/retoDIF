@@ -12,6 +12,6 @@
 5. Configurar un entorno virtual de python dentro de la carpeta /web y activarlo
 6. Ejecutar el siguiente comando para instalar las dependencias requeridas
     pip install -r <Ruta al archivo pip_requierements.txt>
-7. Ejecutar el siguiente comando para crear las BD de SQLITE
+7. Ejecutar el siguiente comando dentro de la carpeta /web para crear las BD de SQLITE
     sqlite3 admin.db -init <Ruta al archivo ADMIN_SQLITE.sql>
     ...

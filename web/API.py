@@ -5,6 +5,7 @@ from secrets import token_hex
 import User
 from werkzeug.security import check_password_hash
 import secrets
+from datetime import date, timedelta
 
 app = Flask(__name__)
 app.secret_key = token_hex()
@@ -90,9 +91,15 @@ def get_top_ventas():
 @login_required
 def get_ventas_x_dia():
     id_comedor = request.args.get('idComedor')
+
+    if not id_comedor:
+        return 'Bad request: Missing requiered parameter \'idComedor\'', 400
+
     resultado = db_connection.get_ventasDia_comedor(int(id_comedor))
     '''Returns the sales per day given a specific "Comedor"'''
-    dict_ventas_dia = {}
+    dict_ventas_dia = {'lunes' : 0, 'martes' : 0, 'miércoles' : 0, 
+                       'jueves' : 0, 'viernes' : 0, 'sábado' : 0, 
+                       'domingo' : 0}
 
     for register in resultado:
         dict_ventas_dia[register[0]] = register[1]
@@ -104,8 +111,12 @@ def get_ventas_x_dia():
 def get_ventasHora():
     '''Returns the number of sales by hour of a community kitchen'''
     id_comedor = request.args.get('idComedor')
-    resultado = db_connection.get_ventasHora_comedor(id_comedor)
-    dict_ventas_hora = {}
+
+    if not id_comedor:
+        return 'Bad request: Missing requiered parameter \'idComedor\'', 400
+
+    resultado = db_connection.get_ventasHora_comedor(int(id_comedor))
+    dict_ventas_hora = {t : 0 for t in range(24)}
 
     for register in resultado:
         dict_ventas_hora[register[0]] = register[1]
@@ -117,7 +128,7 @@ def get_ventasHora():
 def get_dependencias():
     '''Returns the number of dependants'''
     dependencias = db_connection.get_num_dependencia()
-    dict_num_dependencias = {}
+    dict_num_dependencias = {'Dependiente' : 0, 'Independiente' : 0}
 
     for register in dependencias:
         dict_num_dependencias[register[0]] = register[1]
@@ -127,9 +138,9 @@ def get_dependencias():
 @app.route('/queries/get-cant-sexos')
 @login_required
 def get_tipoPoblacion():
-    '''Returns the sex of the clients of a "Comedor"'''
+    '''Returns the sex of the clients of all kitchens'''
     resultado = db_connection.get_sexo_clientes()
-    dict_sexos = {}
+    dict_sexos = {'F' : 0, 'H' : 0}
 
     for register in resultado:
         dict_sexos[register[0]] = register[1]
@@ -141,18 +152,22 @@ def get_tipoPoblacion():
 def get_donaciones():
     '''Returns the number of donations of a community kitchen'''
     id_comedor = request.args.get('idComedor')
-    resultado = db_connection.get_cantidad_donaciones_comedor(id_comedor)
+
+    if not id_comedor:
+        return 'Bad request: Missing requiered parameter \'idComedor\'', 400
+    
+    resultado = db_connection.get_cantidad_donaciones_comedor(int(id_comedor))
 
     if not resultado:
         resultado = []
 
     try:
-        num1 = resultado[0]
+        num1 = resultado[0][0]
     except IndexError:
         num1 = 0
 
     try:
-        num2 = resultado[1]
+        num2 = resultado[1][0]
     except IndexError:
         num2 = 0
 
@@ -165,7 +180,8 @@ def get_donaciones():
 def get_rangosEdades():
     '''Returns the ranges and the quantity of clients per age range'''
     resultado = db_connection.get_rangos_edades_comedor()
-    dict_edades = {}
+    dict_edades = {'Niños' : 0, 'Estudiantes adolescentes (12 - 19)' : 0, 
+                   'Adultos (20 - 65)' : 0, 'Adultos Mayores (65+)' : 0}
 
     for register in resultado:
         dict_edades[register[0]] = register[1]
@@ -177,8 +193,16 @@ def get_rangosEdades():
 def get_metas():
     '''Returns the number of sales in the last 30 days of a community kitchen'''
     id_comedor = request.args.get('idComedor')
-    resultado = db_connection.get_metas_comedor(id_comedor)
+
+    if not id_comedor:
+        return 'Bad request: Missing requiered parameter \'idComedor\'', 400
+    
+    resultado = db_connection.get_metas_comedor(int(id_comedor))
     dict_metas = {}
+
+    date_now = date.today()
+    for i in range(30):
+        dict_metas[str(date_now - timedelta(days=i))] = 0
 
     for register in resultado:
         dict_metas[str(register[0])] = register[1]
