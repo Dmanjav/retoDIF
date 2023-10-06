@@ -4,7 +4,6 @@ import connection
 from secrets import token_hex
 import User
 from werkzeug.security import check_password_hash
-import secrets
 from datetime import date, timedelta
 
 app = Flask(__name__)
@@ -90,13 +89,14 @@ def get_top_ventas():
 @app.route('/queries/get-ventas-dia')
 @login_required
 def get_ventas_x_dia():
+    '''Returns the sales per day given a specific "Comedor"'''
     id_comedor = request.args.get('idComedor')
 
     if not id_comedor:
         return 'Bad request: Missing requiered parameter \'idComedor\'', 400
 
     resultado = db_connection.get_ventasDia_comedor(int(id_comedor))
-    '''Returns the sales per day given a specific "Comedor"'''
+    
     dict_ventas_dia = {'lunes' : 0, 'martes' : 0, 'miércoles' : 0, 
                        'jueves' : 0, 'viernes' : 0, 'sábado' : 0, 
                        'domingo' : 0}
