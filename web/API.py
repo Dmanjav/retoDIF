@@ -20,7 +20,7 @@ sqlite_admin_connection = connection.Admin_connection()
 def load_user(user_id):
     '''Returns object user given the user_id in the DB'''
     admin_info = sqlite_admin_connection.get_admin(user_id)
-    user = User.User(admin_info[0], admin_info[1])
+    user = User.Admin_user(admin_info[0], admin_info[1])
     return user
 
 
