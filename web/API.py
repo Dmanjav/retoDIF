@@ -5,7 +5,6 @@ from secrets import token_hex
 import User
 from werkzeug.security import check_password_hash
 from datetime import date, timedelta
-from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 app.secret_key = token_hex()
@@ -14,13 +13,12 @@ login_manager.init_app(app)
 
 # Connection with database
 db_connection = connection.connection()
-sqlite_admin_connection = connection.Admin_connection()
 
 
 @login_manager.user_loader
 def load_user(user_id):
     '''Returns object user given the user_id in the DB'''
-    admin_info = sqlite_admin_connection.get_admin(user_id)
+    admin_info = db_connection.get_admin(user_id)
     user = User.Admin_user(admin_info[0], admin_info[1])
     return user
 
@@ -32,7 +30,7 @@ def login_page():
         FORM_USER = request.form.get('usuario')
         FORM_PASS = request.form.get('contraseña')
 
-        USER_DB_INFO = sqlite_admin_connection.get_admin(FORM_USER)
+        USER_DB_INFO = db_connection.get_admin(FORM_USER)
 
         if USER_DB_INFO:
             if USER_DB_INFO[0] == FORM_USER and check_password_hash(USER_DB_INFO[1], FORM_PASS):

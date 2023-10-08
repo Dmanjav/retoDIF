@@ -1,4 +1,13 @@
 1. Configurar en mysql el usuario para la base de datos.
+2. Configurar el idioma de mysql en español de la siguiente forma
+    1. Abrir el archivo en la siguiente ruta:
+        /etc/mysql/my.cnf
+    2. Copiar las siguientes líneas al final del archivo
+        [mysqld]
+        lc_time_names = "es_MX"
+    3. Reiniciar el servicio
+        sudo service mysql restart
+
 2. Iniciar sesión en mysql
     mysql -u <usuarioBD> -p
 3. Utilizar los siguientes comandos para cargar la BD en mysql
@@ -12,6 +21,3 @@
 5. Configurar un entorno virtual de python dentro de la carpeta /web y activarlo
 6. Ejecutar el siguiente comando para instalar las dependencias requeridas
     pip install -r <Ruta al archivo pip_requierements.txt>
-7. Ejecutar el siguiente comando dentro de la carpeta /web para crear las BD de SQLITE
-    sqlite3 admin.db -init <Ruta al archivo ADMIN_SQLITE.sql>
-    ...

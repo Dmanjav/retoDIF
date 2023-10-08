@@ -1,11 +1,15 @@
 USE APPDIF;
 
--- INSERT INTO Admins (`usuario`, `contrasena`) VALUES
--- ('Aldehil', 'pbkdf2:sha256:600000$FAhTzalCnmY15ljn$ba493709f7fce005ec3f1334003e3dc072f5d061026d4709b87dbae5aeaaa4df'),
--- ('Manja', 'pbkdf2:sha256:600000$qMhpBtIjN4BsozZt$030807f82615243981fed0e4da4d6cd035fa1f6d522839bd082c652017f099f7');
+--
+-- Volcado de datos para la tabla `Admins`
+--
+
+INSERT INTO Admins VALUES
+('Aldehil', 'pbkdf2:sha256:600000$FAhTzalCnmY15ljn$ba493709f7fce005ec3f1334003e3dc072f5d061026d4709b87dbae5aeaaa4df'), -- 12345
+('Manja', 'pbkdf2:sha256:600000$qMhpBtIjN4BsozZt$030807f82615243981fed0e4da4d6cd035fa1f6d522839bd082c652017f099f7'); -- 54321
 
 --
--- Volcado de datos para la tabla `cliente`
+-- Volcado de datos para la tabla `Cliente`
 --
 
 INSERT INTO Cliente (`curp`, `nombre`, `apellidoP`, `apellidoM`, `sexo`, `fechaNacimiento`, `condicion`, `contrasena`) VALUES
@@ -16,7 +20,7 @@ INSERT INTO Cliente (`curp`, `nombre`, `apellidoP`, `apellidoM`, `sexo`, `fechaN
 ('SILP030314HDFPPBA3', 'Pablo', 'Spínola', 'López', 'H', '2003-04-14', 'Cuatro Ojos', 'pbkdf2:sha256:600000$AilSViF3yYUSxAyz$21bacc4088c0a781a6af788ba1b7daf2d5084c14059080301d2d42558c18c1b0');
 
 --
--- Volcado de datos para la tabla `comedor`
+-- Volcado de datos para la tabla `Comedor`
 --
 
 INSERT INTO Comedor (`idComedor`, `nombre`, `calle`, `numero`, `colonia`, `contrasena`) VALUES
@@ -59,7 +63,7 @@ INSERT INTO Comedor (`idComedor`, `nombre`, `calle`, `numero`, `colonia`, `contr
 (38, 'Tierra de en Medio', 'Hacienda de la Flor', '14', 'Tierra de en medio', 'pbkdf2:sha256:600000$ZNVJ5tvmU0P3iQ55$9d48dfeed0cbbffad40af744226184f9359c3770477fb2023dda686ef7342382');
 
 --
--- Volcado de datos para la tabla `anuncios`
+-- Volcado de datos para la tabla `Anuncios`
 --
 
 INSERT INTO Anuncios (`idAnuncio`, `idComedor`, `fechaHora`, `contenido`, `cierre`) VALUES
@@ -89,7 +93,7 @@ INSERT INTO Anuncios (`idAnuncio`, `idComedor`, `fechaHora`, `contenido`, `cierr
 (24, 38, '2023-10-05 10:24:27', 'Cerrado porque queremos', 1);
 
 --
--- Volcado de datos para la tabla `comida`
+-- Volcado de datos para la tabla `Comida`
 --
 
 INSERT INTO Comida (`idComida`, `entrada`, `plato`, `postre`) VALUES
@@ -104,7 +108,7 @@ INSERT INTO Comida (`idComida`, `entrada`, `plato`, `postre`) VALUES
 (9, 'Espagueti', 'Birria', 'Fresas con crema');
 
 --
--- Volcado de datos para la tabla `dependencia`
+-- Volcado de datos para la tabla `Dependencia`
 --
 
 INSERT INTO Dependencia (`idResponsable`, `idDependiente`) VALUES
@@ -115,7 +119,7 @@ INSERT INTO Dependencia (`idResponsable`, `idDependiente`) VALUES
 ('SACC030606HMCNLRA2', 'SACC030606HMCNLRA2');
 
 --
--- Volcado de datos para la tabla `pedido`
+-- Volcado de datos para la tabla `Pedido`
 --
 
 INSERT INTO Pedido (`idPedido`, `fechaHora`, `donacion`, `responsable`, `dependiente`, `idComedor`, `idComida`) VALUES

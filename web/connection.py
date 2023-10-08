@@ -1,27 +1,9 @@
 import mysql.connector
 from os import environ
-from sqlite3 import connect
 
 # Environment variables for DB connection
 DB_USER = environ.get('DB_DIF_USER')
 DB_PASS = environ.get('DB_DIF_PASS')
-
-class Admin_connection():
-    def __init__(self) -> None:
-        self.connection = connect('./admin.db', check_same_thread=False)
-        self.cursor = self.connection.cursor()
-
-    def get_admin(self, user):
-        query = '''SELECT * FROM Admins WHERE usuario = ?;'''
-        self.cursor.execute(query,[user])
-        result = self.cursor.fetchone()
-        return result
-
-
-class App_user_connection():
-    def __init__(self) -> None:
-        pass
-
 
 class connection():
 
@@ -29,6 +11,12 @@ class connection():
         self.connect = mysql.connector.connect(
             host='localhost', user=DB_USER, password=DB_PASS, database="APPDIF")
         self.cursor = self.connect.cursor()
+
+    def get_admin(self, user):
+        query = '''SELECT * FROM Admins WHERE usuario = %s;'''
+        self.cursor.execute(query,[user])
+        result = self.cursor.fetchone()
+        return result
 
     def get_comedores(self):
         '''Returns id and name of all community kitchens in DB'''

@@ -27,6 +27,29 @@ DROP DATABASE IF EXISTS APPDIF;
 CREATE DATABASE APPDIF;
 USE APPDIF;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Admins`
+--
+
+CREATE TABLE `Admins` (
+  `usuario` varchar(50) NOT NULL,
+  `contrasena` varchar(102) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `LoginClientes`
+--
+
+CREATE TABLE `LoginClientes` (
+  `token` varchar(32) NOT NULL,
+  `curpCliente` varchar(18) NOT NULL,
+  `fechaToken` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -119,6 +142,20 @@ CREATE TABLE `Pedido` (
 --
 
 --
+-- Indices de la tabla `Admins`
+--
+ALTER TABLE  `Admins`
+  ADD PRIMARY KEY (`usuario`);
+
+--
+-- Indices de la tabla `LoginClientes`
+--
+
+ALTER TABLE `LoginClientes`
+  ADD PRIMARY KEY (`token`),
+  ADD KEY `curpCliente` (`curpCliente`);
+
+--
 -- Indices de la tabla `Anuncios`
 --
 ALTER TABLE `Anuncios`
@@ -192,6 +229,13 @@ ALTER TABLE `Pedido`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `Anuncios`
+--
+
+ALTER TABLE `LoginClientes`
+  ADD CONSTRAINT `LoginClientes_ibfk_1` FOREIGN KEY (`curpCliente`) REFERENCES `Cliente` (`curp`);
 
 --
 -- Filtros para la tabla `Anuncios`
