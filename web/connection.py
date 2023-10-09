@@ -12,6 +12,8 @@ class connection():
             host='localhost', user=DB_USER, password=DB_PASS, database="APPDIF")
         self.cursor = self.connect.cursor()
 
+    # ------------ Dashboard queries -----------------
+
     def get_admin(self, user):
         query = '''SELECT * FROM Admins WHERE usuario = %s;'''
         self.cursor.execute(query,[user])
@@ -109,3 +111,23 @@ class connection():
         
         self.cursor.execute(query)
         return self.cursor.fetchall()
+    
+    # ------------ Dashboard queries -----------------
+
+    def get_comedor(self, nombre_comedor):
+        '''Returns the name and password of a kitchen'''
+        query = '''SELECT idComedor,nombre,contrasena FROM Comedor where nombre = %s;'''
+        self.cursor.execute(query,[nombre_comedor])
+        return self.cursor.fetchall()
+    
+    def login_comedor(self, token, idComedor):
+        '''Creates de log on DB table of a kitchen'''
+        query = '''INSERT INTO LoginComedores (token,idComedor,fechaHora) VALUES (%s,%s,NOW());'''
+        self.cursor.execute(query,[token,idComedor])
+        self.connect.commit()
+
+    def generar_pedido(self, donacion, responsable, dependiente, idComedor, idComida):
+        query = '''INSERT INTO Pedido (fechaHora,donacion,responsable,dependiente,idComedor,idComida)
+            VALUES (NOW(),%s,%s,%s,%s,%s);'''
+        self.cursor.execute(query,[donacion,responsable,dependiente,idComedor,idComida])
+        self.connect.commit()

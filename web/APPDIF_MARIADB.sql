@@ -47,7 +47,19 @@ CREATE TABLE `Admins` (
 CREATE TABLE `LoginClientes` (
   `token` varchar(32) NOT NULL,
   `curpCliente` varchar(18) NOT NULL,
-  `fechaToken` date NOT NULL
+  `fechaHora` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `LoginComedores`
+--
+
+CREATE TABLE `LoginComedores` (
+  `token` varchar(32) NOT NULL,
+  `idComedor` int(11) NOT NULL,
+  `fechaHora` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -105,6 +117,8 @@ CREATE TABLE `Comedor` (
 
 CREATE TABLE `Comida` (
   `idComida` int(11) NOT NULL,
+  `idComedor` int(11) NOT NULL,
+  `fechaRegistro` date NOT NULL,
   `entrada` varchar(50) NOT NULL,
   `plato` varchar(50) NOT NULL,
   `postre` varchar(50) NOT NULL
@@ -156,6 +170,14 @@ ALTER TABLE `LoginClientes`
   ADD KEY `curpCliente` (`curpCliente`);
 
 --
+-- Indices de la tabla `LoginComedores`
+--
+
+ALTER TABLE `LoginComedores`
+  ADD PRIMARY KEY (`token`),
+  ADD KEY `idComedor` (`idComedor`);
+
+--
 -- Indices de la tabla `Anuncios`
 --
 ALTER TABLE `Anuncios`
@@ -178,7 +200,8 @@ ALTER TABLE `Comedor`
 -- Indices de la tabla `Comida`
 --
 ALTER TABLE `Comida`
-  ADD PRIMARY KEY (`idComida`);
+  ADD PRIMARY KEY (`idComida`,`idComedor`),
+  ADD KEY (`idComedor`);
 
 --
 -- Indices de la tabla `Dependencia`
@@ -231,11 +254,18 @@ ALTER TABLE `Pedido`
 --
 
 --
--- Filtros para la tabla `Anuncios`
+-- Filtros para la tabla `LoginClientes`
 --
 
 ALTER TABLE `LoginClientes`
   ADD CONSTRAINT `LoginClientes_ibfk_1` FOREIGN KEY (`curpCliente`) REFERENCES `Cliente` (`curp`);
+
+--
+-- Filtros para la tabla `LoginComedores`
+--
+
+ALTER TABLE `LoginComedores`
+  ADD CONSTRAINT `LoginComedores_ibfk_1` FOREIGN KEY (`idComedor`) REFERENCES `Comedor` (`idComedor`);
 
 --
 -- Filtros para la tabla `Anuncios`
@@ -253,10 +283,16 @@ ALTER TABLE `Dependencia`
 --
 -- Filtros para la tabla `Pedido`
 --
+ALTER TABLE `Comida`
+  ADD CONSTRAINT `Comida_ibfk_1` FOREIGN KEY (`idComedor`) REFERENCES `Comedor` (`idComedor`);
+
+--
+-- Filtros para la tabla `Pedido`
+--
 ALTER TABLE `Pedido`
   ADD CONSTRAINT `Pedido_ibfk_1` FOREIGN KEY (`responsable`) REFERENCES `Cliente` (`curp`),
   ADD CONSTRAINT `Pedido_ibfk_2` FOREIGN KEY (`dependiente`) REFERENCES `Cliente` (`curp`),
-  ADD CONSTRAINT `Pedido_ibfk_3` FOREIGN KEY (`idComedor`) REFERENCES `Comedor` (`idComedor`),
+  ADD CONSTRAINT `Pedido_ibfk_3` FOREIGN KEY (`idComedor`) REFERENCES `Comida` (`idComedor`),
   ADD CONSTRAINT `Pedido_ibfk_4` FOREIGN KEY (`idComida`) REFERENCES `Comida` (`idComida`);
 COMMIT;
 

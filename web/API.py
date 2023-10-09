@@ -22,6 +22,7 @@ def load_user(user_id):
     user = User.Admin_user(admin_info[0], admin_info[1])
     return user
 
+# --------- Dashboard endpoints --------------
 
 @app.route('/', methods=['GET', 'POST'])
 def login_page():
@@ -32,26 +33,15 @@ def login_page():
 
         USER_DB_INFO = db_connection.get_admin(FORM_USER)
 
-        if USER_DB_INFO:
-            if USER_DB_INFO[0] == FORM_USER and check_password_hash(USER_DB_INFO[1], FORM_PASS):
-                login_user(load_user(FORM_USER))
-                return redirect('/dashboard')
-
-        return 'Not valid user or password, try again.', 401
+        if FORM_USER and FORM_PASS:
+            if USER_DB_INFO:
+                if USER_DB_INFO[0] == FORM_USER and check_password_hash(USER_DB_INFO[1], FORM_PASS):
+                    login_user(load_user(FORM_USER))
+                    return redirect('/dashboard')
+            return 'Not valid user or password, try again.', 401
+        return 'Bad request: Missing requiered parameter(s) \'usuario\' or \'contraseña\'', 400
 
     return render_template('login.html', stylesheet=url_for('static', filename='css/login.css'))
-
-
-@app.route('/app/comedor/login', methods = ['POST'])
-def app_user_login():
-    JSON = request.get_json()
-
-    if 'usuario' not in JSON or 'contraseña' not in JSON:
-        return 'Not valid user or password, try again.', 401
-    
-    JSON_USER = JSON['usuario']
-    JSON_PASSW = JSON['contraseña']
-    
 
 
 @app.route('/dashboard')
@@ -219,6 +209,42 @@ def get_cierres():
         dict_cierres[register[0]] = register[1]
 
     return dict_cierres
+
+
+# --------- App "Comedor" endpoints --------------
+
+@app.route('/app/comedor/login', methods = ['POST'])
+def app_user_login():
+    JSON = dict(request.get_json())
+
+    JSON_USER = JSON.get('usuario')
+    JSON_PASSW = JSON.get('contraseña')
+
+    if JSON_USER and JSON_PASSW:
+        COMEDOR_DB_INFO = db_connection.get_comedor(JSON_USER)
+
+        for register in COMEDOR_DB_INFO:
+            if JSON_USER == register[1] and check_password_hash(register[2],JSON_PASSW):
+                token = token_hex(16)
+                try:
+                    db_connection.login_comedor(token,register[0])
+                    return token, 200
+                except Exception as e:
+                    return ({'error' : 'Error del servidor',
+                            'message' : 'Error al insertar la información del usuario en la BD',
+                            'details' :
+                                str(e)},
+                            500)
+        return 'Not valid user or password, try again.', 401
+    
+    return 'Bad request: Missing requiered parameter(s) \'usuario\' or \'contraseña\'', 400
+
+# @app.route('/app/comedor/generar-pedido', methods=['POST'])
+# def generar_pedido():
+#     JSON = dict(request.get_json())
+
+    
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
