@@ -399,6 +399,7 @@ function generar_graficas() {
             },
         },
     });
+    top10ventas.canvas.onclick = clickHandler;
 
     //Más cierres
     var cierres = new Chart(document.getElementById("myChart8"), {
@@ -421,7 +422,7 @@ function generar_graficas() {
             ],
         },
     });
-
+    cierres.canvas.onclick = clickHandler;
 
     //Información Por Comedor
 
