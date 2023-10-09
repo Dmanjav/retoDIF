@@ -158,7 +158,7 @@ CREATE TABLE `Pedido` (
 --
 
 CREATE TABLE `Encuesta` (
-  `idPedido` int(11) NOT NULL
+  `idPedido` int(11) NOT NULL,
   `servicio` int(11),
   `higiene` int(11),
   `calidad` int(11)
