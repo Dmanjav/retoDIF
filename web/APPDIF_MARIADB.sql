@@ -151,6 +151,19 @@ CREATE TABLE `Pedido` (
   `idComida` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Encuesta`
+--
+
+CREATE TABLE `Encuesta` (
+  `idPedido` int(11) NOT NULL
+  `servicio` int(11),
+  `higiene` int(11),
+  `calidad` int(11)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Índices para tablas volcadas
 --
@@ -220,6 +233,12 @@ ALTER TABLE `Pedido`
   ADD KEY `dependiente` (`dependiente`),
   ADD KEY `idComedor` (`idComedor`),
   ADD KEY `idComida` (`idComida`);
+
+--
+-- Indices de la tabla `Encuesta`
+--
+ALTER TABLE `Encuesta`
+  ADD PRIMARY KEY (`idPedido`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -294,6 +313,13 @@ ALTER TABLE `Pedido`
   ADD CONSTRAINT `Pedido_ibfk_2` FOREIGN KEY (`dependiente`) REFERENCES `Cliente` (`curp`),
   ADD CONSTRAINT `Pedido_ibfk_3` FOREIGN KEY (`idComedor`) REFERENCES `Comida` (`idComedor`),
   ADD CONSTRAINT `Pedido_ibfk_4` FOREIGN KEY (`idComida`) REFERENCES `Comida` (`idComida`);
+COMMIT;
+
+--
+-- Filtros para la tabla `Encuesta`
+--
+ALTER TABLE `Encuesta`
+  ADD CONSTRAINT `Encuesta_ibfk_1` FOREIGN KEY (`idPedido`) REFERENCES `Pedido` (`idPedido`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
