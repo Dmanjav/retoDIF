@@ -10,8 +10,24 @@ def generate_random_data():
     id += 1
     return data
 
-veces = 100
+veces = 107
 id = 8
 
+# for i in range(veces):
+#     print(generate_random_data())
+    
+def generate_califs():
+    global new
+    
+    servicio = random.randint(1, 5)
+    higiene = random.randint(1, 5)
+    calidad = random.randint(1, 5)
+    data = (new, servicio, higiene, calidad)
+    new += 1
+    
+    return data
+
+new = 1
+
 for i in range(veces):
-    print(generate_random_data())
+    print(generate_califs())
