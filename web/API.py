@@ -210,6 +210,29 @@ def get_cierres():
 
     return dict_cierres
 
+@app.route('/queries/get-evaluaciones')
+@login_required
+def get_califs():
+    '''Returns the average of a kitchen different categories'''
+    id_comedor = request.args.get('idComedor')
+    
+    if not id_comedor:
+        return 'Bad request: Missing requiered parameter \'idComedor\'', 400
+    
+    try:
+        resultado = db_connection.get_calificaciones(int(id_comedor))
+        print(resultado)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                'message' : 'Error al obtener la información de la BD',
+                'details' :
+                    str(e)},
+                500)
+    
+    dict_calificaciones = {'Servicio' : round(resultado[1], 2), 
+                            'Higiene' : round(resultado[2], 2), 
+                            'Calidad' : round(resultado[3], 2)}    
+    return dict_calificaciones
 
 # --------- App "Comedor" endpoints --------------
 

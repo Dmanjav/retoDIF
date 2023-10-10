@@ -155,7 +155,7 @@ async function getVentasDia(id) {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 ventaslabels.push(elem)
                 ventasdata.push(data[elem])
             }
@@ -179,7 +179,7 @@ async function getVentasHora(id) {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 ventaHoralabels.push(elem)
                 ventaHoradata.push(data[elem])
             }
@@ -203,7 +203,7 @@ async function getDonaciones(id) {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 donacioneslabels.push(elem)
                 donacionesdata.push(data[elem])
             }
@@ -227,9 +227,33 @@ async function getMetas(id) {
             return response.json();
         })
         .then(data => {
-            for (elem in data){
+            for (elem in data) {
                 metaslabels.push(elem)
                 metasdata.push(data[elem])
+            }
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
+}
+
+async function getEvaluaciones(id) {
+    await fetch("/queries/get-evaluaciones?idComedor=" + [id], {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (elem in data) {
+                evaluacioneslabels.push(elem)
+                evaluacionesdata.push(data[elem])
             }
         })
         .catch(error => {
@@ -260,7 +284,8 @@ var donacioneslabels = []
 var metasdata = []
 var metaslabels = []
 var objetivos = []
-
+var evaluacionesdata = []
+var evaluacioneslabels = []
 
 async function contar_llaves() {
     await getComedores()
@@ -330,37 +355,37 @@ function generar_graficas() {
             console.log(activeSelection)
 
             // Gráfica 1
-            while(ventasdata.length > 0) {
+            while (ventasdata.length > 0) {
                 ventasdata.pop();
             }
-            while(ventaslabels.length > 0) {
+            while (ventaslabels.length > 0) {
                 ventaslabels.pop();
             }
             await getVentasDia(idSeleccionado)
             daysPerWeek.update();
             // Gráfica 2
-            while(ventaHoradata.length > 0) {
+            while (ventaHoradata.length > 0) {
                 ventaHoradata.pop();
             }
-            while(ventaHoralabels.length > 0) {
+            while (ventaHoralabels.length > 0) {
                 ventaHoralabels.pop();
             }
             await getVentasHora(idSeleccionado);
             horarios.update();
             // Gráfica 3
-            while(donacionesdata.length > 0) {
+            while (donacionesdata.length > 0) {
                 donacionesdata.pop();
             }
-            while(donacioneslabels.length > 0) {
+            while (donacioneslabels.length > 0) {
                 donacioneslabels.pop();
             }
             await getDonaciones(idSeleccionado);
             donaciones.update();
             // Gráfica 4
-            while(metasdata.length > 0) {
+            while (metasdata.length > 0) {
                 metasdata.pop();
             }
-            while(metaslabels.length > 0) {
+            while (metaslabels.length > 0) {
                 metaslabels.pop();
             }
             await getMetas(idSeleccionado);
@@ -369,6 +394,12 @@ function generar_graficas() {
             for (let i = 0; i < dias; i++) {
                 objetivos.push(50);
             }
+            //Evaluaciones
+            while (evaluacionesdata.length > 0) {
+                evaluacionesdata.pop();
+            }
+            await getEvaluaciones(idSeleccionado);
+            evaluaciones.update();
         }
     }
     comedores.canvas.onclick = clickHandler;
@@ -473,12 +504,12 @@ function generar_graficas() {
         type: "line",
         // Define los datos
         data: {
-            // labels: ["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00"],
             labels: ventaHoralabels,
             datasets: [
                 {
                     label: "# Clientes",
                     data: ventaHoradata,
+                    backgroundColor: "rgba(0, 102, 255, 0.5)"
                 },
             ],
         },
@@ -499,7 +530,7 @@ function generar_graficas() {
                 {
                     label: "Población",
                     data: sexodata,
-                    backgroundColor: ["rgba(255, 99, 132, 1)", "rgba(255, 255, 64, 1)"],
+                    backgroundColor: ["rgba(225, 225, 225, 1)", "rgba(40, 40, 40, 1)"],
                 },
             ],
         },
@@ -521,6 +552,7 @@ function generar_graficas() {
                 {
                     label: "Población",
                     data: edaddata,
+                    backgroundColor: ["rgba(93, 211, 158, 1)", "rgba(52, 138, 166, 1)", "rgba(82, 81, 116, 1)", "rgba(81, 59, 86, 1)"]
                 },
             ],
         },
@@ -536,7 +568,7 @@ function generar_graficas() {
                 {
                     label: "Ventas",
                     data: donacionesdata,
-                    backgroundColor: ["rgba(255, 0, 255, 1)", "rgba(150, 225, 64, 1)"],
+                    backgroundColor: ["rgba(112, 255, 130, 0.5)", "rgba(255, 112, 166, 0.5)"],
                 },
             ],
         },
@@ -550,11 +582,24 @@ function generar_graficas() {
             labels: ["Dependientes", "Independientes"],
             datasets: [
                 {
-                    label: "Dependencias",
+                    label: "Clientes",
                     data: dependata,
                     backgroundColor: ["rgba(0, 255, 10, 1)", "rgba(0, 255, 200, 1)"],
                 },
             ],
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            tooltips: {
+                enabled: true,
+                custom: function (tooltipItem) {
+                    return tooltipItem.yLabel;
+                },
+            },
         },
     });
 
@@ -566,13 +611,13 @@ function generar_graficas() {
                     type: "line",
                     label: "Objetivo de la Meta",
                     data: objetivos,
-                    backgroundColor: "rgba(130, 250, 80, 1)",
+                    backgroundColor: "rgba(51, 255, 167, 0.5)",
                 },
                 {
                     type: "bar",
                     label: "Venta",
                     data: metasdata,
-                    backgroundColor: "rgba(100, 95, 182, 1)",
+                    backgroundColor: "rgba(65, 51, 255, 0.5)",
                 },
             ],
             labels: metaslabels,
@@ -584,4 +629,25 @@ function generar_graficas() {
             },
         },
     });
+
+    var evaluaciones = new Chart(document.getElementById("myChart11"), {
+        data: {
+            datasets: [
+                {
+                    type: "bar",
+                    label: "Promedio de calificaciones",
+                    data: evaluacionesdata,
+                    backgroundColor: ["rgba(255, 195, 0, 0.5)", "rgba(255, 87, 51, 0.5)", "rgba(199, 0, 57, 0.5)"],
+                },
+            ],
+            labels: evaluacioneslabels,
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Calificaciones",
+            },
+        },
+    });
 }
+

@@ -5,6 +5,7 @@ from os import environ
 DB_USER = environ.get('DB_DIF_USER')
 DB_PASS = environ.get('DB_DIF_PASS')
 
+
 class connection():
 
     def __init__(self) -> None:
@@ -16,7 +17,7 @@ class connection():
 
     def get_admin(self, user):
         query = '''SELECT * FROM Admins WHERE usuario = %s;'''
-        self.cursor.execute(query,[user])
+        self.cursor.execute(query, [user])
         result = self.cursor.fetchone()
         return result
 
@@ -65,20 +66,20 @@ class connection():
             GROUP BY tipo_de_usuario ORDER BY tipo_de_usuario;'''
         self.cursor.execute(query)
         return self.cursor.fetchall()
-    
+
     def get_sexo_clientes(self):
         '''Returns the number of male and females'''
         query = '''SELECT sexo, COUNT(*) FROM Cliente GROUP BY sexo;'''
         self.cursor.execute(query)
         return self.cursor.fetchall()
-    
-    def get_cantidad_donaciones_comedor(self,id_comedor):
+
+    def get_cantidad_donaciones_comedor(self, id_comedor):
         '''Returns the number of orders that are donations of one kitchen'''
         query = '''SELECT COUNT(*) FROM Pedido 
             WHERE Pedido.idComedor = %s GROUP BY Pedido.donacion;'''
-        self.cursor.execute(query,[id_comedor])
+        self.cursor.execute(query, [id_comedor])
         return self.cursor.fetchall()
-    
+
     def get_rangos_edades_comedor(self):
         '''Returns the number of people grouped by a range of ages'''
         query = '''SELECT CASE WHEN TIMESTAMPDIFF(YEAR,fechaNacimiento,CURDATE()) <= 11
@@ -88,49 +89,58 @@ class connection():
             BETWEEN 20 AND 65 THEN 'Adultos (20 - 65)'
             ELSE 'Adultos Mayores (65+)' END AS rango_edad,
             COUNT(*) AS cantidad FROM Cliente GROUP BY rango_edad ORDER BY COUNT(*) DESC LIMIT 25;'''
-        
+
         self.cursor.execute(query)
         return self.cursor.fetchall()
-    
+
     def get_metas_comedor(self, id_comedor):
         '''Returns the number of sales in the las 30 days of a kitchen'''
         query = '''SELECT DATE(fechaHora) AS fecha, COUNT(*) AS ventas 
             FROM Pedido WHERE idComedor = %s AND 
             fechaHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) 
             GROUP BY fecha ORDER BY fecha DESC;'''
-        
-        self.cursor.execute(query,[id_comedor])
+
+        self.cursor.execute(query, [id_comedor])
         return self.cursor.fetchall()
-    
+
     def get_cierres(self):
         '''Returns the times a kitchen closed'''
         query = '''SELECT Comedor.nombre, COUNT(*) 
             FROM Comedor ,Anuncios 
             WHERE Anuncios.cierre = 1 AND Anuncios.idComedor = Comedor.idComedor 
             GROUP BY Comedor.nombre;'''
-        
+
         self.cursor.execute(query)
         return self.cursor.fetchall()
-    
+
+    def get_calificaciones(self, idComedor):
+        query = '''SELECT comedor.nombre, AVG(encuesta.servicio), AVG(encuesta.higiene), AVG(encuesta.calidad) 
+        FROM encuesta, pedido, comedor 
+        WHERE pedido.idPedido = encuesta.idPedido AND comedor.idComedor = %s AND pedido.idComedor = %s;'''
+        self.cursor.execute(query, [idComedor, idComedor])
+        return self.cursor.fetchone()
+
     # ------------ App comedor queries -----------------
 
     def get_comedor(self, nombre_comedor):
         '''Returns the name and password of a kitchen'''
         query = '''SELECT idComedor,nombre,contrasena FROM Comedor where nombre = %s;'''
-        self.cursor.execute(query,[nombre_comedor])
+        self.cursor.execute(query, [nombre_comedor])
         return self.cursor.fetchall()
-    
+
     def login_comedor(self, token, idComedor):
         '''Creates the log on DB table of a kitchen'''
         query = '''INSERT INTO LoginComedores (token,idComedor,fechaHora) VALUES (%s,%s,NOW());'''
-        self.cursor.execute(query,[token,idComedor])
+        self.cursor.execute(query, [token, idComedor])
         self.connect.commit()
 
     def generar_pedido(self, donacion, responsable, dependiente, idComedor, idComida):
         query = '''INSERT INTO Pedido (fechaHora,donacion,responsable,dependiente,idComedor,idComida)
             VALUES (NOW(),%s,%s,%s,%s,%s);'''
-        self.cursor.execute(query,[donacion,responsable,dependiente,idComedor,idComida])
+        self.cursor.execute(
+            query, [donacion, responsable, dependiente, idComedor, idComida])
         self.connect.commit()
+        return self.cursor.fetchall()
 
     def get_token_comedor(self, token):
         query = '''SELECT token,idComedor FROM LoginComedores where token = %s'''
