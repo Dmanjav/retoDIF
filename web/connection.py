@@ -112,6 +112,13 @@ class connection():
         self.cursor.execute(query)
         return self.cursor.fetchall()
     
+    def get_calificaciones(self, idComedor):
+        query = '''SELECT comedor.nombre, AVG(encuesta.servicio), AVG(encuesta.higiene), AVG(encuesta.calidad)
+        FROM encuesta, pedido, comedor WHERE pedido.%s = encuesta.%s AND pedido.%s = comedor.%s 
+        GROUP BY comedor.nombre;'''
+        self.cursor.execute(query,[idComedor])
+    
+    
     # ------------ Dashboard queries -----------------
 
     def get_comedor(self, nombre_comedor):
@@ -130,11 +137,5 @@ class connection():
         query = '''INSERT INTO Pedido (fechaHora,donacion,responsable,dependiente,idComedor,idComida)
             VALUES (NOW(),%s,%s,%s,%s,%s);'''
         self.cursor.execute(query,[donacion,responsable,dependiente,idComedor,idComida])
-        self.connect.commit()
-
-    def get_calificaciones(self, idComedor):
-        query = '''SELECT comedor.nombre, AVG(encuesta.servicio), AVG(encuesta.higiene), AVG(encuesta.calidad)
-        FROM encuesta, pedido, comedor WHERE pedido.idPedido = encuesta.idPedido AND pedido.idComedor = comedor.idComedor 
-        GROUP BY comedor.nombre;'''
-        self.cursor.execute(query,[idComedor])
+        self.connect.commit()    
         return self.cursor.fetchall()
