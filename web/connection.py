@@ -131,3 +131,10 @@ class connection():
             VALUES (NOW(),%s,%s,%s,%s,%s);'''
         self.cursor.execute(query,[donacion,responsable,dependiente,idComedor,idComida])
         self.connect.commit()
+
+    def get_calificaciones(self, idComedor):
+        query = '''SELECT comedor.nombre, AVG(encuesta.servicio), AVG(encuesta.higiene), AVG(encuesta.calidad)
+        FROM encuesta, pedido, comedor WHERE pedido.idPedido = encuesta.idPedido AND pedido.idComedor = comedor.idComedor 
+        GROUP BY comedor.nombre;'''
+        self.cursor.execute(query,[idComedor])
+        return self.cursor.fetchall()

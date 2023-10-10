@@ -584,4 +584,31 @@ function generar_graficas() {
             },
         },
     });
+
+    var evaluaciones = new Chart(document.getElementById("myChart11"), {
+        data: {
+            datasets: [
+                {
+                    type: "bar",
+                    label: "Promedio de calificaciones",
+                    data: objetivos,
+                    backgroundColor: "rgba(130, 250, 80, 1)",
+                },
+                {
+                    type: "bar",
+                    label: "Calificación",
+                    data: metasdata,
+                    backgroundColor: "rgba(100, 95, 182, 1)",
+                },
+            ],
+            labels: metaslabels,
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Calificaciones",
+            },
+        },
+    });
 }
+
