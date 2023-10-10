@@ -131,3 +131,8 @@ class connection():
             VALUES (NOW(),%s,%s,%s,%s,%s);'''
         self.cursor.execute(query,[donacion,responsable,dependiente,idComedor,idComida])
         self.connect.commit()
+
+    def get_token_comedor(self, token):
+        query = '''SELECT token,idComedor FROM LoginComedores where token = %s'''
+        self.cursor.execute(query,[token])
+        return self.cursor.fetchone()

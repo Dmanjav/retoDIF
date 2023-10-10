@@ -231,7 +231,8 @@ def app_user_login():
                     return token, 200
                 except Exception as e:
                     return ({'error' : 'Error del servidor',
-                            'message' : 'Error al insertar la información del usuario en la BD',
+                            'message' : 
+                                'Error al insertar la información del usuario en la BD',
                             'details' :
                                 str(e)},
                             500)
@@ -239,11 +240,46 @@ def app_user_login():
     
     return 'Bad request: Missing requiered parameter(s) \'usuario\' or \'contraseña\'', 400
 
-# @app.route('/app/comedor/generar-pedido', methods=['POST'])
-# def generar_pedido():
-#     JSON = dict(request.get_json())
+@app.route('/app/comedor/generar-pedido', methods=['POST'])
+def generar_pedido():
 
-    
+    JSON = dict(request.get_json())
+
+    TOKEN = JSON.get('token')
+    COMEDOR_INFO = db_connection.get_token_comedor(TOKEN)
+
+    if COMEDOR_INFO:
+        DONACION  = JSON.get('donacion')
+        RESPONSABLE = JSON.get('responsable')
+        DEPENDIENTE = JSON.get('dependiente')
+        IDCOMIDA = JSON.get('idComida')
+
+        if (RESPONSABLE and
+            DEPENDIENTE and IDCOMIDA and
+            DONACION is not None):
+            try:
+                db_connection.generar_pedido(DONACION,
+                                             RESPONSABLE,
+                                             DEPENDIENTE,
+                                             COMEDOR_INFO[1],
+                                             IDCOMIDA)
+                return 'Pedido creado con éxito', 200
+            
+            except Exception as e:
+                return ({'error' : 'Error del servidor',
+                            'message' : 
+                                'Error al insertar la información del pedido en la BD',
+                            'details' :
+                                str(e)},
+                            500)
+
+        return '''Bad request: 
+            Missing requiered parameter(s)
+              \'donacion\' or \'responsable\' or
+              \'dependiente\' or \'idComida\'''', 400
+
+    return 'Not valid token, try again', 401
+
     
 
 if __name__ == '__main__':
