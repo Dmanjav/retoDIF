@@ -112,7 +112,7 @@ class connection():
         self.cursor.execute(query)
         return self.cursor.fetchall()
     
-    # ------------ Dashboard queries -----------------
+    # ------------ App comedor queries -----------------
 
     def get_comedor(self, nombre_comedor):
         '''Returns the name and password of a kitchen'''
@@ -121,7 +121,7 @@ class connection():
         return self.cursor.fetchall()
     
     def login_comedor(self, token, idComedor):
-        '''Creates de log on DB table of a kitchen'''
+        '''Creates the log on DB table of a kitchen'''
         query = '''INSERT INTO LoginComedores (token,idComedor,fechaHora) VALUES (%s,%s,NOW());'''
         self.cursor.execute(query,[token,idComedor])
         self.connect.commit()
@@ -134,5 +134,24 @@ class connection():
 
     def get_token_comedor(self, token):
         query = '''SELECT token,idComedor FROM LoginComedores where token = %s'''
+        self.cursor.execute(query,[token])
+        return self.cursor.fetchone()
+
+    # ------------ App clientes queries -----------------
+
+    def get_cliente(self,curp):
+        '''Returns the curp and password of a client'''
+        query = '''SELECT curp,contrasena FROM Cliente where curp = %s'''
+        self.cursor.execute(query,[curp])
+        return self.cursor.fetchone()
+    
+    def login_cliente(self, token, curp):
+        '''Creates the log on DB table of a client'''
+        query = '''INSERT INTO LoginClientes (token,curpCliente,fechaHora) VALUES (%s,%s,NOW());'''
+        self.cursor.execute(query,[token,curp])
+        self.connect.commit()
+
+    def get_token_cliente(self, token):
+        query = '''SELECT token,curp FROM LoginComedores where token = %s'''
         self.cursor.execute(query,[token])
         return self.cursor.fetchone()

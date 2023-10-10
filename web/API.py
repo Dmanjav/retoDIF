@@ -214,7 +214,7 @@ def get_cierres():
 # --------- App "Comedor" endpoints --------------
 
 @app.route('/app/comedor/login', methods = ['POST'])
-def app_user_login():
+def app_comedor_login():
     JSON = dict(request.get_json())
 
     JSON_USER = JSON.get('usuario')
@@ -225,10 +225,10 @@ def app_user_login():
 
         for register in COMEDOR_DB_INFO:
             if JSON_USER == register[1] and check_password_hash(register[2],JSON_PASSW):
-                token = token_hex(16)
+                TOKEN = token_hex(16)
                 try:
-                    db_connection.login_comedor(token,register[0])
-                    return token, 200
+                    db_connection.login_comedor(TOKEN,register[0])
+                    return TOKEN, 200
                 except Exception as e:
                     return ({'error' : 'Error del servidor',
                             'message' : 
@@ -280,7 +280,32 @@ def generar_pedido():
 
     return 'Not valid token, try again', 401
 
-    
+# --------- App "Clientes" endpoints --------------
+
+@app.route('/app/clientes/login', methods = ['POST'])
+def app_clientes_login():
+    JSON = dict(request.get_json())
+
+    JSON_USER = JSON.get('usuario')
+    JSON_PASS = JSON.get('contraseña')
+
+    if JSON_USER and JSON_PASS:
+        CLIENTE_DB_INFO = db_connection.get_cliente(JSON_USER)
+        if CLIENTE_DB_INFO:
+            if JSON_USER == CLIENTE_DB_INFO[0] and check_password_hash(CLIENTE_DB_INFO[1],JSON_PASS):
+                TOKEN = token_hex(16)
+                try:
+                    db_connection.login_cliente(TOKEN,JSON_USER)
+                    return TOKEN,200
+                except Exception as e:
+                    return ({'error' : 'Error del servidor',
+                                'message' : 
+                                    'Error al insertar la información del usuario en la BD',
+                                'details' :
+                                    str(e)},
+                                500)
+        return 'Not valid user or password, try again.', 401
+    return 'Bad request: Missing requiered parameter(s) \'usuario\' or \'contraseña\'', 400
 
 if __name__ == '__main__':
     app.run(debug=True)

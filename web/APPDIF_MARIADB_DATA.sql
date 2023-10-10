@@ -14,7 +14,7 @@ INSERT INTO Admins VALUES
 
 INSERT INTO Cliente (`curp`, `nombre`, `apellidoP`, `apellidoM`, `sexo`, `fechaNacimiento`, `condicion`, `contrasena`) VALUES
 ('AAAA030125HDFLVLA2', 'Alan', 'Alcántara', 'Ávila', 'H', '2003-01-25', 'Sano', 'pbkdf2:sha256:600000$i5qVgZPSoL293JLe$4a376c123c0f367450d75f23c134bcf72f2094b5ab408abb6984db18f172f11f'),
-('GAHI020228MMCRRNA7', 'Ingrid', 'García', 'Hernández', 'F', '2002-02-28', '', 'pbkdf2:sha256:600000$b8xYYER1mdI0Vnhr$44cb8a8021f8ad5bfcdbf489ee7e281017a62267410e01e0e49bbe2de97efad3'),
+('GAHI020228MMCRRNA7', 'Ingrid', 'García', 'Hernández', 'F', '2002-02-28', '', 'pbkdf2:sha256:600000$b8xYYER1mdI0Vnhr$44cb8a8021f8ad5bfcdbf489ee7e281017a62267410e01e0e49bbe2de97efad3'), -- Ingrid
 ('MAVD030411HDFNVGA7', 'Diego', 'Manjarrez', 'Viveros', 'H', '2003-04-11', 'Sano', 'pbkdf2:sha256:600000$ONOocJRfINGSEPz0$6138532be9c4c17ee944708175873dccd8cc3caed384a65f2c214503b5a7f8ff'),
 ('SACC030606HMCNLRA2', 'Carlos', 'Sánchez', 'Calderon', 'H', '2003-06-06', 'Cuatro Ojos', 'pbkdf2:sha256:600000$LqBV7P8cylf6YXyb$4bb0cbff5ac485a97d714a2c3c413103910e7640f945b042d17e6752bfdb80b4'),
 ('SILP030314HDFPPBA3', 'Pablo', 'Spínola', 'López', 'H', '2003-04-14', 'Cuatro Ojos', 'pbkdf2:sha256:600000$AilSViF3yYUSxAyz$21bacc4088c0a781a6af788ba1b7daf2d5084c14059080301d2d42558c18c1b0');
