@@ -244,388 +244,410 @@ async function getEvaluaciones(id) {
             "Content-Type": "application/json",
         },
     })
-    .then (response => {
-        if (!response.ok) {
-            throw new Error("HTTP error " + response.status);
-        }
-        return response.json();
-    })
-    .then (data => {
-        for (elem in data) {
-        }
-    })
-    .catch (error => {
-        console.log('Hubo un error: ', error);
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (elem in data) {
+                evaluacioneslabels.push(elem)
+                evaluacionesdata.push(data[elem])
+            }
+        })
+        .catch(error => {
+            console.log('Hubo un error: ', error);
+        });
 }
 
-    generar_datos()
+generar_datos()
 
-    const ids = []
-    const llaves = []
-    const datos = []
-    const top10data = []
-    const top10labels = []
-    const cierresdata = []
-    const cierreslabels = []
-    const dependata = []
-    const sexodata = []
-    const edaddata = []
-    const edadlabels = []
+const ids = []
+const llaves = []
+const datos = []
+const top10data = []
+const top10labels = []
+const cierresdata = []
+const cierreslabels = []
+const dependata = []
+const sexodata = []
+const edaddata = []
+const edadlabels = []
 
-    var ventasdata = []
-    var ventaslabels = []
-    var ventaHoradata = []
-    var ventaHoralabels = []
-    var donacionesdata = []
-    var donacioneslabels = []
-    var metasdata = []
-    var metaslabels = []
-    var objetivos = []
+var ventasdata = []
+var ventaslabels = []
+var ventaHoradata = []
+var ventaHoralabels = []
+var donacionesdata = []
+var donacioneslabels = []
+var metasdata = []
+var metaslabels = []
+var objetivos = []
+var evaluacionesdata = []
+var evaluacioneslabels = []
 
-
-    async function contar_llaves() {
-        await getComedores()
-        tamaño = llaves.length
-        for (let i = 0; i < tamaño; i++) {
-            datos.push(1);
-        }
+async function contar_llaves() {
+    await getComedores()
+    tamaño = llaves.length
+    for (let i = 0; i < tamaño; i++) {
+        datos.push(1);
     }
+}
 
 
-    async function generar_datos() {
-        await contar_llaves();
-        await getTopVentas();
-        await getCierres();
-        await getDependencias();
-        await getSexos();
-        await getEdades();
-        generar_graficas()
-    }
+async function generar_datos() {
+    await contar_llaves();
+    await getTopVentas();
+    await getCierres();
+    await getDependencias();
+    await getSexos();
+    await getEdades();
+    generar_graficas()
+}
 
-    //Información General
-    function generar_graficas() {
-        //Selector De comedores
-        var comedores = new Chart(document.getElementById("myChart10"), {
-            type: "pie",
-            title: "Selector de comedores",
-            data: {
-                labels: llaves,
-                datasets: [
-                    {
-                        data: datos,
-                        backgroundColor: [
-                            "rgba(255, 0, 0, 1)",
-                            "rgba(255, 255, 0, 1)",
-                            "rgba(0, 255, 0, 1)",
-                            "rgba(0, 255, 255, 1)",
-                            "rgba(0, 0, 255, 1)",
-                        ],
-                    },
-                ],
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+//Información General
+function generar_graficas() {
+    //Selector De comedores
+    var comedores = new Chart(document.getElementById("myChart10"), {
+        type: "pie",
+        title: "Selector de comedores",
+        data: {
+            labels: llaves,
+            datasets: [
+                {
+                    data: datos,
+                    backgroundColor: [
+                        "rgba(255, 0, 0, 1)",
+                        "rgba(255, 255, 0, 1)",
+                        "rgba(0, 255, 0, 1)",
+                        "rgba(0, 255, 255, 1)",
+                        "rgba(0, 0, 255, 1)",
+                    ],
                 },
-                tooltips: {
-                    enabled: true,
-                    custom: function (tooltipItem) {
-                        return tooltipItem.yLabel;
-                    },
+            ],
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            tooltips: {
+                enabled: true,
+                custom: function (tooltipItem) {
+                    return tooltipItem.yLabel;
                 },
             },
-        });
+        },
+    });
 
-        //FUNCIÓN QUE VA A SACAR LOS DATOS DEL API
-        async function clickHandler(click) {
-            const points = comedores.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
-            if (points.length) {
-                const name = comedores.data.labels[points[0].index];
-                const idSeleccionado = ids[points[0].index];
-                console.log(name)
-                console.log(idSeleccionado)
+    //FUNCIÓN QUE VA A SACAR LOS DATOS DEL API
+    async function clickHandler(click) {
+        const points = comedores.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
+        if (points.length) {
+            const name = comedores.data.labels[points[0].index];
+            const idSeleccionado = ids[points[0].index];
+            console.log(name)
+            console.log(idSeleccionado)
 
-                activeSelection = { name, id: idSeleccionado };
-                console.log(activeSelection)
+            activeSelection = { name, id: idSeleccionado };
+            console.log(activeSelection)
 
-                // Gráfica 1
-                while (ventasdata.length > 0) {
-                    ventasdata.pop();
-                }
-                while (ventaslabels.length > 0) {
-                    ventaslabels.pop();
-                }
-                await getVentasDia(idSeleccionado)
-                daysPerWeek.update();
-                // Gráfica 2
-                while (ventaHoradata.length > 0) {
-                    ventaHoradata.pop();
-                }
-                while (ventaHoralabels.length > 0) {
-                    ventaHoralabels.pop();
-                }
-                await getVentasHora(idSeleccionado);
-                horarios.update();
-                // Gráfica 3
-                while (donacionesdata.length > 0) {
-                    donacionesdata.pop();
-                }
-                while (donacioneslabels.length > 0) {
-                    donacioneslabels.pop();
-                }
-                await getDonaciones(idSeleccionado);
-                donaciones.update();
-                // Gráfica 4
-                while (metasdata.length > 0) {
-                    metasdata.pop();
-                }
-                while (metaslabels.length > 0) {
-                    metaslabels.pop();
-                }
-                await getMetas(idSeleccionado);
-                metas.update();
-                dias = metaslabels.length
-                for (let i = 0; i < dias; i++) {
-                    objetivos.push(50);
-                }
+            // Gráfica 1
+            while (ventasdata.length > 0) {
+                ventasdata.pop();
             }
+            while (ventaslabels.length > 0) {
+                ventaslabels.pop();
+            }
+            await getVentasDia(idSeleccionado)
+            daysPerWeek.update();
+            // Gráfica 2
+            while (ventaHoradata.length > 0) {
+                ventaHoradata.pop();
+            }
+            while (ventaHoralabels.length > 0) {
+                ventaHoralabels.pop();
+            }
+            await getVentasHora(idSeleccionado);
+            horarios.update();
+            // Gráfica 3
+            while (donacionesdata.length > 0) {
+                donacionesdata.pop();
+            }
+            while (donacioneslabels.length > 0) {
+                donacioneslabels.pop();
+            }
+            await getDonaciones(idSeleccionado);
+            donaciones.update();
+            // Gráfica 4
+            while (metasdata.length > 0) {
+                metasdata.pop();
+            }
+            while (metaslabels.length > 0) {
+                metaslabels.pop();
+            }
+            await getMetas(idSeleccionado);
+            metas.update();
+            dias = metaslabels.length
+            for (let i = 0; i < dias; i++) {
+                objetivos.push(50);
+            }
+            //Evaluaciones
+            while (evaluacionesdata.length > 0) {
+                evaluacionesdata.pop();
+            }
+            await getEvaluaciones(idSeleccionado);
+            evaluaciones.update();
         }
-        comedores.canvas.onclick = clickHandler;
-
-        //Comedores con más Ventas
-        var top10ventas = new Chart(document.getElementById("myChart3"), {
-            type: "bar",
-            data: {
-                labels: top10labels,
-                datasets: [
-                    {
-                        label: "Top 10 Comedores x Ventas",
-                        data: top10data,
-                        backgroundColor: [
-                            "rgba(255, 0, 0, 1)",
-                            "rgba(255, 255, 0, 1)",
-                            "rgba(0, 255, 0, 1)",
-                            "rgba(0, 255, 255, 1)",
-                            "rgba(0, 0, 255, 1)",
-                        ],
-                    },
-                ],
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Top 10 ventas",
-                },
-            },
-        });
-        top10ventas.canvas.onclick = clickHandler;
-
-        //Más cierres
-        var cierres = new Chart(document.getElementById("myChart8"), {
-            type: "polarArea",
-            title: "Cierres por sucursal",
-            data: {
-                labels: cierreslabels,
-                datasets: [
-                    {
-                        label: "Cierres",
-                        data: cierresdata,
-                        backgroundColor: [
-                            "rgba(255, 0, 0, 1)",
-                            "rgba(255, 255, 0, 1)",
-                            "rgba(0, 255, 0, 1)",
-                            "rgba(0, 255, 255, 1)",
-                            "rgba(0, 0, 255, 1)",
-                        ],
-                    },
-                ],
-            },
-        });
-        cierres.canvas.onclick = clickHandler;
-
-        //Información Por Comedor
-
-        //Ventas por día
-        var daysPerWeek = new Chart(document.getElementById("myChart"), {
-            // Define el tipo de gráfico
-            type: "bar",
-            // Define los datos
-            data: {
-                // labels: [
-                //     "Lunes",
-                //     "Martes",
-                //     "Miércoles",
-                //     "Jueves",
-                //     "Viernes",
-                //     "Sábado",
-                //     "Domingo",
-                // ],
-                labels: ventaslabels,
-                datasets: [
-                    {
-                        label: "Cantidad de Clientes",
-                        // data: lsVentas.com1[0],
-                        data: ventasdata,
-                        backgroundColor: [
-                            "rgba(255, 99, 132, 0.5)",
-                            "rgba(255, 255, 64, 0.5)",
-                            "rgba(54, 162, 235, 0.5)",
-                            "rgba(100, 255, 255, 0.5)",
-                            "rgba(200, 140, 255, 0.5)",
-                            "rgba(180, 47, 202, 0.5)",
-                            "rgba(20, 150, 102, 0.5)",
-                        ],
-                    },
-                ],
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Ventas por día",
-                },
-            },
-        });
-
-        //Cantidad de clientes por horario
-        var horarios = new Chart(document.getElementById("myChart2"), {
-            // Define el tipo de gráfico
-            type: "line",
-            // Define los datos
-            data: {
-                // labels: ["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00"],
-                labels: ventaHoralabels,
-                datasets: [
-                    {
-                        label: "# Clientes",
-                        data: ventaHoradata,
-                    },
-                ],
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Clientes por Horario",
-                },
-            },
-        });
-
-        //Sexo de los clientes
-        var poblacion = new Chart(document.getElementById("myChart4"), {
-            type: "doughnut",
-            data: {
-                labels: ["Mujeres", "Hombres"],
-                datasets: [
-                    {
-                        label: "Población",
-                        data: sexodata,
-                        backgroundColor: ["rgba(255, 99, 132, 1)", "rgba(255, 255, 64, 1)"],
-                    },
-                ],
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "% Población",
-                },
-            },
-        });
-
-        //Edades de los CLientes
-        var edades = new Chart(document.getElementById("myChart5"), {
-            type: "polarArea",
-            title: "Distribución de edades",
-            data: {
-                labels: edadlabels,
-                datasets: [
-                    {
-                        label: "Población",
-                        data: edaddata,
-                    },
-                ],
-            },
-        });
-
-        //Cantida de donaciones
-        var donaciones = new Chart(document.getElementById("myChart6"), {
-            type: "doughnut",
-            title: "Donaciones",
-            data: {
-                labels: donacioneslabels,
-                datasets: [
-                    {
-                        label: "Ventas",
-                        data: donacionesdata,
-                        backgroundColor: ["rgba(255, 0, 255, 1)", "rgba(150, 225, 64, 1)"],
-                    },
-                ],
-            },
-        });
-
-        //Estado de los clientes
-        var dependencias = new Chart(document.getElementById("myChart7"), {
-            type: "bar",
-            title: "Dependencias",
-            data: {
-                labels: ["Dependientes", "Independientes"],
-                datasets: [
-                    {
-                        label: "Dependencias",
-                        data: dependata,
-                        backgroundColor: ["rgba(0, 255, 10, 1)", "rgba(0, 255, 200, 1)"],
-                    },
-                ],
-            },
-        });
-
-        //Cumplimiento de metas
-        var metas = new Chart(document.getElementById("myChart9"), {
-            data: {
-                datasets: [
-                    {
-                        type: "line",
-                        label: "Objetivo de la Meta",
-                        data: objetivos,
-                        backgroundColor: "rgba(130, 250, 80, 1)",
-                    },
-                    {
-                        type: "bar",
-                        label: "Venta",
-                        data: metasdata,
-                        backgroundColor: "rgba(100, 95, 182, 1)",
-                    },
-                ],
-                labels: metaslabels,
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Metas",
-                },
-            },
-        });
-
-        var evaluaciones = new Chart(document.getElementById("myChart11"), {
-            data: {
-                datasets: [
-                    {
-                        type: "bar",
-                        label: "Promedio de calificaciones",
-                        data: objetivos,
-                        backgroundColor: "rgba(130, 250, 80, 1)",
-                    },
-                ],
-                // labels: metaslabels,
-                labels: ["Higiene", "Servicio", "Calidad", "Promedio General"],
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Calificaciones",
-                },
-            },
-        });
     }
+    comedores.canvas.onclick = clickHandler;
+
+    //Comedores con más Ventas
+    var top10ventas = new Chart(document.getElementById("myChart3"), {
+        type: "bar",
+        data: {
+            labels: top10labels,
+            datasets: [
+                {
+                    label: "Top 10 Comedores x Ventas",
+                    data: top10data,
+                    backgroundColor: [
+                        "rgba(255, 0, 0, 1)",
+                        "rgba(255, 255, 0, 1)",
+                        "rgba(0, 255, 0, 1)",
+                        "rgba(0, 255, 255, 1)",
+                        "rgba(0, 0, 255, 1)",
+                    ],
+                },
+            ],
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Top 10 ventas",
+            },
+        },
+    });
+    top10ventas.canvas.onclick = clickHandler;
+
+    //Más cierres
+    var cierres = new Chart(document.getElementById("myChart8"), {
+        type: "polarArea",
+        title: "Cierres por sucursal",
+        data: {
+            labels: cierreslabels,
+            datasets: [
+                {
+                    label: "Cierres",
+                    data: cierresdata,
+                    backgroundColor: [
+                        "rgba(255, 0, 0, 1)",
+                        "rgba(255, 255, 0, 1)",
+                        "rgba(0, 255, 0, 1)",
+                        "rgba(0, 255, 255, 1)",
+                        "rgba(0, 0, 255, 1)",
+                    ],
+                },
+            ],
+        },
+    });
+    cierres.canvas.onclick = clickHandler;
+
+    //Información Por Comedor
+
+    //Ventas por día
+    var daysPerWeek = new Chart(document.getElementById("myChart"), {
+        // Define el tipo de gráfico
+        type: "bar",
+        // Define los datos
+        data: {
+            // labels: [
+            //     "Lunes",
+            //     "Martes",
+            //     "Miércoles",
+            //     "Jueves",
+            //     "Viernes",
+            //     "Sábado",
+            //     "Domingo",
+            // ],
+            labels: ventaslabels,
+            datasets: [
+                {
+                    label: "Cantidad de Clientes",
+                    // data: lsVentas.com1[0],
+                    data: ventasdata,
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.5)",
+                        "rgba(255, 255, 64, 0.5)",
+                        "rgba(54, 162, 235, 0.5)",
+                        "rgba(100, 255, 255, 0.5)",
+                        "rgba(200, 140, 255, 0.5)",
+                        "rgba(180, 47, 202, 0.5)",
+                        "rgba(20, 150, 102, 0.5)",
+                    ],
+                },
+            ],
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Ventas por día",
+            },
+        },
+    });
+
+    //Cantidad de clientes por horario
+    var horarios = new Chart(document.getElementById("myChart2"), {
+        // Define el tipo de gráfico
+        type: "line",
+        // Define los datos
+        data: {
+            labels: ventaHoralabels,
+            datasets: [
+                {
+                    label: "# Clientes",
+                    data: ventaHoradata,
+                    backgroundColor: "rgba(0, 102, 255, 0.5)"
+                },
+            ],
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Clientes por Horario",
+            },
+        },
+    });
+
+    //Sexo de los clientes
+    var poblacion = new Chart(document.getElementById("myChart4"), {
+        type: "doughnut",
+        data: {
+            labels: ["Mujeres", "Hombres"],
+            datasets: [
+                {
+                    label: "Población",
+                    data: sexodata,
+                    backgroundColor: ["rgba(225, 225, 225, 1)", "rgba(40, 40, 40, 1)"],
+                },
+            ],
+        },
+        options: {
+            title: {
+                display: true,
+                text: "% Población",
+            },
+        },
+    });
+
+    //Edades de los CLientes
+    var edades = new Chart(document.getElementById("myChart5"), {
+        type: "polarArea",
+        title: "Distribución de edades",
+        data: {
+            labels: edadlabels,
+            datasets: [
+                {
+                    label: "Población",
+                    data: edaddata,
+                    backgroundColor: ["rgba(93, 211, 158, 1)", "rgba(52, 138, 166, 1)", "rgba(82, 81, 116, 1)", "rgba(81, 59, 86, 1)"]
+                },
+            ],
+        },
+    });
+
+    //Cantida de donaciones
+    var donaciones = new Chart(document.getElementById("myChart6"), {
+        type: "doughnut",
+        title: "Donaciones",
+        data: {
+            labels: donacioneslabels,
+            datasets: [
+                {
+                    label: "Ventas",
+                    data: donacionesdata,
+                    backgroundColor: ["rgba(112, 255, 130, 0.5)", "rgba(255, 112, 166, 0.5)"],
+                },
+            ],
+        },
+    });
+
+    //Estado de los clientes
+    var dependencias = new Chart(document.getElementById("myChart7"), {
+        type: "bar",
+        title: "Dependencias",
+        data: {
+            labels: ["Dependientes", "Independientes"],
+            datasets: [
+                {
+                    label: "Clientes",
+                    data: dependata,
+                    backgroundColor: ["rgba(0, 255, 10, 1)", "rgba(0, 255, 200, 1)"],
+                },
+            ],
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            tooltips: {
+                enabled: true,
+                custom: function (tooltipItem) {
+                    return tooltipItem.yLabel;
+                },
+            },
+        },
+    });
+
+    //Cumplimiento de metas
+    var metas = new Chart(document.getElementById("myChart9"), {
+        data: {
+            datasets: [
+                {
+                    type: "line",
+                    label: "Objetivo de la Meta",
+                    data: objetivos,
+                    backgroundColor: "rgba(51, 255, 167, 0.5)",
+                },
+                {
+                    type: "bar",
+                    label: "Venta",
+                    data: metasdata,
+                    backgroundColor: "rgba(65, 51, 255, 0.5)",
+                },
+            ],
+            labels: metaslabels,
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Metas",
+            },
+        },
+    });
+
+    var evaluaciones = new Chart(document.getElementById("myChart11"), {
+        data: {
+            datasets: [
+                {
+                    type: "bar",
+                    label: "Promedio de calificaciones",
+                    data: evaluacionesdata,
+                    backgroundColor: ["rgba(255, 195, 0, 0.5)", "rgba(255, 87, 51, 0.5)", "rgba(199, 0, 57, 0.5)"],
+                },
+            ],
+            labels: evaluacioneslabels,
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Calificaciones",
+            },
+        },
+    });
+}
 

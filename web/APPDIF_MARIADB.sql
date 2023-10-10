@@ -159,9 +159,9 @@ CREATE TABLE `Pedido` (
 
 CREATE TABLE `Encuesta` (
   `idPedido` int(11) NOT NULL,
-  `servicio` int(11),
-  `higiene` int(11),
-  `calidad` int(11)
+  `servicio` float(11),
+  `higiene` float(11),
+  `calidad` float(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

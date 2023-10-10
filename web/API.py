@@ -219,13 +219,20 @@ def get_califs():
     if not id_comedor:
         return 'Bad request: Missing requiered parameter \'idComedor\'', 400
     
-    resultado = db_connection.get_calificaciones(int(id_comedor))
-    dict_calificaciones = {}
+    try:
+        resultado = db_connection.get_calificaciones(int(id_comedor))
+        print(resultado)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                'message' : 'Error al obtener la información de la BD',
+                'details' :
+                    str(e)},
+                500)
     
-    for register in resultado:
-        dict_calificaciones[register[0]] = {'Servicio' : register[1], 
-                                            'Higiene' : register[2], 
-                                            'Calidad' : register[3]}
+    dict_calificaciones = {'Servicio' : round(resultado[1], 2), 
+                            'Higiene' : round(resultado[2], 2), 
+                            'Calidad' : round(resultado[3], 2)}    
+    return dict_calificaciones
 
 # --------- App "Comedor" endpoints --------------
 
