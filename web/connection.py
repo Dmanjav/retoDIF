@@ -114,9 +114,9 @@ class connection():
         return self.cursor.fetchall()
 
     def get_calificaciones(self, idComedor):
-        query = '''SELECT comedor.nombre, AVG(encuesta.servicio), AVG(encuesta.higiene), AVG(encuesta.calidad) 
-        FROM encuesta, pedido, comedor 
-        WHERE pedido.idPedido = encuesta.idPedido AND comedor.idComedor = %s AND pedido.idComedor = %s;'''
+        query = '''SELECT Comedor.nombre, AVG(Encuesta.servicio), AVG(Encuesta.higiene), AVG(Encuesta.calidad) 
+        FROM Encuesta, Pedido, Comedor 
+        WHERE Pedido.idPedido = Encuesta.idPedido AND Comedor.idComedor = %s AND Pedido.idComedor = %s;'''
         self.cursor.execute(query, [idComedor, idComedor])
         return self.cursor.fetchone()
 
