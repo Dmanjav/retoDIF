@@ -349,9 +349,7 @@ function generar_graficas() {
         if (points.length) {
             const name = chart.data.labels[points[0].index];
             const idSeleccionado = ids[points[0].index];
-            console.log(name)
-            console.log(idSeleccionado)
-
+            
             activeSelection = { name, id: idSeleccionado };
             console.log(activeSelection)
 
@@ -431,7 +429,7 @@ function generar_graficas() {
             },
         },
     });
-    top10ventas.canvas.onclick = function(event) {clickHandler(event, top10ventas);};
+    // top10ventas.canvas.onclick = function(event) {clickHandler(event, top10ventas);};
 
     //Más cierres
     var cierres = new Chart(document.getElementById("myChart8"), {
@@ -454,7 +452,7 @@ function generar_graficas() {
             ],
         },
     });
-    cierres.canvas.onclick = function(event) {clickHandler(event, cierres);};
+    // cierres.canvas.onclick = function(event) {clickHandler(event, cierres);};
 
     //Información Por Comedor
 
@@ -464,15 +462,6 @@ function generar_graficas() {
         type: "bar",
         // Define los datos
         data: {
-            // labels: [
-            //     "Lunes",
-            //     "Martes",
-            //     "Miércoles",
-            //     "Jueves",
-            //     "Viernes",
-            //     "Sábado",
-            //     "Domingo",
-            // ],
             labels: ventaslabels,
             datasets: [
                 {
