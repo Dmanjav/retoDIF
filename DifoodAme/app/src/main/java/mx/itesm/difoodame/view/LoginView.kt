@@ -6,14 +6,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import androidx.activity.viewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mx.itesm.difoodame.R
 import mx.itesm.difoodame.databinding.ActivityMainBinding
+import mx.itesm.difoodame.viewmodel.LoginVM
 
 
 class LoginView : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: LoginVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +41,7 @@ class LoginView : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val curp = edtCurp.text.toString()
             val pass =  edtPass.text.toString()
+            val res = viewModel.enviardatos(curp,pass)
 
             val intent: Intent = Intent(this, MenuView::class.java)
             startActivity(intent)

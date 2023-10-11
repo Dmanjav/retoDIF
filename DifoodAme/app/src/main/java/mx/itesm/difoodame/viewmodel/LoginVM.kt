@@ -15,8 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class LoginVM : ViewModel()
 {
     private val modelo = LoginModel()
-    val curp = MutableLiveData<String>()
-    var pass = MutableLiveData<String>()
+    val token = MutableLiveData<String>()
 
     private val retrofit by lazy {
         Retrofit.Builder()
@@ -25,16 +24,16 @@ class LoginVM : ViewModel()
             .build()
     }
     val apiService = retrofit.create(LoginInterface::class.java)
-    val usuario = Usuario(curp.toString(), pass.toString())
-    val call = apiService.verificarIdentidad(usuario)
 
 
-    fun enviardatos(){
+    fun enviardatos(curp:String, pass:String){
+
+        val usuario = Usuario(curp, pass)
+        val call = apiService.verificarIdentidad(usuario)
         call.enqueue(object : Callback<TokenResponse>{
             override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
                 if (response.isSuccessful){
-                    val tokenResponse = response.body()
-                    val token = tokenResponse?.token
+                    token.value =response.body().toString()
                 }
                 else {
                     val tokenResponse = response.body()
