@@ -17,6 +17,7 @@ class MenuView : AppCompatActivity() {
         val btnQr: Button = findViewById(R.id.btnQR)
         val btnMenu: Button = findViewById(R.id.btnMapas)
         val btnMenus: Button = findViewById(R.id.btnMenu)
+        val btnEncuesta: Button = findViewById(R.id.btnEncuesta)
 
         btnQr.setOnClickListener{
             val intent: Intent = Intent(this, GenerarQRView::class.java)
@@ -31,6 +32,11 @@ class MenuView : AppCompatActivity() {
 
         btnMenus.setOnClickListener{
             val intent = Intent(this, MenuComidaView::class.java)
+            startActivity(intent)
+        }
+
+        btnEncuesta.setOnClickListener{
+            val intent = Intent(this, EncuestaView::class.java)
             startActivity(intent)
         }
     }

@@ -11,55 +11,78 @@
         android:id="@+id/imageView2"
         android:layout_width="152dp"
         android:layout_height="158dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logodifood" />
 
     <Button
         android:id="@+id/btnMenu"
-        android:layout_width="114dp"
-        android:layout_height="108dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/boton_redondo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
 
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="#9F2141"
         android:fontFamily="@font/roboto_medium"
         android:text="Menu"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
         android:id="@+id/btnMapas"
-        android:layout_width="114dp"
-        android:layout_height="108dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="60dp"
-        android:background="@drawable/boton_redondo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="40dp"
         android:backgroundTint="#9F2141"
         android:fontFamily="@font/roboto_medium"
         android:text="Mapa"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMenu" />
 
     <Button
         android:id="@+id/btnQR"
-        android:layout_width="114dp"
-        android:layout_height="108dp"
-        android:layout_marginTop="204dp"
-        android:background="@drawable/boton_redondo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="#9F2141"
         android:text="Generar QR"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/btnMapas" />
+
+    <Button
+        android:id="@+id/btnEncuesta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="#9F2141"
+        android:text="Encuesta"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnQR" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
