@@ -25,7 +25,7 @@ class LoginVM : ViewModel()
             .build()
     }
     val apiService = retrofit.create(LoginInterface::class.java)
-    val usuario = Usuario("valor_curp", "valor_contraseña")
+    val usuario = Usuario(curp.toString(), pass.toString())
     val call = apiService.verificarIdentidad(usuario)
 
 
