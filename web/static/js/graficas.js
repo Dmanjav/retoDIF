@@ -397,6 +397,9 @@ function generar_graficas() {
             while (evaluacionesdata.length > 0) {
                 evaluacionesdata.pop();
             }
+            while (evaluacioneslabels.length > 0) {
+                evaluacioneslabels.pop();
+            }
             await getEvaluaciones(idSeleccionado);
             evaluaciones.update();
         }
