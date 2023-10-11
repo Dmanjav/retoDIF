@@ -343,10 +343,11 @@ function generar_graficas() {
     });
 
     //FUNCIÓN QUE VA A SACAR LOS DATOS DEL API
-    async function clickHandler(click) {
-        const points = comedores.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
+    async function clickHandler(event, chart) {
+        // const points = chart.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
+        const points = chart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
         if (points.length) {
-            const name = comedores.data.labels[points[0].index];
+            const name = chart.data.labels[points[0].index];
             const idSeleccionado = ids[points[0].index];
             console.log(name)
             console.log(idSeleccionado)
@@ -402,7 +403,7 @@ function generar_graficas() {
             evaluaciones.update();
         }
     }
-    comedores.canvas.onclick = clickHandler;
+    comedores.canvas.onclick = function(event) {clickHandler(event, comedores);};
 
     //Comedores con más Ventas
     var top10ventas = new Chart(document.getElementById("myChart3"), {
@@ -430,7 +431,7 @@ function generar_graficas() {
             },
         },
     });
-    top10ventas.canvas.onclick = clickHandler;
+    top10ventas.canvas.onclick = function(event) {clickHandler(event, top10ventas);};
 
     //Más cierres
     var cierres = new Chart(document.getElementById("myChart8"), {
@@ -453,7 +454,7 @@ function generar_graficas() {
             ],
         },
     });
-    cierres.canvas.onclick = clickHandler;
+    cierres.canvas.onclick = function(event) {clickHandler(event, cierres);};
 
     //Información Por Comedor
 
