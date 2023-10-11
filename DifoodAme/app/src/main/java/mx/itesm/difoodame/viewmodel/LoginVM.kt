@@ -34,6 +34,7 @@ class LoginVM : ViewModel()
             override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
                 if (response.isSuccessful){
                     token.value =response.body().toString()
+                    println("EXITO en LOGIN")
                 }
                 else {
                     val tokenResponse = response.body()
