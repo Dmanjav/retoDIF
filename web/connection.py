@@ -146,6 +146,12 @@ class connection():
         query = '''SELECT token,idComedor FROM LoginComedores where token = %s'''
         self.cursor.execute(query,[token])
         return self.cursor.fetchone()
+    
+    def get_dependencias_cliente(self,curp):
+        query = '''SELECT idDependiente,nombre from Dependencia,Cliente where idDependiente = curp
+            and idResponsable = %s;'''
+        self.cursor.execute(query,[curp])
+        return self.cursor.fetchall()
 
     # ------------ App clientes queries -----------------
 
@@ -165,3 +171,13 @@ class connection():
         query = '''SELECT token,curp FROM LoginComedores where token = %s'''
         self.cursor.execute(query,[token])
         return self.cursor.fetchone()
+    
+    def registrar_cliente(self,curp,nombre,apellidop,apellidom,sexo,fecha_nacimiento,condicion,contrasena):
+        query = '''INSERT INTO Cliente
+            (curp,nombre,apellidoP,apellidoM,sexo,
+                fechaNacimiento,condicion,contrasena)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s)'''
+        self.cursor.execute(query,[curp,nombre,apellidop,
+                                   apellidom,sexo,fecha_nacimiento,
+                                   condicion,contrasena])
+        self.connect.commit()
