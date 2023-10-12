@@ -334,31 +334,43 @@ def app_clientes_login():
         return 'Not valid user or password, try again.', 401
     return 'Bad request: Missing requiered parameter(s) \'usuario\' or \'contraseña\'', 400
 
-@app.route('/app/clientes/registrar-cliente')
+@app.route('/app/clientes/registrar-cliente', methods=['POST'])
 def app_comedor_registrar_cliente():
     JSON = dict(request.get_json())
-
-    TOKEN = JSON.get('token')
-
-    if TOKEN:
-        CLIENTE_INFO
 
     CURP_JSON = JSON.get('curp')
     NOMBRE_JSON = JSON.get('nombre')
     APELLIDOP_JSON = JSON.get('apellidop')
     APELLIDOM_JSON = JSON.get('apellidom')
-    SEXO_JSON = JSON.get('sexo')
     FECHA_NACIMIENTO_JSON = JSON.get('fechaNacimiento')
     CONDICION_JSON = JSON.get('condicion')
-    CONTRASENA_JSON = JSON.get('contrasena')
+    CONTRASENA_JSON = JSON.get('contraseña')
 
-    if TOKEN:
-        if (CURP_JSON and NOMBRE_JSON and
-            APELLIDOP_JSON and APELLIDOM_JSON and
-            SEXO_JSON and FECHA_NACIMIENTO_JSON and
-            CONDICION_JSON and CONTRASENA_JSON):
-            pass
+    if not (CURP_JSON and NOMBRE_JSON and
+        APELLIDOP_JSON and APELLIDOM_JSON and
+        FECHA_NACIMIENTO_JSON and
+        CONDICION_JSON and CONTRASENA_JSON):
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered parameter(s)',
+                'details' : '''Missing requiered parameter(s) \'curp\'
+                    or \'nombre\' or \'apellidop\' 
+                    or \'apellidom\' or \'condicion\'
+                    or \'contraseña\''''}, 400
 
+    SEXO_JSON = CURP_JSON[10]
+
+    try:
+        db_connection.registrar_cliente(CURP_JSON,NOMBRE_JSON,APELLIDOP_JSON,
+                                        APELLIDOM_JSON,SEXO_JSON,FECHA_NACIMIENTO_JSON,
+                                        CONDICION_JSON,CONTRASENA_JSON)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al insertar la información del usuario en la BD',
+                 'details' : str(e)}), 500
+    
+    return {'message' : 'Usuario registrado',
+            'details' : f'Se ha registrado correctamente al usuario {CURP_JSON}'}, 200
 
 
 
