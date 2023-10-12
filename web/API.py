@@ -319,7 +319,7 @@ def app_clientes_login():
                 TOKEN = token_hex(16)
                 try:
                     db_connection.login_cliente(TOKEN,JSON_USER)
-                    return TOKEN,200
+                    return {'token':TOKEN},200
                 except Exception as e:
                     return ({'error' : 'Error del servidor',
                                 'message' : 
@@ -327,8 +327,8 @@ def app_clientes_login():
                                 'details' :
                                     str(e)},
                                 500)
-        return 'Not valid user or password, try again.', 401
-    return 'Bad request: Missing requiered parameter(s) \'usuario\' or \'contraseña\'', 400
+        return {'Error':'Not valid user or password, try again.'}, 401
+    return {'Error':'Bad request: Missing requiered parameter(s) \'usuario\' or \'contraseña\''}, 400
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0')
