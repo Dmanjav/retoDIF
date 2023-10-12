@@ -251,7 +251,7 @@ def app_comedor_login():
                 TOKEN = token_hex(16)
                 try:
                     db_connection.login_comedor(TOKEN,register[0])
-                    return TOKEN, 200
+                    return {'token' : TOKEN}, 200
                 except Exception as e:
                     return ({'error' : 'Error del servidor',
                             'message' : 
@@ -307,6 +307,34 @@ def generar_pedido():
 
     return 'Not valid token, try again', 401
 
+@app.route('/app/comedor/get-dependientes')
+def get_dependientes_cliente():
+    JSON = dict(request.get_json())
+
+    TOKEN_JSON = JSON.get('token')
+
+    if TOKEN_JSON:
+        COMEDOR_INFO = db_connection.get_token_comedor(TOKEN_JSON)
+    else:
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered parameter',
+                'details' : 'Missing requiered parameter \'token\''}, 400
+    
+    if not COMEDOR_INFO:
+        return {'error' : 'Unauthorized',
+                'message' : 'token no valido',
+                'details' : f'No existe un token autorizado {TOKEN_JSON}'}, 401
+    
+    CURP_RESPONSABLE_JSON = JSON.get('curp-responsable')
+
+    if not CURP_RESPONSABLE_JSON:
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered parameter',
+                'details' : 'Missing requiered parameter \'curp-responsable\''}, 400
+
+    return {'dependientes' : db_connection.get_dependencias_cliente(CURP_RESPONSABLE_JSON)}
+
+
 # --------- App "Clientes" endpoints --------------
 
 @app.route('/app/clientes/login', methods = ['POST'])
@@ -342,13 +370,13 @@ def app_comedor_registrar_cliente():
     NOMBRE_JSON = JSON.get('nombre')
     APELLIDOP_JSON = JSON.get('apellidop')
     APELLIDOM_JSON = JSON.get('apellidom')
-    FECHA_NACIMIENTO_JSON = JSON.get('fechaNacimiento')
+    ANIO_NACIMIENTO = JSON.get('añoNacimiento')
     CONDICION_JSON = JSON.get('condicion')
     CONTRASENA_JSON = JSON.get('contraseña')
 
     if not (CURP_JSON and NOMBRE_JSON and
         APELLIDOP_JSON and APELLIDOM_JSON and
-        FECHA_NACIMIENTO_JSON and
+        ANIO_NACIMIENTO and
         CONDICION_JSON and CONTRASENA_JSON):
         return {'error' : 'Bad request',
                 'message' : 'Missing requiered parameter(s)',
@@ -358,6 +386,7 @@ def app_comedor_registrar_cliente():
                     or \'contraseña\''''}, 400
 
     SEXO_JSON = CURP_JSON[10]
+    FECHA_NACIMIENTO_JSON = ANIO_NACIMIENTO + '-' + CURP_JSON[6:7] + '-' + CURP_JSON[8:9]
 
     try:
         db_connection.registrar_cliente(CURP_JSON,NOMBRE_JSON,APELLIDOP_JSON,

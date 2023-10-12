@@ -146,6 +146,12 @@ class connection():
         query = '''SELECT token,idComedor FROM LoginComedores where token = %s'''
         self.cursor.execute(query,[token])
         return self.cursor.fetchone()
+    
+    def get_dependencias_cliente(self,curp):
+        query = '''SELECT idDependiente,nombre from Dependencia,Cliente where idDependiente = curp
+            and idResponsable = %s;'''
+        self.cursor.execute(query,[curp])
+        return self.cursor.fetchall()
 
     # ------------ App clientes queries -----------------
 
