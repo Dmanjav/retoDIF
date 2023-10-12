@@ -325,10 +325,10 @@ def app_clientes_login():
                                 'message' : 
                                     'Error al insertar la información del usuario en la BD',
                                 'details' :
-                                    str(e)},
+                                    str(e),'token':''},
                                 500)
-        return {'Error':'Not valid user or password, try again.'}, 401
-    return {'Error':'Bad request: Missing requiered parameter(s) \'usuario\' or \'contraseña\''}, 400
+        return {'Error':'Not valid user or password, try again.','toke':''}, 401
+    return {'Error':'Bad request: Missing requiered parameter(s) \'usuario\' or \'contraseña\'','token':''}, 400
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0')
