@@ -3,7 +3,7 @@ from flask_login import LoginManager, login_user, login_required
 import connection
 from secrets import token_hex
 import User
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash,generate_password_hash
 from datetime import date, timedelta
 
 app = Flask(__name__)
@@ -391,7 +391,7 @@ def app_comedor_registrar_cliente():
     try:
         db_connection.registrar_cliente(CURP_JSON,NOMBRE_JSON,APELLIDOP_JSON,
                                         APELLIDOM_JSON,SEXO_JSON,FECHA_NACIMIENTO_JSON,
-                                        CONDICION_JSON,CONTRASENA_JSON)
+                                        CONDICION_JSON,generate_password_hash(CONTRASENA_JSON))
     except Exception as e:
         return ({'error' : 'Error del servidor',
                  'message' : 
