@@ -7,8 +7,7 @@ body {
 
 .bg {
     animation: slide 3s ease-in-out infinite alternate;
-    /* background-image: linear-gradient(-60deg, #6c3 50%, rgb(95, 68, 127) 50%); */
-    /* background-image: linear-gradient(-60deg, rgb(0, 195, 255) 40%, rgb(0, 240, 0) 20%); */
+    background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
     bottom: 0;
     left: -50%;
     opacity: .5;
