@@ -165,3 +165,13 @@ class connection():
         query = '''SELECT token,curp FROM LoginComedores where token = %s'''
         self.cursor.execute(query,[token])
         return self.cursor.fetchone()
+    
+    def registrar_cliente(self,curp,nombre,apellidop,apellidom,sexo,fecha_nacimiento,condicion,contrasena):
+        query = '''INSERT INTO Cliente
+            (curp,nombre,apellidoP,apellidoM,sexo,
+                fechaNacimiento,condicion,contrasena)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s)'''
+        self.cursor.execute(query,[curp,nombre,apellidop,
+                                   apellidom,sexo,fecha_nacimiento,
+                                   condicion,contrasena])
+        self.connect.commit()
