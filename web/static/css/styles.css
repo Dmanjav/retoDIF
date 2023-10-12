@@ -66,6 +66,7 @@ body {
     padding-right: 10px;
     padding-bottom: 10px;
     background: linear-gradient(45deg, #cdfffc, #fbeced);
+    font-size: 1vw;
 }
 
 .nav p {

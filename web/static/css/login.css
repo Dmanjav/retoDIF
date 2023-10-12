@@ -84,17 +84,18 @@ li {
 #IDboton {
     /* linear-gradient(90deg, #a68097, #6a78b8) 1; */
     background-color: #cdfffc;
-    border: 1px;
     border-radius: 10px;
     width: 50%;
     height: 3rem;
     font-size: 2rem;
     font-weight: bold;
     margin-top: 2rem;
-    box-shadow: 0px 5px 10px 0px rgb(255, 231, 232);
+    color: black;
+    /*box-shadow: 0px 5px 10px 0px rgb(255, 231, 232);*/
     transition: all ease 1s;
     margin-left: 25%;
     margin-right: 25%;
+    text-align: center;
 }
 
 #IDboton:hover {
