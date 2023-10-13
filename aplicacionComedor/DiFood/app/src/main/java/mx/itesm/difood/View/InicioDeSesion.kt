@@ -2,6 +2,7 @@ package mx.itesm.difood.View
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import mx.itesm.difood.ViewModel.InicioDeSesionViewModel
 import mx.itesm.difood.R
 import mx.itesm.difood.databinding.FragmentInicioDeSesionBinding
+import mx.itesm.difood.model.InicioSesionPost
+import retrofit2.Retrofit
 
 class InicioDeSesion : Fragment() {
     private  lateinit var binding: FragmentInicioDeSesionBinding
@@ -25,6 +28,7 @@ class InicioDeSesion : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentInicioDeSesionBinding.inflate(layoutInflater)
+
         return binding.root
     }
 
@@ -42,8 +46,25 @@ class InicioDeSesion : Fragment() {
     private fun registrarEventos() {
         binding.btnInicio.setOnClickListener{
 
-            val accion = InicioDeSesionDirections.actionInicioDeSesionToPrincipal()
-            findNavController().navigate(accion)
+
+
+            //Cinco de Mayo
+            val sucursal:String = binding.etSucursal.text.toString()
+            val contraseña: String = binding.etContraseA.text.toString()
+            val inicioSesionData: InicioSesionPost = InicioSesionPost(sucursal,contraseña)
+
+            viewModel.descargarListaServicios(inicioSesionData)
+            registrarObservadores()
+
+        }
+    }
+
+    fun registrarObservadores(){
+        viewModel.token.observe(viewLifecycleOwner){variable ->
+            if (variable.token != "Nel"){
+                val accion = InicioDeSesionDirections.actionInicioDeSesionToPrincipal(variable.token)
+                findNavController().navigate(accion)
+            }
         }
     }
 

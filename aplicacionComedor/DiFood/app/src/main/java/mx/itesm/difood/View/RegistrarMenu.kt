@@ -13,6 +13,7 @@ import mx.itesm.difood.databinding.FragmentRegistrarMenuBinding
 
 class RegistrarMenu : Fragment() {
     private  lateinit var binding: FragmentRegistrarMenuBinding
+    var token: String = ""
     companion object {
         fun newInstance() = RegistrarMenu()
     }
@@ -23,6 +24,9 @@ class RegistrarMenu : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        arguments?.let{
+            token =it.getString("token").toString()
+        }
         binding = FragmentRegistrarMenuBinding.inflate(layoutInflater)
         return  binding.root
     }
@@ -40,7 +44,7 @@ class RegistrarMenu : Fragment() {
 
     private fun registrarEventos() {
         binding.btnRegistrar.setOnClickListener{
-            val accion = RegistrarMenuDirections.actionRegistrarMenuToPrincipal()
+            val accion = RegistrarMenuDirections.actionRegistrarMenuToPrincipal(token)
             findNavController().navigate(accion)
         }
     }

@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_principal_to_anuncio"
             app:destination="@id/anuncio" />
+        <argument
+            android:name="token"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/registrarPedido"
@@ -46,6 +49,9 @@
         <action
             android:id="@+id/action_registrarPedido_to_principal"
             app:destination="@id/principal" />
+        <argument
+            android:name="token"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/registrarMenu"
@@ -55,6 +61,9 @@
         <action
             android:id="@+id/action_registrarMenu_to_principal"
             app:destination="@id/principal" />
+        <argument
+            android:name="token"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/registrarCliente"
@@ -64,6 +73,9 @@
         <action
             android:id="@+id/action_registrarCliente_to_principal"
             app:destination="@id/principal" />
+        <argument
+            android:name="token"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/clientes"
@@ -73,6 +85,9 @@
         <action
             android:id="@+id/action_clientes_to_principal"
             app:destination="@id/principal" />
+        <argument
+            android:name="token"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/anuncio"
@@ -82,5 +97,8 @@
         <action
             android:id="@+id/action_anuncio_to_principal"
             app:destination="@id/principal" />
+        <argument
+            android:name="token"
+            app:argType="string" />
     </fragment>
 </navigation>

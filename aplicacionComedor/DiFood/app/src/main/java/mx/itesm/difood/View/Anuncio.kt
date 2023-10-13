@@ -14,6 +14,7 @@ import mx.itesm.difood.databinding.FragmentPrincipalBinding
 
 class Anuncio : Fragment() {
     private  lateinit var binding: FragmentAnuncioBinding
+    var token:String = ""
     companion object {
         fun newInstance() = Anuncio()
     }
@@ -24,6 +25,9 @@ class Anuncio : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        arguments?.let{
+            token =it.getString("token").toString()
+        }
         binding = FragmentAnuncioBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -41,7 +45,7 @@ class Anuncio : Fragment() {
 
     private fun registrarEventos() {
         binding.btnRegresarAnuncio.setOnClickListener{
-            val accion = AnuncioDirections.actionAnuncioToPrincipal()
+            val accion = AnuncioDirections.actionAnuncioToPrincipal(token)
             findNavController().navigate(accion)
         }
 

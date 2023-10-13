@@ -2,12 +2,11 @@
     <string name="app_name">DifoodAme</string>
 
     <string-array name="arrCondiciones">
+        <item>Ninguno</item>
         <item>Discapacitado</item>
         <item>Enfermedad Cronica</item>
         <item>Comunidad indigena</item>
         <item>Migrantes</item>
-        <item>No</item>
-
     </string-array>
 
     <string-array name="arrComedores">

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
@@ -25,6 +26,16 @@ class LoginView : AppCompatActivity() {
         registrarEventos()
     }
 
+    private fun registrarObservables() {
+        viewModel.token.observe(this){variable ->
+            Log.d("API_TEST", "Observables ${variable}")
+            if (variable != "NEL"){
+                val intent = Intent(this, MenuView::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+
     fun registrarEventos(){
 
         val btnCurp2 : FloatingActionButton = findViewById(R.id.btnCurp2)
@@ -41,12 +52,10 @@ class LoginView : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val curp = edtCurp.text.toString()
             val pass =  edtPass.text.toString()
-            val res = viewModel.enviardatos(curp,pass)
-
-            val intent: Intent = Intent(this, MenuView::class.java)
-            startActivity(intent)
+            viewModel.enviardatos(curp,pass)
+            registrarObservables()
         }
 
-    }
 
+    }
 }

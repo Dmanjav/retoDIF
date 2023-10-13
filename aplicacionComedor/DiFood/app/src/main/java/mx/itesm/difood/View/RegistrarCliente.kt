@@ -13,6 +13,7 @@ import mx.itesm.difood.databinding.FragmentRegistrarClienteBinding
 
 class RegistrarCliente : Fragment() {
     private  lateinit var binding: FragmentRegistrarClienteBinding
+    var token:String = ""
     companion object {
         fun newInstance() = RegistrarCliente()
     }
@@ -23,6 +24,9 @@ class RegistrarCliente : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        arguments?.let{
+            token =it.getString("token").toString()
+        }
         binding = FragmentRegistrarClienteBinding.inflate(layoutInflater)
         return  binding.root    }
 
@@ -39,7 +43,7 @@ class RegistrarCliente : Fragment() {
 
     private fun registrarEventos() {
         binding.btnCliente.setOnClickListener{
-            val accion = RegistrarClienteDirections.actionRegistrarClienteToPrincipal()
+            val accion = RegistrarClienteDirections.actionRegistrarClienteToPrincipal(token)
             findNavController().navigate(accion)
         }
     }

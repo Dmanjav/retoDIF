@@ -2,6 +2,7 @@ package mx.itesm.difood.View
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,8 @@ import mx.itesm.difood.databinding.FragmentPrincipalBinding
 
 class Principal : Fragment() {
     private  lateinit var binding: FragmentPrincipalBinding
+    var token:String = ""
+
     companion object {
         fun newInstance() = Principal()
     }
@@ -24,6 +27,10 @@ class Principal : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        arguments?.let{
+            token =it.getString("token").toString()
+            Log.d("ApI Test", "uwu: $token")
+        }
         binding = FragmentPrincipalBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -41,22 +48,22 @@ class Principal : Fragment() {
 
     private fun registrarEventos() {
         binding.btnPedido.setOnClickListener{
-            val accion = PrincipalDirections.actionPrincipalToRegistrarPedido()
+            val accion = PrincipalDirections.actionPrincipalToRegistrarPedido(token)
             findNavController().navigate(accion)
         }
 
         binding.btnRegCliente.setOnClickListener{
-            val accion = PrincipalDirections.actionPrincipalToRegistrarCliente()
+            val accion = PrincipalDirections.actionPrincipalToRegistrarCliente(token)
             findNavController().navigate(accion)
         }
 
         binding.btnClientes.setOnClickListener{
-            val accion = PrincipalDirections.actionPrincipalToClientes()
+            val accion = PrincipalDirections.actionPrincipalToClientes(token)
             findNavController().navigate(accion)
         }
 
         binding.btnMenu.setOnClickListener{
-            val accion = PrincipalDirections.actionPrincipalToRegistrarMenu()
+            val accion = PrincipalDirections.actionPrincipalToRegistrarMenu(token)
             findNavController().navigate(accion)
         }
 
@@ -66,7 +73,7 @@ class Principal : Fragment() {
         }
 
         binding.btnAnuncio.setOnClickListener{
-            val accion = PrincipalDirections.actionPrincipalToAnuncio()
+            val accion = PrincipalDirections.actionPrincipalToAnuncio(token)
             findNavController().navigate(accion)
         }
     }

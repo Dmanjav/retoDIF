@@ -13,6 +13,7 @@ import mx.itesm.difood.databinding.FragmentClientesBinding
 
 class Clientes : Fragment() {
     private lateinit var binding: FragmentClientesBinding
+    var token:String = ""
     companion object {
         fun newInstance() = Clientes()
     }
@@ -23,6 +24,9 @@ class Clientes : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        arguments?.let{
+            token =it.getString("token").toString()
+        }
         binding = FragmentClientesBinding.inflate(layoutInflater)
         return  binding.root    }
 
@@ -40,7 +44,7 @@ class Clientes : Fragment() {
     private fun registrarEventos() {
         binding.btnRegresarMenu.setOnClickListener{
 
-            val accion = ClientesDirections.actionClientesToPrincipal()
+            val accion = ClientesDirections.actionClientesToPrincipal(token)
             findNavController().navigate(accion)
         }
     }
