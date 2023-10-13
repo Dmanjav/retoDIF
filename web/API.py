@@ -363,7 +363,7 @@ def app_clientes_login():
     return 'Bad request: Missing requiered parameter(s) \'usuario\' or \'contraseña\'', 400
 
 @app.route('/app/clientes/registrar-cliente', methods=['POST'])
-def app_comedor_registrar_cliente():
+def app_clientes_registrar_cliente():
     JSON = dict(request.get_json())
 
     CURP_JSON = JSON.get('curp')
@@ -386,7 +386,7 @@ def app_comedor_registrar_cliente():
                     or \'contraseña\''''}, 400
 
     SEXO_JSON = CURP_JSON[10]
-    FECHA_NACIMIENTO_JSON = ANIO_NACIMIENTO + '-' + CURP_JSON[6:7] + '-' + CURP_JSON[8:9]
+    FECHA_NACIMIENTO_JSON = ANIO_NACIMIENTO + '-' + CURP_JSON[6:8] + '-' + CURP_JSON[8:10]
 
     try:
         db_connection.registrar_cliente(CURP_JSON,NOMBRE_JSON,APELLIDOP_JSON,
@@ -400,6 +400,41 @@ def app_comedor_registrar_cliente():
     
     return {'message' : 'Usuario registrado',
             'details' : f'Se ha registrado correctamente al usuario {CURP_JSON}'}, 200
+
+@app.route('/app/clientes/get-menu-comedor')
+def get_menu_comedor():
+    JSON = dict(request.get_json())
+
+    TOKEN_JSON = JSON.get('token')
+    if TOKEN_JSON:
+        CLIENTE_INFO = db_connection.get_token_cliente(TOKEN_JSON)
+    else:
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered parameter',
+                'details' : 'Missing requiered parameter \'token\''}, 400
+    
+    if not CLIENTE_INFO:
+        return {'error' : 'Unauthorized',
+                'message' : 'token no valido',
+                'details' : f'No existe un token autorizado {TOKEN_JSON}'}, 401
+    
+    IDCOMEDOR = JSON.get('idComedor')
+
+    if not IDCOMEDOR:
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered parameter',
+                'details' : 'Missing requiered parameter \'idComedor\''}, 400
+    
+    try:
+        MENU = db_connection.get_menu(int(IDCOMEDOR))
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al insertar la información del usuario en la BD',
+                 'details' : str(e)}), 500
+    
+    return {'entrada' : MENU[0], 'plato' : MENU[1], 'postre' : MENU[2]}
+
 
 
 

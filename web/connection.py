@@ -181,3 +181,9 @@ class connection():
                                    apellidom,sexo,fecha_nacimiento,
                                    condicion,contrasena])
         self.connect.commit()
+
+    def get_menu(self,idComedor):
+        query = '''SELECT entrada,plato,postre FROM Comida 
+            where fechaRegistro = CURDATE() and idComedor = %s;'''
+        self.cursor.execute(query,[idComedor])
+        return self.cursor.fetchone()
