@@ -13,6 +13,7 @@ import mx.itesm.difood.databinding.FragmentRegistrarPedidoBinding
 
 class RegistrarPedido : Fragment() {
     private lateinit var binding: FragmentRegistrarPedidoBinding
+    var token: String = ""
     companion object {
         fun newInstance() = RegistrarPedido()
     }
@@ -23,6 +24,9 @@ class RegistrarPedido : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        arguments?.let{
+            token =it.getString("token").toString()
+        }
         binding = FragmentRegistrarPedidoBinding.inflate(layoutInflater)
         return  binding.root
     }
@@ -41,7 +45,7 @@ class RegistrarPedido : Fragment() {
     private fun registrarEventos() {
         binding.btnRegresar.setOnClickListener{
 
-            val accion = RegistrarPedidoDirections.actionRegistrarPedidoToPrincipal()
+            val accion = RegistrarPedidoDirections.actionRegistrarPedidoToPrincipal(token)
             findNavController().navigate(accion)
         }
     }
