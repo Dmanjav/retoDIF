@@ -1,9 +1,9 @@
 package mx.itesm.difoodame.viewmodel
 
 import LoginInterface
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import mx.itesm.difoodame.model.LoginModel
 import mx.itesm.difoodame.model.TokenResponse
 import mx.itesm.difoodame.model.Usuario
 import retrofit2.Call
@@ -14,7 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class LoginVM : ViewModel()
 {
-    private val modelo = LoginModel()
     val token = MutableLiveData<String>()
 
     private val retrofit by lazy {
@@ -23,34 +22,35 @@ class LoginVM : ViewModel()
             .addConverterFactory(GsonConverterFactory.create())  // JSON
             .build()
     }
-    val apiService = retrofit.create(LoginInterface::class.java)
+
 
 
     fun enviardatos(curp:String, pass:String){
 
+        val apiService = retrofit.create(LoginInterface::class.java)
         val usuario = Usuario(curp, pass)
         val call = apiService.verificarIdentidad(usuario)
-        call.enqueue(object : Callback<TokenResponse>{
+
+        call.enqueue(object : Callback<TokenResponse> {
             override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
+                Log.d("API_TEST", "HOLA ${response.isSuccessful}")
                 if (response.isSuccessful){
+                    Log.d("API_TEST", "se logro banda ${response.body()}")
                     token.value =response.body().toString()
-                    println("EXITO en LOGIN")
+                    Log.d("API_TEST", "se logro banda tokeeen: ${token.value}")
                 }
                 else {
-                    val tokenResponse = response.body()
-                    val token = tokenResponse?.token
-                    println("FALLO en LOGIN")
-                    println(token)
+                    token.value = "NEL"
+                    Log.e("API_TEST", "${token.value}")
                 }
             }
 
             override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.e("API_TEST", "se valio bandaaaaaaaaa")
+
             }
 
         })
     }
-
-
 
 }
