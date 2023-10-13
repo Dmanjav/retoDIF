@@ -435,6 +435,16 @@ def get_menu_comedor():
     
     return {'entrada' : MENU[0], 'plato' : MENU[1], 'postre' : MENU[2]}
 
+@app.route('/app/clientes/get-comedores')
+def get_comedores():
+    '''Returns name and id of all community kitchens'''
+    lista_comedores = db_connection.get_comedores()
+    dict_comedores = {}
+
+    for register in lista_comedores:
+        dict_comedores[register[1]] = register[0]
+
+    return dict_comedores
 
 
 
