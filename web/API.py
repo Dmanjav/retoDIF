@@ -438,6 +438,10 @@ def get_menu_comedor():
 @app.route('/app/clientes/get-comedores')
 def get_comedores():
     '''Returns name and id of all community kitchens'''
+
+    token = dict(request.get_json()).get('token')
+    print(token)
+
     lista_comedores = db_connection.get_comedores()
     dict_comedores = {}
 
