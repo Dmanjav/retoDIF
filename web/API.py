@@ -571,7 +571,7 @@ def get_menu_comedor(token):
     
     try:
         return {'entrada' : MENU[0], 'plato' : MENU[1], 'postre' : MENU[2]}
-    except KeyError:
+    except (IndexError, TypeError):
         return {'error' : 'Not found',
                 'message' : 'Not found menu',
                 'details' : f'No existe un menu para el comedor {IDCOMEDOR}'}, 404
