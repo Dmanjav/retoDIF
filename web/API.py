@@ -243,25 +243,33 @@ def app_comedor_login():
     JSON_USER = JSON.get('usuario')
     JSON_PASSW = JSON.get('contraseña')
 
-    if JSON_USER and JSON_PASSW:
-        COMEDOR_DB_INFO = db_connection.get_comedor(JSON_USER)
+    if not JSON_USER or not JSON_PASSW:
+        return {'error': 'Bad request',
+                'message': 'Missing required parameter(s)',
+                'details' : 'Missing required parameter(s) \'usuario\' or \'contraseña\''}, 400
 
-        for register in COMEDOR_DB_INFO:
-            if JSON_USER == register[1] and check_password_hash(register[2],JSON_PASSW):
-                TOKEN = token_hex(16)
-                try:
-                    db_connection.login_comedor(TOKEN,register[0])
-                    return {'token' : TOKEN}, 200
-                except Exception as e:
-                    return ({'error' : 'Error del servidor',
-                            'message' : 
-                                'Error al insertar la información del usuario en la BD',
-                            'details' :
-                                str(e)},
-                            500)
-        return 'Not valid user or password, try again.', 401
-    
-    return 'Bad request: Missing requiered parameter(s) \'usuario\' or \'contraseña\'', 400
+    COMEDOR_DB_INFO = db_connection.get_comedor(JSON_USER)
+    valid_credentials = False
+
+    for register in COMEDOR_DB_INFO:
+        if JSON_USER == register[1] and check_password_hash(register[2], JSON_PASSW):
+            valid_credentials = True
+            break
+
+    if valid_credentials:
+        TOKEN = token_hex(16)
+        try:
+            db_connection.login_comedor(TOKEN, register[0])
+            return {'token': TOKEN}, 200
+        except Exception as e:
+            return {'error': 'Error del servidor',
+                    'message': 'Error al insertar la información del usuario en la BD',
+                    'details': str(e)}, 500
+    else:
+        return {'error': 'Unauthorized',
+                'message' : 'Not valid credentials',
+                'details' : 'Not valid user or password'}, 401
+
 
 @app.route('/app/comedor/generar-pedido', methods=['POST'])
 def generar_pedido():
@@ -269,46 +277,63 @@ def generar_pedido():
     JSON = dict(request.get_json())
 
     TOKEN = JSON.get('token')
-    if TOKEN:
-        COMEDOR_INFO = db_connection.get_token_comedor(TOKEN)
-    else:
-        return '''Bad request: 
-            Missing requiered parameter \'token\'''', 400
+    if not TOKEN:
+        return {'error': 'Bad request',
+                'message': 'Missing required parameter',
+                'details' : 'Missing required parameter \'token\''}, 400
 
-    if COMEDOR_INFO:
-        DONACION  = JSON.get('donacion')
-        RESPONSABLE = JSON.get('responsable')
-        DEPENDIENTE = JSON.get('dependiente')
-        IDCOMIDA = JSON.get('idComida')
+    COMEDOR_INFO = db_connection.get_token_comedor(TOKEN)
+    if not COMEDOR_INFO:
+        return {'error': 'Unauthorized',
+                'message' : 'Not valid token',
+                'details' : 'Not valid token'}, 401
 
-        if (RESPONSABLE and
-            DEPENDIENTE and IDCOMIDA and
-            DONACION is not None):
-            try:
-                db_connection.generar_pedido(DONACION,
-                                             RESPONSABLE,
-                                             DEPENDIENTE,
-                                             COMEDOR_INFO[1],
-                                             IDCOMIDA)
-                return 'Pedido creado con éxito', 200
-            
-            except Exception as e:
-                return ({'error' : 'Error del servidor',
-                            'message' : 
-                                'Error al insertar la información del pedido en la BD',
-                            'details' :
-                                str(e)},
-                            500)
+    DONACION = JSON.get('donacion')
+    RESPONSABLE = JSON.get('responsable')
+    DEPENDIENTE = JSON.get('dependiente')
+    IDCOMIDA = JSON.get('idComida')
 
-        return '''Bad request: 
-            Missing requiered parameter(s)
-              \'donacion\' or \'responsable\' or
-              \'dependiente\' or \'idComida\'''', 400
+    if not (RESPONSABLE and DEPENDIENTE and IDCOMIDA and DONACION is not None):
+        return {'error': 'Bad request',
+                'message': 'Missing required parameter(s)',
+                'details' : 'Missing required parameter(s) \'donacion\' or \'responsable\' or \'dependiente\' or \'idComida\''}, 400
 
-    return 'Not valid token, try again', 401
+    try:
+        return {'idPedido' : db_connection.generar_pedido(DONACION,
+                                                          RESPONSABLE, DEPENDIENTE,
+                                                          COMEDOR_INFO[1], IDCOMIDA)}, 200
+    except Exception as e:
+        return {'error': 'Error del servidor',
+                'message': 'Error al insertar la información del pedido en la BD',
+                'details': str(e)}, 500
 
-@app.route('/app/comedor/get-dependientes')
-def get_dependientes_cliente():
+
+@app.route('/app/comedor/<token>/get-dependientes')
+def get_dependientes_cliente(token):
+
+    COMEDOR_INFO = db_connection.get_token_comedor(token)
+    
+    if not COMEDOR_INFO:
+        return {'error' : 'Unauthorized',
+                'message' : 'token no valido',
+                'details' : f'No existe un token autorizado {token}'}, 401
+    
+    CURP_RESPONSABLE = request.args.get('curp-responsable')
+
+    if not CURP_RESPONSABLE:
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered query parameter',
+                'details' : 'Missing requiered query parameter \'curp-responsable\''}, 400
+
+    try:
+        return {'dependientes' : db_connection.get_dependencias_cliente(CURP_RESPONSABLE)}
+    except Exception as e:
+        return {'error': 'Error del servidor',
+                'message': 'Error al obtener la información de la BD',
+                'details': str(e)}, 500
+
+@app.route('/app/comedor/publicar-menu', methods=['POST'])
+def publicar_menu():
     JSON = dict(request.get_json())
 
     TOKEN_JSON = JSON.get('token')
@@ -325,15 +350,22 @@ def get_dependientes_cliente():
                 'message' : 'token no valido',
                 'details' : f'No existe un token autorizado {TOKEN_JSON}'}, 401
     
-    CURP_RESPONSABLE_JSON = JSON.get('curp-responsable')
+    ENTRADA_JSON = JSON.get('entrada')
+    PLATO_JSON = JSON.get('plato')
+    POSTRE_JSON = JSON.get('postre')
 
-    if not CURP_RESPONSABLE_JSON:
+    if not (ENTRADA_JSON and PLATO_JSON and POSTRE_JSON):
         return {'error' : 'Bad request',
-                'message' : 'Missing requiered parameter',
-                'details' : 'Missing requiered parameter \'curp-responsable\''}, 400
-
-    return {'dependientes' : db_connection.get_dependencias_cliente(CURP_RESPONSABLE_JSON)}
-
+                'message' : 'Missing requiered parameter(s)',
+                'details' : 'Missing requiered parameter(s) \'entrada\' or \'plato\' or \'postre\''}, 400
+    
+    try:
+        return {'idComida' : db_connection.publicar_menu(TOKEN_JSON,ENTRADA_JSON,PLATO_JSON,POSTRE_JSON)}, 200
+    except Exception as e:
+        return {'error': 'Error del servidor',
+                'message': 'Error al insertar la información del pedido en la BD',
+                'details': str(e)}, 500
+    
 
 # --------- App "Clientes" endpoints --------------
 
@@ -344,23 +376,28 @@ def app_clientes_login():
     JSON_USER = JSON.get('usuario')
     JSON_PASS = JSON.get('contraseña')
 
-    if JSON_USER and JSON_PASS:
-        CLIENTE_DB_INFO = db_connection.get_cliente(JSON_USER)
-        if CLIENTE_DB_INFO:
-            if JSON_USER == CLIENTE_DB_INFO[0] and check_password_hash(CLIENTE_DB_INFO[1],JSON_PASS):
-                TOKEN = token_hex(16)
-                try:
-                    db_connection.login_cliente(TOKEN,JSON_USER)
-                    return {'token':TOKEN},200
-                except Exception as e:
-                    return ({'error' : 'Error del servidor',
-                                'message' : 
-                                    'Error al insertar la información del usuario en la BD',
-                                'details' :
-                                    str(e)},
-                                500)
-        return 'Not valid user or password, try again.', 401
-    return 'Bad request: Missing requiered parameter(s) \'usuario\' or \'contraseña\'', 400
+    if not JSON_USER or not JSON_PASS:
+        return {'error': 'Bad request',
+                'message': 'Missing required parameter(s)',
+                'details' : 'Missing required parameter(s) \'usuario\' or \'contraseña\''}, 400
+    
+    CLIENTE_DB_INFO = db_connection.get_cliente(JSON_USER)
+
+    if CLIENTE_DB_INFO:
+        if JSON_USER == CLIENTE_DB_INFO[0] and check_password_hash(CLIENTE_DB_INFO[1],JSON_PASS):
+            TOKEN = token_hex(16)
+            try:
+                db_connection.login_cliente(TOKEN,JSON_USER)
+                return {'token' : TOKEN}, 200
+            except Exception as e:
+                return ({'error' : 'Error del servidor',
+                            'message' : 
+                                'Error al insertar la información del usuario en la BD',
+                            'details' :
+                                str(e)},
+                            500)
+    return {'error' : 'Unauthorized', 'message' : 'Not valid credentials',
+            'details' : 'Not valid user or password'}, 401
 
 @app.route('/app/clientes/registrar-cliente', methods=['POST'])
 def app_clientes_registrar_cliente():
@@ -401,29 +438,21 @@ def app_clientes_registrar_cliente():
     return {'message' : 'Usuario registrado',
             'details' : f'Se ha registrado correctamente al usuario {CURP_JSON}'}, 200
 
-@app.route('/app/clientes/get-menu-comedor')
-def get_menu_comedor():
-    JSON = dict(request.get_json())
-
-    TOKEN_JSON = JSON.get('token')
-    if TOKEN_JSON:
-        CLIENTE_INFO = db_connection.get_token_cliente(TOKEN_JSON)
-    else:
-        return {'error' : 'Bad request',
-                'message' : 'Missing requiered parameter',
-                'details' : 'Missing requiered parameter \'token\''}, 400
+@app.route('/app/clientes/<token>/get-menu-comedor')
+def get_menu_comedor(token):
+    CLIENTE_INFO = db_connection.get_token_cliente(token)
     
     if not CLIENTE_INFO:
         return {'error' : 'Unauthorized',
-                'message' : 'token no valido',
-                'details' : f'No existe un token autorizado {TOKEN_JSON}'}, 401
+                'message' : 'token no válido',
+                'details' : f'No existe un token autorizado {token}'}, 401
     
-    IDCOMEDOR = JSON.get('idComedor')
+    IDCOMEDOR = request.args.get('idComedor')
 
     if not IDCOMEDOR:
         return {'error' : 'Bad request',
-                'message' : 'Missing requiered parameter',
-                'details' : 'Missing requiered parameter \'idComedor\''}, 400
+                'message' : 'Missing requiered query parameter',
+                'details' : 'Missing requiered query parameter \'idComedor\''}, 400
     
     try:
         MENU = db_connection.get_menu(int(IDCOMEDOR))
@@ -435,12 +464,17 @@ def get_menu_comedor():
     
     return {'entrada' : MENU[0], 'plato' : MENU[1], 'postre' : MENU[2]}
 
-@app.route('/app/clientes/get-comedores')
-def get_comedores():
+@app.route('/app/clientes/<token>/get-comedores')
+def get_comedores(token):
     '''Returns name and id of all community kitchens'''
 
-    token = dict(request.get_json()).get('token')
-    print(token)
+    CLIENTE_INFO = db_connection.get_token_cliente(token)
+
+    if not CLIENTE_INFO:
+        return {'error' : 'Unauthorized',
+                'message' : 'token no valido',
+                'details' : f'No existe un token autorizado {token}'}, 401
+    
 
     lista_comedores = db_connection.get_comedores()
     dict_comedores = {}

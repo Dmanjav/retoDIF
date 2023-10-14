@@ -140,7 +140,7 @@ class connection():
         self.cursor.execute(
             query, [donacion, responsable, dependiente, idComedor, idComida])
         self.connect.commit()
-        return self.cursor.fetchall()
+        return self.cursor.lastrowid
 
     def get_token_comedor(self, token):
         query = '''SELECT token,idComedor FROM LoginComedores where token = %s'''
@@ -152,6 +152,14 @@ class connection():
             and idResponsable = %s;'''
         self.cursor.execute(query,[curp])
         return self.cursor.fetchall()
+    
+    def publicar_menu(self,token,entrada,plato,postre):
+        INFO_COMEDOR = self.get_token_comedor(token)
+        query = '''INSERT INTO Comida (idComedor,fechaRegistro,entrada,plato,postre)
+            VALUES (%s,CURDATE(),%s,%s,%s);'''
+        self.cursor.execute(query,[INFO_COMEDOR[1],entrada,plato,postre])
+        self.connect.commit()
+        return self.cursor.lastrowid
 
     # ------------ App clientes queries -----------------
 
