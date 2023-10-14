@@ -366,6 +366,113 @@ def publicar_menu():
                 'message': 'Error al insertar la información del pedido en la BD',
                 'details': str(e)}, 500
     
+@app.route('/app/comedor/<token>/get-clientes')
+def get_clientes(token):
+
+    COMEDOR_INFO = db_connection.get_token_comedor(token)
+
+    if not COMEDOR_INFO:
+        return {'error' : 'Unauthorized',
+                'message' : 'token no valido',
+                'details' : f'No existe un token autorizado {token}'}, 401
+    
+    try:
+        return {'clientes' : db_connection.get_clientes()}
+    except Exception as e:
+        return {'error': 'Error del servidor',
+                'message': 'Error al obtener la información de la BD',
+                'details': str(e)}, 500
+    
+@app.route('/app/comedor/registrar-cliente', methods=['POST'])
+def app_comedor_registrar_cliente():
+    JSON = dict(request.get_json())
+
+    TOKEN_JSON = JSON.get('token')
+
+    if TOKEN_JSON:
+        COMEDOR_INFO = db_connection.get_token_comedor(TOKEN_JSON)
+    else:
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered parameter',
+                'details' : 'Missing requiered parameter \'token\''}, 400
+    
+    if not COMEDOR_INFO:
+        return {'error' : 'Unauthorized',
+                'message' : 'token no valido',
+                'details' : f'No existe un token autorizado {TOKEN_JSON}'}, 401
+    
+    CURP_JSON = JSON.get('curp')
+    NOMBRE_JSON = JSON.get('nombre')
+    APELLIDOP_JSON = JSON.get('apellidop')
+    APELLIDOM_JSON = JSON.get('apellidom')
+    ANIO_NACIMIENTO = JSON.get('añoNacimiento')
+    CONDICION_JSON = JSON.get('condicion')
+    CONTRASENA_JSON = JSON.get('contraseña')
+
+    if not (CURP_JSON and NOMBRE_JSON and
+        APELLIDOP_JSON and APELLIDOM_JSON and
+        ANIO_NACIMIENTO and
+        CONDICION_JSON and CONTRASENA_JSON):
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered parameter(s)',
+                'details' : '''Missing requiered parameter(s) \'curp\'
+                    or \'nombre\' or \'apellidop\' 
+                    or \'apellidom\' or \'condicion\'
+                    or \'contraseña\''''}, 400
+    
+    SEXO_JSON = CURP_JSON[10]
+    FECHA_NACIMIENTO_JSON = ANIO_NACIMIENTO + '-' + CURP_JSON[6:8] + '-' + CURP_JSON[8:10]
+
+    try:
+        db_connection.registrar_cliente(CURP_JSON,NOMBRE_JSON,APELLIDOP_JSON,
+                                        APELLIDOM_JSON,SEXO_JSON,FECHA_NACIMIENTO_JSON,
+                                        CONDICION_JSON,generate_password_hash(CONTRASENA_JSON))
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al insertar la información del usuario en la BD',
+                 'details' : str(e)}), 500
+    
+    return {'message' : 'Usuario registrado',
+            'details' : f'Se ha registrado correctamente al usuario {CURP_JSON}'}, 200
+    
+
+@app.route('/app/comedor/<token>/get-donaciones-dia')
+def app_comedor_get_donaciones(token):
+    COMEDOR_INFO = db_connection.get_token_comedor(token)
+
+    if not COMEDOR_INFO:
+        return {'error' : 'Unauthorized',
+                'message' : 'token no valido',
+                'details' : f'No existe un token autorizado {token}'}, 401
+    
+    IDCOMEDOR = COMEDOR_INFO[1]
+    
+    try:
+        resultado = db_connection.get_donaciones_comedor_dia(int(IDCOMEDOR))
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al insertar la información del usuario en la BD',
+                 'details' : str(e)}), 500
+
+    if not resultado:
+        resultado = []
+
+    try:
+        num1 = resultado[0][0]
+    except IndexError:
+        num1 = 0
+
+    try:
+        num2 = resultado[1][0]
+    except IndexError:
+        num2 = 0
+
+    resultado = [num1,num2]
+
+    return {"No donaciones": resultado[0], "Donaciones": resultado[1]}
+    
 
 # --------- App "Clientes" endpoints --------------
 

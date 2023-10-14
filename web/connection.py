@@ -160,6 +160,18 @@ class connection():
         self.cursor.execute(query,[INFO_COMEDOR[1],entrada,plato,postre])
         self.connect.commit()
         return self.cursor.lastrowid
+    
+    def get_clientes(self):
+        query = '''SELECT nombre,apellidoP,apellidoM FROM Cliente'''
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+    
+    def get_donaciones_comedor_dia(self, id_comedor):
+        '''Returns the number of orders that are donations of one kitchen'''
+        query = '''SELECT COUNT(*) FROM Pedido 
+            WHERE Pedido.idComedor = %s AND DATE(Pedido.fechaHora) = CURDATE() GROUP BY Pedido.donacion;'''
+        self.cursor.execute(query, [id_comedor])
+        return self.cursor.fetchall()
 
     # ------------ App clientes queries -----------------
 
