@@ -8,7 +8,7 @@
     tools:context=".view.MenuComidaView">
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spComedoresMenu"
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:layout_marginStart="27dp"
@@ -48,7 +48,7 @@
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/spComedoresMenu" />
 
     <LinearLayout
         android:id="@+id/llMenu"

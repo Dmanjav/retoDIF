@@ -24,7 +24,6 @@ class RegistrarseVM : ViewModel()
     }
 
     fun enviardatos(curp:String, nombre:String, apellidop: String, apellidom:String,  año: String, condicion:String, pass:String){
-
         val apiService = retrofit.create(RegistrarInterface::class.java)
         val usuario = UsuarioRegistro(curp, nombre, apellidop, apellidom, año,condicion, pass)
         val call = apiService.registrar(usuario)
