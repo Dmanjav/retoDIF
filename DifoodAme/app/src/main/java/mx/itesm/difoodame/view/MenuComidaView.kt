@@ -26,31 +26,48 @@ class MenuComidaView : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_comida_view)
 
+        iniciarEventos()
+        iniciarspinner()
+    }
+
+    fun iniciarEventos(){
+
+        // Llamadas a R para encontrar el elemento VISUAL
         val btnBuscar: Button = findViewById(R.id.btnBuscar)
         val llMenu: LinearLayout = findViewById(R.id.llMenu)
-        iniciarspinner()
+
+        // Tomar de las preferencias los datos que nos interesan
         val sharedPref = getSharedPreferences("mySharedPrefs", Context.MODE_PRIVATE)
         val token = sharedPref.getString("Token", "")
-        Log.d("API_TEST_C_MENU", "${token.toString()}")
-        viewModel.descargarComedores()
+
+        // Crear el endpoint para la llamada de la API
+        val endpoint = "app/clientes/" + token.toString() +"/get-comedores"
+
+        // Llamada a la API
+        viewModel.descargarComedores(endpoint)
+
+        // Listeners
         btnBuscar.setOnClickListener{
             llMenu.visibility= View.VISIBLE
         }
+
     }
 
+    // Esta funcion espera a las variables observables
     fun iniciarspinner()
     {
+
         viewModel.comedor.observe(this){mapa ->
-            val milista = ArrayList<String>()
-            milista.add("Hola")
-            milista.add("Adios")
-            milista.add("Hola")
-            //val arrComedores = lista.toTypedArray()
+
+            val milista = ArrayList(mapa.keys)
+
+            // Identificar el spinner del Comedor
             val spComedoresMenu: Spinner = findViewById(R.id.spComedoresMenu)
+
+            // Crear el adaptador para modificar el spinner con datos que recibe de la API
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,milista)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
             spComedoresMenu.adapter = adapter
-
         }
     }
 }
