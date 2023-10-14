@@ -1,5 +1,6 @@
 package mx.itesm.difoodame.view
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -15,9 +16,13 @@ class GenerarQRView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_generar_qrview)
+        iniciarEventos()
+    }
 
-        val curp = "ROMA030605HDFDNNA6"
-        val qrgenerado = generarQR(curp)
+    fun iniciarEventos(){
+        val sharedPref = getSharedPreferences("mySharedPrefs", Context.MODE_PRIVATE)
+        val curp = sharedPref.getString("CurpUsuario", "")
+        val qrgenerado = generarQR(curp.toString())
         val imgQR : ImageView = findViewById(R.id.imageViewQR)
         imgQR.setImageBitmap(qrgenerado)
     }

@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class LoginVM : ViewModel()
 {
-    val token = MutableLiveData<String>()
+    val token = MutableLiveData<TokenResponse?>()
 
     private val retrofit by lazy {
         Retrofit.Builder()
@@ -36,11 +36,11 @@ class LoginVM : ViewModel()
                 Log.d("API_TEST", "HOLA ${response.isSuccessful}")
                 if (response.isSuccessful){
                     Log.d("API_TEST", "se logro banda ${response.body()}")
-                    token.value =response.body().toString()
-                    Log.d("API_TEST", "se logro banda tokeeen: ${token.value}")
+                    token.value = response.body()
+                    Log.d("API_TEST", "se logro banda tokeeen: ${token.value?.token}")
                 }
                 else {
-                    token.value = "NEL"
+                    token.value = null
                     Log.e("API_TEST", "${token.value}")
                 }
             }

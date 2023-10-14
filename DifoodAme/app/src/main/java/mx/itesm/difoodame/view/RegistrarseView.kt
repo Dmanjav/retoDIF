@@ -12,7 +12,6 @@ import androidx.activity.viewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import mx.itesm.difoodame.R
-import mx.itesm.difoodame.viewmodel.LoginVM
 import mx.itesm.difoodame.viewmodel.RegistrarseVM
 
 
