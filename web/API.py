@@ -569,7 +569,12 @@ def get_menu_comedor(token):
                     'Error al insertar la información del usuario en la BD',
                  'details' : str(e)}), 500
     
-    return {'entrada' : MENU[0], 'plato' : MENU[1], 'postre' : MENU[2]}
+    try:
+        return {'entrada' : MENU[0], 'plato' : MENU[1], 'postre' : MENU[2]}
+    except KeyError:
+        return {'error' : 'Not found',
+                'message' : 'Not found menu',
+                'details' : f'No existe un menu para el comedor {IDCOMEDOR}'}, 404
 
 @app.route('/app/clientes/<token>/get-comedores')
 def get_comedores(token):
