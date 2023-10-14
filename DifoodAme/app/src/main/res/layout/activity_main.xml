@@ -5,70 +5,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.MainActivity"
-    android:background="@drawable/fondo3difood"
+    android:background="@drawable/fondooficial3"
     >
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="51dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="140dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="#9F2141"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="#50212D"
         android:fontFamily="@font/roboto_medium"
         android:text="Iniciar Sesion"
         android:textColor="#E6E2E2"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.642" />
+        app:layout_constraintVertical_bias="0.598" />
 
     <TextView
         android:id="@+id/textBienvenidos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginBottom="40dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Bienvenido"
-        android:textColor="#9F2141"
+        android:textColor="#50212D"
         android:textSize="27sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintVertical_bias="0.93" />
 
     <Button
         android:id="@+id/btnRegistrarse"
         android:layout_width="0dp"
         android:layout_height="51dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="36dp"
-        android:backgroundTint="#9F2141"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="#50212D"
         android:fontFamily="@font/roboto_medium"
         android:text="Registrarse"
         android:textColor="#E6E2E2"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
     <ImageView
         android:id="@+id/imgLogo"
-        android:layout_width="282dp"
-        android:layout_height="327dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="216dp"
+        android:layout_height="292dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="60dp"
         android:src="@drawable/logodifood"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.621"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="105dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/finalllll" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

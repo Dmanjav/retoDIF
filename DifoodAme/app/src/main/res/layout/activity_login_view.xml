@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondologin"
+    android:background="@drawable/loginfinal"
     android:visibility="visible"
     tools:context=".view.LoginView">
 
@@ -12,74 +12,100 @@
         android:id="@+id/textView"
         android:layout_width="195dp"
         android:layout_height="48dp"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="140dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Inicio de Sesión"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textColor="#9F2141"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="195dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Ingresa tu CURP"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/edtCurp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="232dp"
+        android:layout_height="38dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Ingresa tu contraseña"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/edtPass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <EditText
         android:id="@+id/edtCurp"
-        android:layout_width="0dp"
-        android:layout_height="41dp"
+        android:layout_width="298dp"
+        android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/recuadro_con_bordes"
         android:ems="10"
         android:hint="CURP"
         android:inputType="text"
         android:textAlignment="center"
-        android:textColor="#BBBBBB"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:text="CURP" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/btnIngresar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#9F2141"
+        android:layout_width="114dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#FFFFFF"
         android:text="Ingresar"
-        android:textColor="#ffffff"
+        android:textColor="#9F2141"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.396"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtPass" />
 
     <EditText
         android:id="@+id/edtPass"
-        android:layout_width="0dp"
-        android:layout_height="41dp"
+        android:layout_width="298dp"
+        android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="96dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/recuadro_con_bordes"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
         android:textAlignment="center"
-        android:textColor="#BBBBBB"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtCurp" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="120dp"
-        android:layout_height="162dp"
-        android:layout_marginStart="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/logodifood" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnCurp2"
@@ -87,10 +113,20 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:backgroundTint="#DC7E96"
         android:clickable="true"
         android:src="@android:drawable/ic_dialog_info"
+        app:backgroundTint="#DC7E96"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="105dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/finalllll" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
