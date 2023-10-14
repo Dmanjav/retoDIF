@@ -188,7 +188,7 @@ class connection():
         self.connect.commit()
 
     def get_token_cliente(self, token):
-        query = '''SELECT token,curp FROM LoginComedores where token = %s'''
+        query = '''SELECT token,curpCliente FROM LoginComedores where token = %s'''
         self.cursor.execute(query,[token])
         return self.cursor.fetchone()
     
