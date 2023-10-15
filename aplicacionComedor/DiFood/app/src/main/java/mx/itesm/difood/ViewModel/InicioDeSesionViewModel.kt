@@ -4,8 +4,8 @@ import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import mx.itesm.difood.model.InicioSesionGet
-import mx.itesm.difood.model.InicioSesionPost
+import mx.itesm.difood.model.InicioSesion.InicioSesionGet
+import mx.itesm.difood.model.InicioSesion.InicioSesionPost
 import mx.itesm.difood.model.ListaServiciosAPI
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,8 +29,8 @@ class InicioDeSesionViewModel : ViewModel() {
         retroFit.create(ListaServiciosAPI::class.java)
     }
 
-    //funcion para descargar los paises
-    fun descargarListaServicios(data:InicioSesionPost){
+    //funcion que manda el login
+    fun descargarListaServicios(data: InicioSesionPost){
         val call = descargaAPI.InicioSesion(data)
         call.enqueue(object : Callback<InicioSesionGet>{
             override fun onResponse(

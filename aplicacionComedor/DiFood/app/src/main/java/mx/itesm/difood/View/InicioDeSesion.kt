@@ -2,17 +2,14 @@ package mx.itesm.difood.View
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import mx.itesm.difood.ViewModel.InicioDeSesionViewModel
-import mx.itesm.difood.R
 import mx.itesm.difood.databinding.FragmentInicioDeSesionBinding
-import mx.itesm.difood.model.InicioSesionPost
-import retrofit2.Retrofit
+import mx.itesm.difood.model.InicioSesion.InicioSesionPost
 
 class InicioDeSesion : Fragment() {
     private  lateinit var binding: FragmentInicioDeSesionBinding
@@ -45,9 +42,6 @@ class InicioDeSesion : Fragment() {
 
     private fun registrarEventos() {
         binding.btnInicio.setOnClickListener{
-
-
-
             //Cinco de Mayo
             val sucursal:String = binding.etSucursal.text.toString()
             val contraseña: String = binding.etContraseA.text.toString()
