@@ -12,6 +12,8 @@ import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
 import mx.itesm.difoodame.R
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class GenerarQRView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +39,8 @@ class GenerarQRView : AppCompatActivity() {
 
         val edcampCurp: TextView = findViewById(R.id.edSetCurp)
         edcampCurp.setText(curp)
+
+        recuperarFecha()
     }
 
     private fun generarQR(curp: String): Bitmap? {
@@ -66,5 +70,15 @@ class GenerarQRView : AppCompatActivity() {
             e.printStackTrace()
             return null
         }
+    }
+
+    // Función que recupera la fecha en la que se genera el qr
+    fun recuperarFecha(){
+
+        val dateTextView = findViewById<TextView>(R.id.edFecha)
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+        val date = Date()
+        val formattedDate = dateFormat.format(date)
+        dateTextView.text = "Fecha: $formattedDate"
     }
 }

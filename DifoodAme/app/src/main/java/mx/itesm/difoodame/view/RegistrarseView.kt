@@ -97,17 +97,19 @@ class RegistrarseView : AppCompatActivity() {
     }
 
     fun registrarObservables(){
+
+        // Se observa el response2 Cuando cambia de valor hace lo siguiente
         viewModel.response2.observe(this){observes ->
             if (viewModel.response2.value != "NEL"){
+                // Se cambia de pantalla si se registro bien
                 val intent : Intent = Intent(this, LoginView::class.java)
                 startActivity(intent)
                 finish()
             } else {
-
+                //Arroja un mensaje de error al usuario para que pueda cambiar los datos
                 val mensajeError = "No te pudimos registrar :( \n" +
                         "Verifica tus datos"
                 val duracion = Toast.LENGTH_LONG
-
                 val toast = Toast.makeText(applicationContext, mensajeError, duracion)
                 toast.show()
             }

@@ -2,8 +2,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="4dp"
     >
-    <solid android:color="#F89498" /> <!-- Color de fondo -->
-    <corners android:radius="16dp" /> <!-- Radio de las esquinas para hacerlas redondas -->
+    <solid android:color="#FAF3E0" /> <!-- Color de fondo -->
+    <corners android:radius="80dp" /> <!-- Radio de las esquinas para hacerlas redondas -->
     <stroke
         android:width="2dp"
         android:color="#F89498" />
