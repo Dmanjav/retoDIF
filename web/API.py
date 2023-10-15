@@ -472,6 +472,36 @@ def app_comedor_get_donaciones(token):
     resultado = [num1,num2]
 
     return {"No donaciones": resultado[0], "Donaciones": resultado[1]}
+
+@app.route('/app/comedor/publicar-anuncio', methods=['POST'])
+def publicar_anuncio():
+    JSON = dict(request.get_json())
+
+    TOKEN_JSON = JSON.get('token')
+
+    if not TOKEN_JSON:
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered parameter',
+                'details' : 'Missing requiered parameter \'token\''}, 400
+    
+    CONTENIDO_ANUNCIO_JSON = JSON.get('contenido')
+    CIERRE_ANUNCIO_JSON = JSON.get('cierre')
+
+    if not (CONTENIDO_ANUNCIO_JSON and CIERRE_ANUNCIO_JSON):
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered parameter(s)',
+                'details' : 'Missing requiered parameter(s) \'contenido\' or \'cierre\''}, 400
+    
+    try:
+        db_connection.publicar_anuncio(TOKEN_JSON,CONTENIDO_ANUNCIO_JSON,CIERRE_ANUNCIO_JSON)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al insertar la información del usuario en la BD',
+                 'details' : str(e)}), 500
+    
+    return {'message' : 'Anuncio publicado',
+            'details' : 'Se ha publicado correctamente el anuncio'}, 200
     
 
 # --------- App "Clientes" endpoints --------------
@@ -573,8 +603,8 @@ def get_menu_comedor(token):
         return {'entrada' : MENU[0], 'plato' : MENU[1], 'postre' : MENU[2]}
     except (IndexError, TypeError):
         return {'error' : 'Not found',
-                'message' : 'Not found menu',
-                'details' : f'No existe un menu para el comedor {IDCOMEDOR}'}, 404
+                'message' : 'Not found menu for today',
+                'details' : f'No existe un menu para el comedor {IDCOMEDOR} para el día de hoy'}, 404
 
 @app.route('/app/clientes/<token>/get-comedores')
 def get_comedores(token):
@@ -596,6 +626,70 @@ def get_comedores(token):
 
     return dict_comedores
 
+@app.route('/app/clientes/<token>/get-pedidos')
+def app_clientes_get_pedidos(token):
+    CLIENTE_INFO = db_connection.get_token_cliente(token)
+
+    if not CLIENTE_INFO:
+        return {'error' : 'Unauthorized',
+                'message' : 'token no valido',
+                'details' : f'No existe un token autorizado {token}'}, 401
+    
+    CURP_CLIENTE = CLIENTE_INFO[1]
+
+    try:
+        PEDIDOS = db_connection.get_pedidos_cliente(CURP_CLIENTE)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al obtener la información de la BD',
+                 'details' : str(e)}), 500
+    
+    dict_pedidos = {}
+    for register in PEDIDOS:
+        dict_pedidos[register[0]] = {'fechaHora' : register[1].strftime('%Y-%m-%d %H:%M:%S'),
+                                     'nombreComedor' : register[2]}
+        
+    return dict_pedidos
+
+@app.route('/app/clientes/publicar-evaluacion', methods=['POST'])
+def publicar_evaluacion():
+    JSON = dict(request.get_json())
+
+    TOKEN_JSON = JSON.get('token')
+
+    if not TOKEN_JSON:
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered parameter',
+                'details' : 'Missing requiered parameter \'token\''}, 400
+
+    CLIENTE_INFO = db_connection.get_token_cliente(TOKEN_JSON)
+
+    if not CLIENTE_INFO:
+        return {'error' : 'Unauthorized',
+                'message' : 'token no valido',
+                'details' : f'No existe un token autorizado {TOKEN_JSON}'}, 401
+    
+    IDPEDIDO_JSON = JSON.get('idPedido')
+    SERVICIO_JSON = JSON.get('servicio')
+    HIGIENE_JSON = JSON.get('higiene')
+    CALIDAD_JSON = JSON.get('calidad')
+
+    if not (IDPEDIDO_JSON and SERVICIO_JSON and HIGIENE_JSON and CALIDAD_JSON):
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered parameter(s)',
+                'details' : 'Missing requiered parameter(s) \'idPedido\' or \'servicio\' or \'higiene\' or \'calidad\''}, 400
+    
+    try:
+        db_connection.publicar_evaluacion(IDPEDIDO_JSON,SERVICIO_JSON,HIGIENE_JSON,CALIDAD_JSON)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al insertar la información del usuario en la BD',
+                 'details' : str(e)}), 500
+    
+    return {'message' : 'Evaluación publicada',
+            'details' : 'Se ha publicado correctamente la evaluación'}, 200
 
 
 if __name__ == '__main__':

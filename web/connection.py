@@ -172,6 +172,14 @@ class connection():
             WHERE Pedido.idComedor = %s AND DATE(Pedido.fechaHora) = CURDATE() GROUP BY Pedido.donacion;'''
         self.cursor.execute(query, [id_comedor])
         return self.cursor.fetchall()
+    
+    def publicar_anuncio(self,token,contenido,cierre):
+        INFO_COMEDOR = self.get_token_comedor(token)
+        query = '''INSERT INTO Anuncios (idComedor,fechaHora,contenido,cierre)
+            VALUES (%s,NOW(),%s,%s);'''
+        self.cursor.execute(query,[INFO_COMEDOR[1],contenido,cierre])
+        self.connect.commit()
+        return self.cursor.lastrowid
 
     # ------------ App clientes queries -----------------
 
@@ -207,3 +215,18 @@ class connection():
             where fechaRegistro = CURDATE() and idComedor = %s;'''
         self.cursor.execute(query,[idComedor])
         return self.cursor.fetchone()
+    
+    def get_pedidos_cliente(self, curp):
+        query = '''SELECT Pedido.idPedido, Pedido.fechaHora, Comedor.nombre
+            FROM Pedido,Comedor WHERE Pedido.idComedor = Comedor.idComedor
+            and Pedido.dependiente = %s and DATE(Pedido.fechaHora)
+            BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND CURDATE();'''
+        self.cursor.execute(query, [curp])
+        return self.cursor.fetchall()
+    
+    def publicar_evaluacion(self,idPedido,servicio,higiene,calidad):
+        query = '''INSERT INTO Encuesta (idPedido,servicio,higiene,calidad)
+            VALUES (%s,%s,%s,%s);'''
+        self.cursor.execute(query,[idPedido,servicio,higiene,calidad])
+        self.connect.commit()
+        return self.cursor.lastrowid
