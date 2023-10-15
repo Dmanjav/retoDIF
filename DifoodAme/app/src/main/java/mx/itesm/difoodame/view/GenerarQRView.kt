@@ -6,6 +6,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
@@ -33,6 +34,9 @@ class GenerarQRView : AppCompatActivity() {
         // Identificamos el ImageView de la actividad y lo modificamos con el qr generado
         val imgQR : ImageView = findViewById(R.id.imageViewQR)
         imgQR.setImageBitmap(qrgenerado)
+
+        val edcampCurp: TextView = findViewById(R.id.edSetCurp)
+        edcampCurp.setText(curp)
     }
 
     private fun generarQR(curp: String): Bitmap? {

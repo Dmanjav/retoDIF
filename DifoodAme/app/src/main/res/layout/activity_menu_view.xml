@@ -60,7 +60,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="40dp"
         android:backgroundTint="#9F2141"
-        android:text="Generar QR"
+        android:text="Mi QR"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20sp"

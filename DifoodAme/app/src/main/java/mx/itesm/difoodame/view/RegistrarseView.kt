@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
@@ -24,6 +25,7 @@ class RegistrarseView : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrarse_view)
         iniciarEvento()
+        registrarObservables()
     }
 
     fun iniciarEvento()
@@ -89,8 +91,28 @@ class RegistrarseView : AppCompatActivity() {
             // Se hace el llamado para enviar los datos
             viewModel.enviardatos(curp, nombre,apellidop, apellidom,año,condicion,contra)
 
+
         }
 
+    }
+
+    fun registrarObservables(){
+        viewModel.response2.observe(this){observes ->
+            if (viewModel.response2.value != "NEL"){
+                val intent : Intent = Intent(this, LoginView::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+
+                val mensajeError = "No te pudimos registrar :( \n" +
+                        "Verifica tus datos"
+                val duracion = Toast.LENGTH_LONG
+
+                val toast = Toast.makeText(applicationContext, mensajeError, duracion)
+                toast.show()
+            }
+
+        }
     }
 
 }

@@ -25,11 +25,13 @@ class MainActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val intent: Intent = Intent(this, LoginView::class.java)
             startActivity(intent)
+            finish()
         }
         val btnRegistrarse: Button = findViewById(R.id.btnRegistrarse)
         btnRegistrarse.setOnClickListener{
             val intent: Intent = Intent(this, RegistrarseView::class.java)
             startActivity(intent)
+            finish()
 
         }
         btnRegistrarse.startAnimation(animation)
