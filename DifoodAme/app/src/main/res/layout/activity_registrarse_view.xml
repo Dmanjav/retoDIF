@@ -4,209 +4,260 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondoregistrarse"
+    android:background="@drawable/registrooficial"
     tools:context=".view.RegistrarseView">
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="195dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="132dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Registro"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="#9F2141"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/edCurp"
-        android:layout_width="291dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/recuadro_con_bordes"
-        android:ems="10"
-        android:hint="Ingresa tu CURP"
-        android:inputType="text"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <EditText
-        android:id="@+id/edNombre"
-        android:layout_width="156dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/recuadro_con_bordes"
-        android:ems="10"
-        android:hint="Nombre"
-        android:inputType="text"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edCurp" />
-
-    <EditText
-        android:id="@+id/edPaterno"
-        android:layout_width="0dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/recuadro_con_bordes"
-        android:ems="10"
-        android:hint="Apellido Paterno"
-        android:inputType="text"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edNombre" />
-
-    <EditText
-        android:id="@+id/edMaterno"
-        android:layout_width="0dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/recuadro_con_bordes"
-        android:ems="10"
-        android:hint="Apellido Materno"
-        android:inputType="text"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edPaterno" />
-
-    <EditText
-        android:id="@+id/edContrasena"
-        android:layout_width="0dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/recuadro_con_bordes"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edMaterno" />
-
-    <Button
-        android:id="@+id/btnRegist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="44dp"
-        android:backgroundTint="#9F2141"
-        android:text="Registrarse"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spCondiciones" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnCurp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        app:backgroundTint="#DC7E96"
-        app:backgroundTintMode="add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_info" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="98dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="105dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logodifood" />
+        app:srcCompat="@drawable/finalllll" />
 
-    <Spinner
-        android:id="@+id/spCondiciones"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="27dp"
-        android:background="@drawable/recuadro_con_bordes"
-        android:entries="@array/arrCondiciones"
-        android:spinnerMode="dialog"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="350dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="45dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Selecciona el grupo con el que mas te identificas"
-        android:textAlignment="center"
-        android:textColor="#9F2141"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edContrasena" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnLeerQR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="680dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        app:backgroundTint="#DC7E96"
-        app:layout_constraintBottom_toTopOf="@+id/edNombre"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/edCurp"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/edAño"
-        android:layout_width="156dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/recuadro_con_bordes"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Año de Nacimiento"
-        android:inputType="number"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/edNombre"
-        app:layout_constraintTop_toBottomOf="@+id/edCurp" />
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Ingresa tu CURP"
+            android:textAlignment="center"
+            android:textColor="#FA656B"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edCurp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/recuadroregis"
+            android:ems="10"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="200dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Nombre"
+                    android:textAlignment="center"
+                    android:textColor="#FA656B"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edNombre"
+                    android:layout_width="190dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/recuadroregis"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:textAlignment="center"
+                    android:textColor="#000000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Año de Nacimiento"
+                    android:textAlignment="center"
+                    android:textColor="#FA656B"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edAño"
+                    android:layout_width="170dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/recuadroregis"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textColor="#000000" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Primer Apellido"
+            android:textAlignment="center"
+            android:textColor="#FA656B"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edPaterno"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/recuadroregis"
+            android:ems="10"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Segundo Apellido"
+            android:textAlignment="center"
+            android:textColor="#FA656B"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edMaterno"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/recuadroregis"
+            android:ems="10"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Contraseña"
+            android:textAlignment="center"
+            android:textColor="#FA656B"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edContrasena"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/recuadroregis"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Selecciona la condicion con la que mas te Identifiques"
+            android:textAlignment="center"
+            android:textColor="#FA656B"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spCondiciones"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/recuadroregis"
+            android:entries="@array/arrCondiciones"
+            android:gravity="center"
+            android:textAlignment="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="311dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30sp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Autocompletar datos ->"
+                    android:textAlignment="textEnd"
+                    android:textColor="#FA656B"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="83dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnLeerQR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:clickable="true"
+                    android:src="@android:drawable/ic_menu_camera"
+                    app:backgroundTint="#FA656B" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnRegist"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#FA656B"
+            android:text="Registrarse" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnCurp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:backgroundTint="#FA656B"
+            app:srcCompat="@android:drawable/ic_search_category_default" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

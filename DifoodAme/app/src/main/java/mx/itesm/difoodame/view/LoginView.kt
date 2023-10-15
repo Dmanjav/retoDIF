@@ -25,8 +25,6 @@ class LoginView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_view)
-
-
         registrarEventos()
         registrarObservables()
 
@@ -48,6 +46,7 @@ class LoginView : AppCompatActivity() {
             }
         }
     }
+
 
     fun registrarEventos(){
 
