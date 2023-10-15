@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mx.itesm.difoodame.R
@@ -25,8 +26,6 @@ class LoginView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_view)
-
-
         registrarEventos()
         registrarObservables()
 
@@ -37,17 +36,23 @@ class LoginView : AppCompatActivity() {
         viewModel.token.observe(this){variable ->
             Log.d("API_TEST", "Observables ${variable?.token}")
             if (variable != null){
-                val intent = Intent(this, MenuView::class.java)
-                startActivity(intent)
-
                 val sharedPref = getSharedPreferences("mySharedPrefs", Context.MODE_PRIVATE)
                 val editor = sharedPref.edit()
                 editor.putString("Token", variable.token)
                 editor.apply()
+                val intent = Intent(this, MenuView::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                val mensajeError = "CURP o Contraseña Incorrectas, Verificalas :) "
+                val duracion = Toast.LENGTH_LONG
 
+                val toast = Toast.makeText(applicationContext, mensajeError, duracion)
+                toast.show()
             }
         }
     }
+
 
     fun registrarEventos(){
 
@@ -63,7 +68,7 @@ class LoginView : AppCompatActivity() {
         val edtPass: EditText = findViewById(R.id.edtPass)
 
         btnLogin.setOnClickListener {
-            val curp = edtCurp.text.toString()
+            val curp = edtCurp.text.toString().uppercase()
             val pass =  edtPass.text.toString()
 
             viewModel.enviardatos(curp,pass)

@@ -24,29 +24,32 @@ class LoginVM : ViewModel()
     }
 
 
-
     fun enviardatos(curp:String, pass:String){
 
         val apiService = retrofit.create(LoginInterface::class.java)
+        // Se crea el Objeto Usuario con el Curp y password para hacer login
         val usuario = Usuario(curp, pass)
         val call = apiService.verificarIdentidad(usuario)
 
         call.enqueue(object : Callback<TokenResponse> {
             override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
-                Log.d("API_TEST", "HOLA ${response.isSuccessful}")
+
                 if (response.isSuccessful){
+                    // Si la respuesta del servidor es "Successful" se guarda la variable token con el body del response
                     Log.d("API_TEST", "se logro banda ${response.body()}")
                     token.value = response.body()
                     Log.d("API_TEST", "se logro banda tokeeen: ${token.value?.token}")
                 }
                 else {
+                    // Si la respuesta del servidor no es "Successful" se guarda la variable token con null
                     token.value = null
                     Log.e("API_TEST", "${token.value}")
                 }
             }
 
+            // Fallo en la conexion del con el servidor
             override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
-                Log.e("API_TEST", "se valio bandaaaaaaaaa")
+                Log.e("API_TEST", "NO SE PUDO CONECTAR CON EL SERVER")
 
             }
 

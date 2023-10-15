@@ -20,23 +20,36 @@ class MainActivity : AppCompatActivity() {
 
 
     fun iniciarEvento(){
+        // Variable para la animacion
         val animation: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate)
+
+        // Se dan de alta los botones
         val btnLogin: Button = findViewById(R.id.btnLogin)
+        val btnRegistrarse: Button = findViewById(R.id.btnRegistrarse)
+
+        // Se dan de alta los setOnClickListener
         btnLogin.setOnClickListener {
+            // Cambio de pantalla
             val intent: Intent = Intent(this, LoginView::class.java)
             startActivity(intent)
+            finish()
         }
-        val btnRegistrarse: Button = findViewById(R.id.btnRegistrarse)
+
         btnRegistrarse.setOnClickListener{
+            // Cambio de pantalla
             val intent: Intent = Intent(this, RegistrarseView::class.java)
             startActivity(intent)
+            finish()
 
         }
+
+        // Se inician las animaciones
         btnRegistrarse.startAnimation(animation)
         btnLogin.startAnimation(animation)
 
     }
     fun animaciontext(){
+        // Cosas de animacion
         val imageView = findViewById<ImageView>(R.id.imgLogo)
         val animation: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate)
         val txv = findViewById<TextView>(R.id.textBienvenidos)

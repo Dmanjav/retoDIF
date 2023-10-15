@@ -4,63 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondomenu"
+    android:background="@drawable/fondomenup3"
     tools:context=".view.MenuView">
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="152dp"
-        android:layout_height="158dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="105dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logodifood" />
+        app:srcCompat="@drawable/finalllll" />
 
     <Button
         android:id="@+id/btnMenu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="325dp"
+        android:layout_height="71dp"
         android:layout_marginStart="40dp"
 
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="236dp"
         android:layout_marginEnd="40dp"
-        android:backgroundTint="#9F2141"
+        android:backgroundTint="#FB4A51"
         android:fontFamily="@font/roboto_medium"
         android:text="Menu"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnMapas"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/btnEncuesta"
+        android:layout_width="325dp"
+        android:layout_height="71dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="40dp"
-        android:backgroundTint="#9F2141"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Mapa"
+        android:backgroundTint="#FB4A51"
+        android:text="Encuesta"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMenu" />
+        app:layout_constraintTop_toBottomOf="@+id/btnQR" />
 
     <Button
         android:id="@+id/btnQR"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="325dp"
+        android:layout_height="71dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="40dp"
-        android:backgroundTint="#9F2141"
-        android:text="Generar QR"
+        android:backgroundTint="#FB4A51"
+        android:text="Mi QR"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
@@ -70,19 +69,41 @@
         app:layout_constraintTop_toBottomOf="@+id/btnMapas" />
 
     <Button
-        android:id="@+id/btnEncuesta"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/btnMapas"
+        android:layout_width="325dp"
+        android:layout_height="71dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="40dp"
-        android:backgroundTint="#9F2141"
-        android:text="Encuesta"
+        android:backgroundTint="#FB4A51"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Mapa"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnQR" />
+        app:layout_constraintTop_toBottomOf="@+id/btnMenu" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="207dp"
+        android:layout_height="199dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/spinnercolor" />
+
+    <ImageView
+        android:id="@+id/difood"
+        android:layout_width="189dp"
+        android:layout_height="184dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:srcCompat="@drawable/logodifood" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

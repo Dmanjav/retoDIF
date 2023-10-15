@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import mx.itesm.difood.R
 import mx.itesm.difood.ViewModel.RegistrarPedidoViewModel
 import mx.itesm.difood.databinding.FragmentRegistrarPedidoBinding
+import mx.itesm.difood.model.Pedido
 
 class RegistrarPedido : Fragment() {
     private lateinit var binding: FragmentRegistrarPedidoBinding
@@ -48,6 +49,23 @@ class RegistrarPedido : Fragment() {
             val accion = RegistrarPedidoDirections.actionRegistrarPedidoToPrincipal(token)
             findNavController().navigate(accion)
         }
+
+        binding.btnEnvPedido.setOnClickListener{
+            val pedidoData: Pedido = Pedido(token,"1","SACC030606HMCNLRA2",
+                "SACC030606HMCNLRA2","1" )
+            viewModel.descargarListaServicios(pedidoData)
+            registrarObservadores()
+        }
     }
+
+    private fun registrarObservadores() {
+        viewModel.tokenResponse.observe(viewLifecycleOwner){
+            if(it.token != "Nel"){
+                val accion = RegistrarPedidoDirections.actionRegistrarPedidoToPrincipal(token)
+                findNavController().navigate(accion)
+            }
+        }
+    }
+
 
 }

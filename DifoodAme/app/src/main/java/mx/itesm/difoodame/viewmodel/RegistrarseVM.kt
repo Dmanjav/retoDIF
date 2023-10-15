@@ -25,25 +25,30 @@ class RegistrarseVM : ViewModel()
 
     fun enviardatos(curp:String, nombre:String, apellidop: String, apellidom:String,  año: String, condicion:String, pass:String){
         val apiService = retrofit.create(RegistrarInterface::class.java)
+
+        // Se crea un objeto Usuario que se envia al API
         val usuario = UsuarioRegistro(curp, nombre, apellidop, apellidom, año,condicion, pass)
         val call = apiService.registrar(usuario)
 
         call.enqueue(object : Callback<TokenResponse> {
             override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
-                Log.d("API_TEST_REGISTRO", "HOLA ${response.isSuccessful}")
+
                 if (response.isSuccessful){
+
+                    // El post de registro es exitoso
                     Log.d("API_TEST_REGISTRO", "REGISTRO EXITOSO ${response.body()}")
                     response2.value =response.body().toString()
-                    Log.d("API_TEST_REGISTRO", "ESTE ES EL VALOR DEL RESPONSE${response2.value}")
+
                 }
                 else {
+                    // El post de registro no es exitoso
                     response2.value = "NEL"
                     Log.e("API_TEST_REGISTRO", "${response2.value}")
                 }
             }
 
             override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
-                Log.e("API_TEST_REGISTRO", "Valiooooo")
+                Log.e("API_TEST_REGISTRO", "FALLO EN LA CONEXION CON EL SERVER")
 
             }
 
