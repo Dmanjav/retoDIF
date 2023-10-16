@@ -39,6 +39,7 @@ class Clientes : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         registrarEventos()
+        viewModel.descargarListaServicios(token)
     }
 
     private fun registrarEventos() {

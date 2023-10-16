@@ -1,4 +1,4 @@
-package mx.itesm.difood.model
+package mx.itesm.difood.model.Pedido
 
 import com.google.gson.annotations.SerializedName
 

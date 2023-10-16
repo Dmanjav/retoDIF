@@ -1,20 +1,22 @@
 package mx.itesm.difood.View
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import mx.itesm.difood.R
 import mx.itesm.difood.ViewModel.RegistrarPedidoViewModel
 import mx.itesm.difood.databinding.FragmentRegistrarPedidoBinding
-import mx.itesm.difood.model.Pedido
+import mx.itesm.difood.model.Pedido.Pedido
 
 class RegistrarPedido : Fragment() {
     private lateinit var binding: FragmentRegistrarPedidoBinding
     var token: String = ""
+    var idMenu: String? = ""
     companion object {
         fun newInstance() = RegistrarPedido()
     }
@@ -41,6 +43,10 @@ class RegistrarPedido : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         registrarEventos()
+        val sharedPref = activity?.getSharedPreferences("mySharedPrefs", Context.MODE_PRIVATE)
+
+        idMenu = sharedPref?.getString("MenuId","")
+        Log.d("ApI Test","IdMenu: ${idMenu}")
     }
 
     private fun registrarEventos() {
@@ -51,8 +57,14 @@ class RegistrarPedido : Fragment() {
         }
 
         binding.btnEnvPedido.setOnClickListener{
-            val pedidoData: Pedido = Pedido(token,"1","SACC030606HMCNLRA2",
-                "SACC030606HMCNLRA2","1" )
+            val donacion: String
+            if(binding.cbDonacion.isChecked){
+                donacion = "1"
+            }else{
+                donacion = "0"
+            }
+            val pedidoData: Pedido = Pedido(token,donacion, binding.etCliente.text.toString(),
+                binding.etDependiente.text.toString(),idMenu.toString())
             viewModel.descargarListaServicios(pedidoData)
             registrarObservadores()
         }
@@ -60,7 +72,7 @@ class RegistrarPedido : Fragment() {
 
     private fun registrarObservadores() {
         viewModel.tokenResponse.observe(viewLifecycleOwner){
-            if(it.token != "Nel"){
+            if(it.idPedido != "Nel"){
                 val accion = RegistrarPedidoDirections.actionRegistrarPedidoToPrincipal(token)
                 findNavController().navigate(accion)
             }

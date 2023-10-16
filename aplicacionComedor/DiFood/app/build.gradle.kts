@@ -58,4 +58,12 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.4.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.0")
+    implementation("androidx.datastore:datastore-preferences-android:1.1.0-alpha05")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-common:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
+    api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+    api ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
 }

@@ -11,6 +11,7 @@ import mx.itesm.difood.ViewModel.AnuncioViewModel
 import mx.itesm.difood.R
 import mx.itesm.difood.databinding.FragmentAnuncioBinding
 import mx.itesm.difood.databinding.FragmentPrincipalBinding
+import mx.itesm.difood.model.Anuncio.AnuncioData
 
 class Anuncio : Fragment() {
     private  lateinit var binding: FragmentAnuncioBinding
@@ -49,7 +50,30 @@ class Anuncio : Fragment() {
             findNavController().navigate(accion)
         }
 
+        binding.btnPublicar.setOnClickListener{
+            var cerrado: String
+            if(binding.checkBox.isChecked){
+                cerrado = "1"
+            }else{
+                cerrado = "0"
+            }
 
+            val anuncio: AnuncioData = AnuncioData(token,
+                binding.etAnuncio.text.toString(),cerrado)
+            viewModel.descargarListaServicios(anuncio)
+            registrarObservadores()
+
+        }
+
+    }
+
+    private fun registrarObservadores() {
+        viewModel.tokenResponse.observe(viewLifecycleOwner){
+            if(it.details != "Nel"){
+                val accion = AnuncioDirections.actionAnuncioToPrincipal(token)
+                findNavController().navigate(accion)
+            }
+        }
     }
 
 }

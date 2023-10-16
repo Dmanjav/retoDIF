@@ -29,37 +29,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView20" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="200dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/corner"
-        android:backgroundTint="#D8D8D8"
-        android:entries="@android:array/organizationTypes"
-        android:paddingHorizontal="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.682"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="200dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/corner"
-        android:backgroundTint="#D8D8D8"
-        android:paddingHorizontal="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.682"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
     <TextView
         android:id="@+id/textView8"
         android:layout_width="85dp"
-        android:layout_height="38dp"
+        android:layout_height="35dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/corner"
         android:backgroundTint="#BCBCBC"
@@ -69,56 +42,39 @@
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="85dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/corner"
-        android:backgroundTint="#BCBCBC"
-        android:fontFamily="@font/jockey_one"
-        android:paddingHorizontal="15dp"
-        android:text="Cliente"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
+        app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="85dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="38dp"
+        android:layout_width="130dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/corner"
         android:backgroundTint="#BCBCBC"
         android:fontFamily="@font/jockey_one"
         android:paddingHorizontal="15dp"
-        android:text="Cliente"
+        android:text="Dependiente"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/etCliente" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/cbDonacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/corner"
         android:backgroundTint="#D7D7D7"
         android:paddingHorizontal="15dp"
         android:text="Donación"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/etDependiente" />
 
     <Button
         android:id="@+id/btnEnvPedido"
@@ -130,7 +86,7 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/cbDonacion" />
 
     <Button
         android:id="@+id/btnRegresar"
@@ -153,6 +109,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etCliente"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/corner"
+        android:backgroundTint="#C9C9C9"
+        android:ems="10"
+        android:fontFamily="@font/jockey_one"
+        android:hint="..."
+        android:inputType="text"
+        android:paddingHorizontal="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <EditText
+        android:id="@+id/etDependiente"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/corner"
+        android:backgroundTint="#C9C9C9"
+        android:ems="10"
+        android:fontFamily="@font/jockey_one"
+        android:hint="..."
+        android:inputType="text"
+        android:paddingHorizontal="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/etCliente" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

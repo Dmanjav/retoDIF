@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView18" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/etEntrada"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
@@ -40,15 +40,15 @@
         android:backgroundTint="#C9C9C9"
         android:ems="10"
         android:fontFamily="@font/jockey_one"
+        android:hint="..."
         android:inputType="text"
         android:paddingHorizontal="15dp"
-        android:text="...."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/editTextText4"
+        android:id="@+id/etPlato"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -56,16 +56,16 @@
         android:backgroundTint="#C9C9C9"
         android:ems="10"
         android:fontFamily="@font/jockey_one"
+        android:hint="..."
         android:inputType="text"
         android:paddingHorizontal="15dp"
-        android:text="..."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+        app:layout_constraintTop_toBottomOf="@+id/etEntrada" />
 
     <EditText
-        android:id="@+id/editTextText5"
+        android:id="@+id/etPostre"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -73,31 +73,13 @@
         android:backgroundTint="#C9C9C9"
         android:ems="10"
         android:fontFamily="@font/jockey_one"
+        android:hint="..."
         android:inputType="text"
         android:paddingHorizontal="15dp"
-        android:text="..."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
-
-    <EditText
-        android:id="@+id/editTextText6"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/corner"
-        android:backgroundTint="#C9C9C9"
-        android:ems="10"
-        android:fontFamily="@font/jockey_one"
-
-        android:inputType="text"
-        android:paddingHorizontal="15dp"
-        android:text="..."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
+        app:layout_constraintTop_toBottomOf="@+id/etPlato" />
 
     <Button
         android:id="@+id/btnRegistrar"
@@ -111,7 +93,22 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
+        app:layout_constraintTop_toBottomOf="@+id/etPostre" />
+
+    <Button
+        android:id="@+id/btnReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#CBCBCB"
+        android:fontFamily="@font/jockey_one"
+        android:text="Regresar"
+        android:textColor="#070707"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView18"
@@ -132,7 +129,7 @@
         android:fontFamily="@font/jockey_one"
         android:paddingHorizontal="15dp"
         android:rotation="-21"
-        android:text="Sopa"
+        android:text="Entrada"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -155,7 +152,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.133"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+        app:layout_constraintTop_toBottomOf="@+id/etEntrada" />
 
     <TextView
         android:id="@+id/textView13"
@@ -172,23 +169,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.133"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/corner"
-        android:backgroundTint="#AAAAAA"
-        android:fontFamily="@font/jockey_one"
-        android:paddingHorizontal="15dp"
-        android:rotation="-21"
-        android:text="Bebida"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.113"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
+        app:layout_constraintTop_toBottomOf="@+id/etPlato" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

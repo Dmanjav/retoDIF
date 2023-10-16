@@ -5,7 +5,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import mx.itesm.difood.model.ListaServiciosAPI
-import mx.itesm.difood.model.Pedido
+import mx.itesm.difood.model.Pedido.Pedido
+import mx.itesm.difood.model.Pedido.PedidoId
 import mx.itesm.difood.model.Token
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,7 +15,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RegistrarPedidoViewModel : ViewModel() {
-    val tokenResponse = MutableLiveData<Token>()
+    val tokenResponse = MutableLiveData<PedidoId>()
 
     //retroFit
     private val retroFit by lazy{
@@ -32,24 +33,24 @@ class RegistrarPedidoViewModel : ViewModel() {
     //funcion que manda el pedido
     fun descargarListaServicios(data: Pedido){
         val call = descargaAPI.MandarPedido(data)
-        call.enqueue(object : Callback<Token> {
+        call.enqueue(object : Callback<PedidoId> {
             override fun onResponse(
-                call: Call<Token>,
-                response: Response<Token>
+                call: Call<PedidoId>,
+                response: Response<PedidoId>
             ) {
 
                 if (response.isSuccessful){
                     Log.d("ApI Test","Respuesta: ${response.body()}")
                     Handler().postDelayed({
-                       // tokenResponse.value = response.body()
+                       tokenResponse.value = response.body()
                     },2000)
                 }else{
                     Log.d("ApI Test","2: ${response.body()}")
-                    //tokenResponse.value = Token("Nel")
+                    tokenResponse.value = PedidoId("Nel")
                 }
             }
 
-            override fun onFailure(call: Call<Token>, t: Throwable) {
+            override fun onFailure(call: Call<PedidoId>, t: Throwable) {
                 Log.d("ApI2 Test","Fallsa: ")
             }
         })

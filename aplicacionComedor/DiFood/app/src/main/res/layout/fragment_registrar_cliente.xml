@@ -34,16 +34,16 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView16" />
 
     <EditText
-        android:id="@+id/editTextText7"
+        android:id="@+id/etNombre"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@drawable/corner"
         android:backgroundTint="#CACACA"
         android:ems="10"
         android:fontFamily="@font/jockey_one"
+        android:hint="Nombre"
         android:inputType="text"
         android:paddingHorizontal="15dp"
-        android:text="Nombre"
         android:textColor="#95000000"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,124 +51,162 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <EditText
-        android:id="@+id/editTextText8"
+        android:id="@+id/etApellidoP"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/corner"
         android:backgroundTint="#CACACA"
         android:ems="10"
         android:fontFamily="@font/jockey_one"
+        android:hint="Apellido paterno"
         android:inputType="text"
         android:paddingHorizontal="15dp"
-        android:text="Apellido paterno"
         android:textColor="#95000000"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText7" />
+        app:layout_constraintTop_toBottomOf="@+id/etNombre" />
 
     <EditText
-        android:id="@+id/editTextText9"
+        android:id="@+id/etApellidoM"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/corner"
         android:backgroundTint="#CACACA"
         android:ems="10"
         android:fontFamily="@font/jockey_one"
+        android:hint="Apellido materno"
         android:inputType="text"
         android:paddingHorizontal="15dp"
-        android:text="Apellido materno"
         android:textColor="#95000000"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText8" />
+        app:layout_constraintTop_toBottomOf="@+id/etApellidoP" />
 
     <EditText
-        android:id="@+id/editTextText11"
+        android:id="@+id/etSexo"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/corner"
         android:backgroundTint="#CACACA"
         android:ems="10"
         android:fontFamily="@font/jockey_one"
+        android:hint="Sexo"
         android:inputType="text"
         android:paddingHorizontal="15dp"
-        android:text="Sexo"
         android:textColor="#95000000"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText9" />
+        app:layout_constraintTop_toBottomOf="@+id/etApellidoM" />
 
     <EditText
-        android:id="@+id/editTextText14"
+        android:id="@+id/etCondicion"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/corner"
         android:backgroundTint="#CACACA"
         android:ems="10"
         android:fontFamily="@font/jockey_one"
+        android:hint="Condición"
         android:inputType="text"
         android:paddingHorizontal="15dp"
-        android:text="Condición"
         android:textColor="#95000000"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+        app:layout_constraintTop_toBottomOf="@+id/etFecha" />
 
     <EditText
-        android:id="@+id/editTextDate"
+        android:id="@+id/etFecha"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/corner"
         android:backgroundTint="#CACACA"
         android:ems="10"
         android:fontFamily="@font/jockey_one"
-        android:inputType="date"
+        android:hint="Fecha de nacimiento"
+        android:inputType="text"
         android:paddingHorizontal="15dp"
-        android:text="Fecha"
         android:textColor="#95000000"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText11" />
+        app:layout_constraintTop_toBottomOf="@+id/etSexo" />
+
+    <EditText
+        android:id="@+id/etCurp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/corner"
+        android:backgroundTint="#CACACA"
+        android:ems="10"
+        android:fontFamily="@font/jockey_one"
+        android:hint="CURP"
+        android:inputType="text"
+        android:paddingHorizontal="15dp"
+        android:textColor="#95000000"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etContra" />
+
+    <EditText
+        android:id="@+id/etContra"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/corner"
+        android:backgroundTint="#CACACA"
+        android:ems="10"
+        android:fontFamily="@font/jockey_one"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:paddingHorizontal="15dp"
+        android:textColor="#95000000"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etCondicion" />
 
     <Button
         android:id="@+id/btnCliente"
         android:layout_width="205dp"
         android:layout_height="49dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="48dp"
         android:backgroundTint="#CBCBCB"
         android:fontFamily="@font/jockey_one"
         android:text="Registrar Cliente"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.922"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText14" />
+        app:layout_constraintTop_toBottomOf="@+id/etCurp" />
 
     <Button
-        android:id="@+id/btnCliente2"
+        android:id="@+id/btnReturn"
         android:layout_width="150dp"
         android:layout_height="46dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="48dp"
         android:backgroundTint="#CBCBCB"
         android:fontFamily="@font/jockey_one"
         android:text="Regresar"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.077"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etCurp" />
 
     <ImageView
         android:id="@+id/imageView16"
