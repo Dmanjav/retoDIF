@@ -185,7 +185,7 @@ def get_tipoPoblacion():
                     str(e)},
                 500)
     
-    dict_sexos = {'F' : 0, 'H' : 0}
+    dict_sexos = {'M' : 0, 'H' : 0}
 
     for register in resultado:
         dict_sexos[register[0]] = register[1]

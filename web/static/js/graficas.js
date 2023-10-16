@@ -518,7 +518,7 @@ function generar_graficas() {
     var poblacion = new Chart(document.getElementById("myChart4"), {
         type: "doughnut",
         data: {
-            labels: ["Mujeres", "Hombres"],
+            labels: ["Hombres", "Mujeres"],
             datasets: [
                 {
                     label: "Población",
