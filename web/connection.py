@@ -154,7 +154,11 @@ class connection():
         return self.cursor.fetchall()
     
     def publicar_menu(self,token,entrada,plato,postre):
-        INFO_COMEDOR = self.get_token_comedor(token)
+        try:
+            INFO_COMEDOR = self.get_token_comedor(token)
+        except Exception as e:
+            return Exception('Token no valido al procesar en BD')
+        
         query = '''INSERT INTO Comida (idComedor,fechaRegistro,entrada,plato,postre)
             VALUES (%s,CURDATE(),%s,%s,%s);'''
         self.cursor.execute(query,[INFO_COMEDOR[1],entrada,plato,postre])
@@ -174,7 +178,11 @@ class connection():
         return self.cursor.fetchall()
     
     def publicar_anuncio(self,token,contenido,cierre):
-        INFO_COMEDOR = self.get_token_comedor(token)
+        try:
+            INFO_COMEDOR = self.get_token_comedor(token)
+        except Exception as e:
+            return Exception('Token no valido al procesar en BD')
+        
         query = '''INSERT INTO Anuncios (idComedor,fechaHora,contenido,cierre)
             VALUES (%s,NOW(),%s,%s);'''
         self.cursor.execute(query,[INFO_COMEDOR[1],contenido,cierre])

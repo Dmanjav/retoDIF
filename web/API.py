@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash,generate_password_hash
 from datetime import date, timedelta
 
 app = Flask(__name__)
-app.secret_key = token_hex()
+app.secret_key = 'secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -31,15 +31,24 @@ def login_page():
         FORM_USER = request.form.get('usuario')
         FORM_PASS = request.form.get('contraseña')
 
-        USER_DB_INFO = db_connection.get_admin(FORM_USER)
+        try:
+            USER_DB_INFO = db_connection.get_admin(FORM_USER)
+        except Exception as e:
+            return ({'error' : 'Error del servidor',
+                    'message' : 'Error al obtener la información de la BD',
+                    'details' :
+                        str(e)},
+                    500)
 
         if FORM_USER and FORM_PASS:
             if USER_DB_INFO:
                 if USER_DB_INFO[0] == FORM_USER and check_password_hash(USER_DB_INFO[1], FORM_PASS):
                     login_user(load_user(FORM_USER))
                     return redirect('/dashboard')
-            return 'Not valid user or password, try again.', 401
-        return 'Bad request: Missing requiered parameter(s) \'usuario\' or \'contraseña\'', 400
+            return {'error' : 'Unauthorized', 'message' : 'Not valid credentials', 
+                    'details' : 'Not valid user or password'}, 401
+        return {'error' : 'Bad request', 'message' : 'Missing requiered parameter(s)',
+                'details' : 'Missing requiered parameter(s) \'usuario\' or \'contraseña\''}, 400
 
     return render_template('login.html', stylesheet=url_for('static', filename='css/login.css'))
 
@@ -56,7 +65,15 @@ def dashboard():
 @login_required
 def get_comedor():
     '''Returns name and id of all community kitchens'''
-    lista_comedores = db_connection.get_comedores()
+    try:
+        lista_comedores = db_connection.get_comedores()
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                'message' : 'Error al obtener la información de la BD',
+                'details' :
+                    str(e)},
+                500)
+    
     dict_comedores = {}
 
     for register in lista_comedores:
@@ -69,10 +86,20 @@ def get_comedor():
 @login_required
 def get_top_ventas():
     '''Top 10 sales number per community kitchen'''
-    result = db_connection.get_top_ventas()
+    try:
+        result = db_connection.get_top_ventas()
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                'message' : 'Error al obtener la información de la BD',
+                'details' :
+                    str(e)},
+                500)
+    
     dict_ventas = {}
+
     for register in result:
         dict_ventas[register[1]] = register[2]
+
     return dict_ventas
 
 @app.route('/queries/get-ventas-dia')
@@ -82,9 +109,15 @@ def get_ventas_x_dia():
     id_comedor = request.args.get('idComedor')
 
     if not id_comedor:
-        return 'Bad request: Missing requiered parameter \'idComedor\'', 400
+        return {'error' : 'Bad request', 'message' : 'Missing requiered parameter', 
+                'details' : 'Missing requiered parameter \'idComedor\''}, 400
 
-    resultado = db_connection.get_ventasDia_comedor(int(id_comedor))
+    try:
+        resultado = db_connection.get_ventasDia_comedor(int(id_comedor))
+    except Exception as e:
+        return ({'error' : 'Error del servidor', 
+                'message' : 'Error al obtener la información de la BD', 
+                'details' : str(e)}, 500)
     
     dict_ventas_dia = {'lunes' : 0, 'martes' : 0, 'miércoles' : 0, 
                        'jueves' : 0, 'viernes' : 0, 'sábado' : 0, 
@@ -102,9 +135,16 @@ def get_ventasHora():
     id_comedor = request.args.get('idComedor')
 
     if not id_comedor:
-        return 'Bad request: Missing requiered parameter \'idComedor\'', 400
+        return {'error' : 'Bad request', 'message' : 'Missing requiered parameter', 
+                'details' : 'Missing requiered parameter \'idComedor\''}, 400
 
-    resultado = db_connection.get_ventasHora_comedor(int(id_comedor))
+    try:
+        resultado = db_connection.get_ventasHora_comedor(int(id_comedor))
+    except Exception as e:
+        return ({'error' : 'Error del servidor', 
+                'message' : 'Error al obtener la información de la BD', 
+                'details' : str(e)}, 500)
+    
     dict_ventas_hora = {t : 0 for t in range(24)}
 
     for register in resultado:
@@ -116,7 +156,15 @@ def get_ventasHora():
 @login_required
 def get_dependencias():
     '''Returns the number of dependants'''
-    dependencias = db_connection.get_num_dependencia()
+    try:
+        dependencias = db_connection.get_num_dependencia()
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                'message' : 'Error al obtener la información de la BD',
+                'details' :
+                    str(e)},
+                500)
+    
     dict_num_dependencias = {'Dependiente' : 0, 'Independiente' : 0}
 
     for register in dependencias:
@@ -128,7 +176,15 @@ def get_dependencias():
 @login_required
 def get_tipoPoblacion():
     '''Returns the sex of the clients of all kitchens'''
-    resultado = db_connection.get_sexo_clientes()
+    try:
+        resultado = db_connection.get_sexo_clientes()
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                'message' : 'Error al obtener la información de la BD',
+                'details' :
+                    str(e)},
+                500)
+    
     dict_sexos = {'F' : 0, 'H' : 0}
 
     for register in resultado:
@@ -143,9 +199,17 @@ def get_donaciones():
     id_comedor = request.args.get('idComedor')
 
     if not id_comedor:
-        return 'Bad request: Missing requiered parameter \'idComedor\'', 400
+        return {'error' : 'Bad request', 'message' : 'Missing requiered parameter',
+                'details' : 'Missing requiered parameter \'idComedor\''}, 400
     
-    resultado = db_connection.get_cantidad_donaciones_comedor(int(id_comedor))
+    try:
+        resultado = db_connection.get_cantidad_donaciones_comedor(int(id_comedor))
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                'message' : 'Error al obtener la información de la BD',
+                'details' :
+                    str(e)},
+                500)
 
     if not resultado:
         resultado = []
@@ -168,7 +232,15 @@ def get_donaciones():
 @login_required
 def get_rangosEdades():
     '''Returns the ranges and the quantity of clients per age range'''
-    resultado = db_connection.get_rangos_edades_comedor()
+    try:
+        resultado = db_connection.get_rangos_edades_comedor()
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                'message' : 'Error al obtener la información de la BD',
+                'details' :
+                    str(e)},
+                500)
+    
     dict_edades = {'Niños' : 0, 'Estudiantes adolescentes (12 - 19)' : 0, 
                    'Adultos (20 - 65)' : 0, 'Adultos Mayores (65+)' : 0}
 
@@ -184,9 +256,19 @@ def get_metas():
     id_comedor = request.args.get('idComedor')
 
     if not id_comedor:
-        return 'Bad request: Missing requiered parameter \'idComedor\'', 400
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered parameter',
+                'details' : 'Missing requiered parameter \'idComedor\''}, 400
     
-    resultado = db_connection.get_metas_comedor(int(id_comedor))
+    try:
+        resultado = db_connection.get_metas_comedor(int(id_comedor))
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                'message' : 'Error al obtener la información de la BD',
+                'details' :
+                    str(e)},
+                500)
+    
     dict_metas = {}
 
     date_now = date.today()
@@ -202,7 +284,14 @@ def get_metas():
 @login_required
 def get_cierres():
     '''Returns the number of times different kitchens closed'''
-    resultado = db_connection.get_cierres()
+    try:
+        resultado = db_connection.get_cierres()
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                'message' : 'Error al obtener la información de la BD',
+                'details' :
+                    str(e)},
+                500)
     dict_cierres = {}
 
     for register in resultado:
@@ -217,11 +306,12 @@ def get_califs():
     id_comedor = request.args.get('idComedor')
     
     if not id_comedor:
-        return 'Bad request: Missing requiered parameter \'idComedor\'', 400
+        return {'error' : 'Bad request',
+                'message' : 'Missing requiered parameter',
+                'details' : 'Missing requiered parameter \'idComedor\''}, 400
     
     try:
         resultado = db_connection.get_calificaciones(int(id_comedor))
-        print(resultado)
     except Exception as e:
         return ({'error' : 'Error del servidor',
                 'message' : 'Error al obtener la información de la BD',
@@ -229,9 +319,13 @@ def get_califs():
                     str(e)},
                 500)
     
-    dict_calificaciones = {'Servicio' : round(resultado[1], 2), 
-                            'Higiene' : round(resultado[2], 2), 
-                            'Calidad' : round(resultado[3], 2)}    
+    try:
+        dict_calificaciones = {'Servicio' : round(resultado[1], 2), 
+                                'Higiene' : round(resultado[2], 2), 
+                                'Calidad' : round(resultado[3], 2)}
+    except TypeError:
+        dict_calificaciones = {'Servicio' : 0, 'Higiene' : 0, 'Calidad' : 0}
+
     return dict_calificaciones
 
 # --------- App "Comedor" endpoints --------------
@@ -248,7 +342,14 @@ def app_comedor_login():
                 'message': 'Missing required parameter(s)',
                 'details' : 'Missing required parameter(s) \'usuario\' or \'contraseña\''}, 400
 
-    COMEDOR_DB_INFO = db_connection.get_comedor(JSON_USER)
+    try:
+        COMEDOR_DB_INFO = db_connection.get_comedor(JSON_USER)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al recuperar información del usuario de la BD',
+                 'details' : str(e)}), 500
+    
     valid_credentials = False
 
     for register in COMEDOR_DB_INFO:
@@ -282,7 +383,14 @@ def generar_pedido():
                 'message': 'Missing required parameter',
                 'details' : 'Missing required parameter \'token\''}, 400
 
-    COMEDOR_INFO = db_connection.get_token_comedor(TOKEN)
+    try:
+        COMEDOR_INFO = db_connection.get_token_comedor(TOKEN)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al recuperar token de la BD',
+                 'details' : str(e)}), 500
+    
     if not COMEDOR_INFO:
         return {'error': 'Unauthorized',
                 'message' : 'Not valid token',
@@ -311,7 +419,13 @@ def generar_pedido():
 @app.route('/app/comedor/<token>/get-dependientes')
 def get_dependientes_cliente(token):
 
-    COMEDOR_INFO = db_connection.get_token_comedor(token)
+    try:
+        COMEDOR_INFO = db_connection.get_token_comedor(token)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al recuperar token de la BD',
+                 'details' : str(e)}), 500
     
     if not COMEDOR_INFO:
         return {'error' : 'Unauthorized',
@@ -339,7 +453,13 @@ def publicar_menu():
     TOKEN_JSON = JSON.get('token')
 
     if TOKEN_JSON:
-        COMEDOR_INFO = db_connection.get_token_comedor(TOKEN_JSON)
+        try:
+            COMEDOR_INFO = db_connection.get_token_comedor(TOKEN_JSON)
+        except Exception as e:
+            return ({'error' : 'Error del servidor',
+                    'message' : 
+                        'Error al recuperar token de la BD',
+                    'details' : str(e)}), 500
     else:
         return {'error' : 'Bad request',
                 'message' : 'Missing requiered parameter',
@@ -369,7 +489,13 @@ def publicar_menu():
 @app.route('/app/comedor/<token>/get-clientes')
 def get_clientes(token):
 
-    COMEDOR_INFO = db_connection.get_token_comedor(token)
+    try:
+        COMEDOR_INFO = db_connection.get_token_comedor(token)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al recuperar token de la BD',
+                 'details' : str(e)}), 500
 
     if not COMEDOR_INFO:
         return {'error' : 'Unauthorized',
@@ -390,7 +516,13 @@ def app_comedor_registrar_cliente():
     TOKEN_JSON = JSON.get('token')
 
     if TOKEN_JSON:
-        COMEDOR_INFO = db_connection.get_token_comedor(TOKEN_JSON)
+        try:
+            COMEDOR_INFO = db_connection.get_token_comedor(TOKEN_JSON)
+        except Exception as e:
+            return ({'error' : 'Error del servidor',
+                    'message' : 
+                        'Error al recuperar token de la BD',
+                    'details' : str(e)}), 500
     else:
         return {'error' : 'Bad request',
                 'message' : 'Missing requiered parameter',
@@ -439,7 +571,13 @@ def app_comedor_registrar_cliente():
 
 @app.route('/app/comedor/<token>/get-donaciones-dia')
 def app_comedor_get_donaciones(token):
-    COMEDOR_INFO = db_connection.get_token_comedor(token)
+    try:
+        COMEDOR_INFO = db_connection.get_token_comedor(token)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al recuperar token de la BD',
+                 'details' : str(e)}), 500
 
     if not COMEDOR_INFO:
         return {'error' : 'Unauthorized',
@@ -487,7 +625,7 @@ def publicar_anuncio():
     CONTENIDO_ANUNCIO_JSON = JSON.get('contenido')
     CIERRE_ANUNCIO_JSON = JSON.get('cierre')
 
-    if not (CONTENIDO_ANUNCIO_JSON and CIERRE_ANUNCIO_JSON):
+    if not (CONTENIDO_ANUNCIO_JSON and int(CIERRE_ANUNCIO_JSON)):
         return {'error' : 'Bad request',
                 'message' : 'Missing requiered parameter(s)',
                 'details' : 'Missing requiered parameter(s) \'contenido\' or \'cierre\''}, 400
@@ -518,7 +656,13 @@ def app_clientes_login():
                 'message': 'Missing required parameter(s)',
                 'details' : 'Missing required parameter(s) \'usuario\' or \'contraseña\''}, 400
     
-    CLIENTE_DB_INFO = db_connection.get_cliente(JSON_USER)
+    try:
+        CLIENTE_DB_INFO = db_connection.get_cliente(JSON_USER)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al recuperar información del usuario de la BD',
+                 'details' : str(e)}), 500
 
     if CLIENTE_DB_INFO:
         if JSON_USER == CLIENTE_DB_INFO[0] and check_password_hash(CLIENTE_DB_INFO[1],JSON_PASS):
@@ -577,7 +721,13 @@ def app_clientes_registrar_cliente():
 
 @app.route('/app/clientes/<token>/get-menu-comedor')
 def get_menu_comedor(token):
-    CLIENTE_INFO = db_connection.get_token_cliente(token)
+    try:
+        CLIENTE_INFO = db_connection.get_token_cliente(token)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al recuperar token de la BD',
+                 'details' : str(e)}), 500
     
     if not CLIENTE_INFO:
         return {'error' : 'Unauthorized',
@@ -610,15 +760,26 @@ def get_menu_comedor(token):
 def get_comedores(token):
     '''Returns name and id of all community kitchens'''
 
-    CLIENTE_INFO = db_connection.get_token_cliente(token)
+    try:
+        CLIENTE_INFO = db_connection.get_token_cliente(token)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al recuperar token de la BD',
+                 'details' : str(e)}), 500
 
     if not CLIENTE_INFO:
         return {'error' : 'Unauthorized',
                 'message' : 'token no valido',
                 'details' : f'No existe un token autorizado {token}'}, 401
     
-
-    lista_comedores = db_connection.get_comedores()
+    try:
+        lista_comedores = db_connection.get_comedores()
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al obtener la información de la BD',
+                 'details' : str(e)}), 500
     dict_comedores = {}
 
     for register in lista_comedores:
@@ -628,7 +789,13 @@ def get_comedores(token):
 
 @app.route('/app/clientes/<token>/get-pedidos')
 def app_clientes_get_pedidos(token):
-    CLIENTE_INFO = db_connection.get_token_cliente(token)
+    try:
+        CLIENTE_INFO = db_connection.get_token_cliente(token)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al recuperar token de la BD',
+                 'details' : str(e)}), 500
 
     if not CLIENTE_INFO:
         return {'error' : 'Unauthorized',
@@ -662,8 +829,13 @@ def publicar_evaluacion():
         return {'error' : 'Bad request',
                 'message' : 'Missing requiered parameter',
                 'details' : 'Missing requiered parameter \'token\''}, 400
-
-    CLIENTE_INFO = db_connection.get_token_cliente(TOKEN_JSON)
+    try:
+        CLIENTE_INFO = db_connection.get_token_cliente(TOKEN_JSON)
+    except Exception as e:
+        return ({'error' : 'Error del servidor',
+                 'message' : 
+                    'Error al recuperar token de la BD',
+                 'details' : str(e)}), 500
 
     if not CLIENTE_INFO:
         return {'error' : 'Unauthorized',
