@@ -53,12 +53,11 @@ class RegistrarseView : AppCompatActivity() {
                     val rawValue: String? = barcode.rawValue
 
                     // Se divide la informacion del String que se recibio
-                    val array = rawValue.toString().split("||")
+                    val array = rawValue.toString().split("|")
                     val curp = array[0]
-                    val array2 = array[1].split("|")
-                    val apPaterno = array2[0]
-                    val apMaterno = array2[1]
-                    val nombre = array2[2]
+                    val apPaterno = array[2]
+                    val apMaterno = array[3]
+                    val nombre = array[4]
 
                     // Se sobreescribe la informacion recibida en los campos que se seleccionan
                     edCurp.setText(curp)

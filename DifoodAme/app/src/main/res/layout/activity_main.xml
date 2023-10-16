@@ -17,7 +17,7 @@
         android:layout_marginEnd="50dp"
         android:backgroundTint="#FB4A51"
         android:fontFamily="@font/roboto_medium"
-        android:text="Iniciar Sesion"
+        android:text="Iniciar Sesión"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

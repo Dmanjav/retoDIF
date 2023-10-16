@@ -1,6 +1,7 @@
 package mx.itesm.difoodame.view
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -21,73 +22,78 @@ import mx.itesm.difoodame.viewmodel.MenuComidaVM
 class MenuComidaView : AppCompatActivity()
 {
     private val viewModel: MenuComidaVM by viewModels()
-
+    lateinit var mapGlobal : Map<String, Int>
+    var miau: Int? = null
+    lateinit var token:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_comida_view)
 
-        iniciarEventos()
         iniciarObservables()
+        iniciarEventos()
+
     }
 
 
     fun iniciarEventos(){
 
-        // Llamadas a R para encontrar el elemento VISUAL
-        val btnBuscar: Button = findViewById(R.id.btnBuscar)
-        val llMenu: LinearLayout = findViewById(R.id.llMenu)
-        val spComedor : Spinner = findViewById(R.id.spComedoresMenu)
 
         // Tomar de las preferencias los datos que nos interesan
         val sharedPref = getSharedPreferences("mySharedPrefs", Context.MODE_PRIVATE)
-        val token = sharedPref.getString("Token", "")
+        token = sharedPref.getString("Token", "").toString()
 
         // Crear el endpoint para la llamada de la API
-        val endpoint = "app/clientes/" + token.toString() +"/get-comedores"
+        var endpoint = "app/clientes/"+ token+"/get-comedores"
+        Log.d("API_TEST", "EL ENDPOINT ES ESTE: ${endpoint}")
 
 
         // Llamada a la API
         viewModel.descargarComedores(endpoint)
 
-        // Listeners
-        btnBuscar.setOnClickListener{
-            llMenu.visibility= View.VISIBLE
-            val nombre = spComedor.selectedItem.toString()
 
-            // Encontrar el ID del comedor en el mapa de VM
-            val id = viewModel.comedor.value?.get(nombre)
 
-            //Log.d("API_TEST_ID", "EL ID DEL COMEDOR SELECCIONADO ES: ${id}")
+    }
 
-            if (id != null) {
-                val endpoint2 = "app/clientes/" + token.toString() +"/get-menu-comedor?idComedor=" + id
-                viewModel.descargarMenu(endpoint2)
+    // Esta funcion espera a las variables observables
+    fun iniciarObservables() {
+
+        viewModel.comedor.observe(this) { mapa ->
+
+            var mapGlobal = mapa
+            val milista = ArrayList(mapa.keys)
+
+            // Identificar el spinner del Comedor
+            val spComedoresMenu: Spinner = findViewById(R.id.spComedoresMenu)
+            val btnBuscar: Button = findViewById(R.id.btnBuscar)
+
+
+            // Crear el adaptador para modificar el spinner con datos que recibe de la API
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, milista)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+
+            spComedoresMenu.adapter = adapter
+            btnBuscar.setOnClickListener {
+                val nombre = spComedoresMenu.selectedItem.toString()
+
+                // Encontrar el ID del comedor en el mapa de VM
+                miau = viewModel.comedor.value?.get(nombre)
+
+                if (miau != null) {
+                    var endpoint2 = "app/clientes/" + token.toString() +"/get-menu-comedor?idComedor=" + miau
+                    Log.d("API_TEST", "EL ENDPOINT ES ESTE: ${endpoint2}")
+                    viewModel.descargarMenu(endpoint2)
+
+                }
+
+                //Log.d("API_TEST_ID", "EL ID DEL COMEDOR SELECCIONADO ES: ${id}")
+
 
             }
 
         }
 
-    }
-
-    // Esta funcion espera a las variables observables
-    fun iniciarObservables()
-    {
-
-        viewModel.comedor.observe(this){mapa ->
-
-            val milista = ArrayList(mapa.keys)
-
-            // Identificar el spinner del Comedor
-            val spComedoresMenu: Spinner = findViewById(R.id.spComedoresMenu)
-
-            // Crear el adaptador para modificar el spinner con datos que recibe de la API
-            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,milista)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
-            spComedoresMenu.adapter = adapter
-        }
-
-        viewModel.menu.observe(this){mapaMenu ->
+        viewModel.menu.observe(this) { mapaMenu ->
             // Encontrar los TextView
             val edPostre: TextView = findViewById(R.id.edPostre)
             val edFuerte: TextView = findViewById(R.id.edPlatoF)
@@ -104,8 +110,9 @@ class MenuComidaView : AppCompatActivity()
             edEntrada.setText(entrada.toString().uppercase())
 
             Log.d("API_TEST_MENU_DEL_DIA", "EL MENU ES: ${postre} ,${plato}, ${entrada}")
+            val llMenu: LinearLayout = findViewById(R.id.llMenu)
+            llMenu.visibility = View.VISIBLE
 
         }
-
     }
 }

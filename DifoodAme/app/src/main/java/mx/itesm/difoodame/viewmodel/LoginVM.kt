@@ -18,7 +18,8 @@ class LoginVM : ViewModel()
 
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("http://54.152.103.250:5000/")
+            .baseUrl("http://difood.ddns.net:5000/")
+            //.baseUrl("https://difood.ddns.net/")
             .addConverterFactory(GsonConverterFactory.create())  // JSON
             .build()
     }

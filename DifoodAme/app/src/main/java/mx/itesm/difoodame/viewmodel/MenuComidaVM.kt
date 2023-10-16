@@ -17,12 +17,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MenuComidaVM : ViewModel()
 {
     // Variables globales que puede consultar su valor el VIEW
-    val comedor = MutableLiveData<Map<String, Int>>()
-    val menu = MutableLiveData<Map<String, String>>()
+    var comedor = MutableLiveData<Map<String, Int>>()
+    var menu = MutableLiveData<Map<String, String>>()
 
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("http://54.152.103.250:5000/")
+            .baseUrl("http://difood.ddns.net:5000/")
+            //.baseUrl("https://difood.ddns.net/")
             .addConverterFactory(GsonConverterFactory.create())  // JSON
             .build()
     }
@@ -44,7 +45,6 @@ class MenuComidaVM : ViewModel()
             override fun onResponse(call: Call<Map<String, Int>>, response: Response<Map<String, Int>>
             )
             {
-
                 if (response.isSuccessful){
                     // Si recibe los valores correctos se guarda en la variable comedor el diccionario de comedores
                     comedor.value = response.body()

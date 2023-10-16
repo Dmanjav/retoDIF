@@ -4,22 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondoregistrarse"
+    android:background="@drawable/menufondo"
     tools:context=".view.MenuComidaView">
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="105dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/finalllll" />
 
     <Spinner
         android:id="@+id/spComedoresMenu"
-        android:layout_width="0dp"
+        android:layout_width="357dp"
         android:layout_height="35dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="27dp"
-        android:background="@drawable/recuadro_con_bordes"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/recuadroregis"
         android:entries="@array/arrComedores"
         android:spinnerMode="dialog"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,23 +34,24 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginBottom="5dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Selecciona el Comedor:"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="#9F2141"
+        android:textColor="#D33E6A"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/spComedoresMenu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnBuscar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="#D33E6A"
         android:text="Buscar"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,15 +62,14 @@
         android:id="@+id/llMenu"
         android:layout_width="326dp"
         android:layout_height="444dp"
-        android:layout_marginTop="1dp"
-        android:background="@drawable/recuadro_con_bordes"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/spinnercolor"
         android:orientation="horizontal"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBuscar"
-        app:layout_constraintVertical_bias="0.247">
+        app:layout_constraintTop_toBottomOf="@+id/btnBuscar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,8 +85,8 @@
                 android:gravity="center"
                 android:text="Postre"
                 android:textAlignment="center"
-                android:textColor="#9F2141"
-                android:textSize="30sp"
+                android:textColor="#D33E6A"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -90,8 +97,8 @@
                 android:gravity="center"
                 android:text="Plato Fuerte"
                 android:textAlignment="center"
-                android:textColor="#9F2141"
-                android:textSize="30sp"
+                android:textColor="#D33E6A"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -102,8 +109,8 @@
                 android:gravity="center"
                 android:text="Entrada"
                 android:textAlignment="center"
-                android:textColor="#9F2141"
-                android:textSize="28sp"
+                android:textColor="#D33E6A"
+                android:textSize="24sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -116,22 +123,34 @@
                 android:id="@+id/edPostre"
                 android:layout_width="match_parent"
                 android:layout_height="148dp"
+                android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="#D33E6A"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/edPlatoF"
                 android:layout_width="match_parent"
                 android:layout_height="148dp"
+                android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="#D33E6A"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/edEntrada"
                 android:layout_width="match_parent"
                 android:layout_height="143dp"
+                android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="#D33E6A"
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 

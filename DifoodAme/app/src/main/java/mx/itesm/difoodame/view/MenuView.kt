@@ -36,26 +36,33 @@ class MenuView : AppCompatActivity() {
         btnQr.setOnClickListener{
             // Se cambia de pantalla a GenerarQR
             val intent: Intent = Intent(this, GenerarQRView::class.java)
+           // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+            finish()
         }
 
         btnMenu.setOnClickListener{
             // Se abre el mapa de todos los comedores en Google Maps
             val url = Uri.parse("https://www.google.com/maps/d/u/1/edit?mid=1mPXVsc0gXxL5diInaNvG9tZfGEKKLZg&usp=sharing")
             val navegador = Intent(Intent.ACTION_VIEW,url)
+            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(navegador)
+            finish()
         }
 
         btnMenus.setOnClickListener{
             // Se cambia de pantalla al Menu
             val intent = Intent(this, MenuComidaView::class.java)
+            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+
         }
 
         btnEncuesta.setOnClickListener{
             // Se cambia de pantalla a la encuesta
             val intent = Intent(this, EncuestaView::class.java)
             startActivity(intent)
+
         }
     }
 
