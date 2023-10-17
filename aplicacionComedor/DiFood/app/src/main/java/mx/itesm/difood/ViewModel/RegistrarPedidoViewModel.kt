@@ -16,11 +16,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RegistrarPedidoViewModel : ViewModel() {
     val tokenResponse = MutableLiveData<PedidoId>()
+    val clientes = MutableLiveData<MutableList<String>>()
 
     //retroFit
     private val retroFit by lazy{
         Retrofit.Builder()
-            .baseUrl("http://54.152.103.250:5000/")
+            .baseUrl("https://difood.ddns.net")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -51,6 +52,43 @@ class RegistrarPedidoViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<PedidoId>, t: Throwable) {
+                Log.d("ApI2 Test","Fallsa: ")
+            }
+        })
+    }
+
+    fun descargarListaServicios2(url: String){
+        val call = descargaAPI.GetDependientes(url)
+        call.enqueue(object : Callback<Map<String,List<List<String>>>> {
+            override fun onResponse(
+                call: Call<Map<String,List<List<String>>>>,
+                response: Response<Map<String,List<List<String>>>>
+            ) {
+
+                if (response.isSuccessful){
+                    Log.d("ApI Test","Respuesta: ${response.body()}")
+                    Handler().postDelayed({
+                        val listaNom = mutableListOf<String>()
+                        response.body()?.forEach{t,u ->
+
+                            Log.d("API_Cl","L")
+
+                            u.forEach{x ->
+                                Log.d("API_Cl",x.toString())
+                                val aux: String = x[0]+" "+x[1]+" "+x[2]
+                                listaNom.add(aux)
+                            }
+                        }
+
+                        clientes.value = listaNom
+                    },2000)
+                }else{
+                    Log.d("ApI Test","2: ${response.body()}")
+                    tokenResponse.value = PedidoId("Nel")
+                }
+            }
+
+            override fun onFailure(call: Call<Map<String,List<List<String>>>>, t: Throwable) {
                 Log.d("ApI2 Test","Fallsa: ")
             }
         })

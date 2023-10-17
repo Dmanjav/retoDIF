@@ -1,14 +1,19 @@
 package mx.itesm.difood.View
 
+import android.R
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
+import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import mx.itesm.difood.ViewModel.RegistrarPedidoViewModel
 import mx.itesm.difood.databinding.FragmentRegistrarPedidoBinding
 import mx.itesm.difood.model.Pedido.Pedido
@@ -64,10 +69,28 @@ class RegistrarPedido : Fragment() {
                 donacion = "0"
             }
             val pedidoData: Pedido = Pedido(token,donacion, binding.etCliente.text.toString(),
-                binding.etDependiente.text.toString(),idMenu.toString())
+                binding.spnDep.selectedItem.toString(),idMenu.toString())
             viewModel.descargarListaServicios(pedidoData)
             registrarObservadores()
         }
+
+        val scanner = GmsBarcodeScanning.getClient(requireContext())
+        binding.btnQr.setOnClickListener{
+            scanner.startScan()
+                .addOnSuccessListener { barcode ->
+                    val rawValue: String? = barcode.rawValue
+                    val array = rawValue.toString().split("|")
+                    val curp = array[0]
+                    binding.etCliente.setText(curp)
+                }
+        }
+
+        binding.btnDep.setOnClickListener{
+            var url = "/app/comedor/$token/get-dependientes"
+            viewModel.descargarListaServicios2(url)
+        }
+
+
     }
 
     private fun registrarObservadores() {
@@ -76,6 +99,15 @@ class RegistrarPedido : Fragment() {
                 val accion = RegistrarPedidoDirections.actionRegistrarPedidoToPrincipal(token)
                 findNavController().navigate(accion)
             }
+        }
+
+        viewModel.clientes.observe(viewLifecycleOwner){
+            var arrCliente = it.toTypedArray()
+            Log.d("API_Cl",it.toString())
+            val adapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_item,
+                arrCliente)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+            binding.spnDep.adapter = adapter
         }
     }
 

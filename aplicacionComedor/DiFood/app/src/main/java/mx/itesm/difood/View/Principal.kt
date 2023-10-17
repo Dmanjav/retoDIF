@@ -38,12 +38,23 @@ class Principal : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(PrincipalViewModel::class.java)
-        // TODO: Use the ViewModel
+        val endpoint = "app/comedor/$token/get-donaciones-dia"
+        viewModel.descargarListaServicios(endpoint)
+        registrarObservadores()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         registrarEventos()
+
+    }
+
+    private fun registrarObservadores() {
+        viewModel.donaciones.observe(viewLifecycleOwner){
+            if(it.donaciones != "Nel"){
+                binding.etDon.text = it.noDonaciones
+            }
+        }
     }
 
     private fun registrarEventos() {
@@ -76,6 +87,7 @@ class Principal : Fragment() {
             val accion = PrincipalDirections.actionPrincipalToAnuncio(token)
             findNavController().navigate(accion)
         }
+
     }
 
 }
