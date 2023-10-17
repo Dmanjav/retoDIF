@@ -324,7 +324,8 @@ class connection():
         connection = mysql.connector.connect(
             host='localhost', user=DB_USER, password=DB_PASS, database="APPDIF")
         cursor = connection.cursor()
-        comprobar_existencia = '''SELECT * FROM Comida where idComedor = %s and fechaRegistro = CURDATE();'''
+        comprobar_existencia = '''SELECT entrada,plato,postre FROM Comida 
+                where fechaRegistro = CURDATE() and idComedor = %s;'''
         cursor.execute(comprobar_existencia,[idComedor])
         existencia_menu_dia = cursor.fetchall()
         cursor.close()
