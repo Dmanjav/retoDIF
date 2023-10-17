@@ -125,7 +125,7 @@
                 android:layout_height="148dp"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
-                android:text="TextView"
+                android:text="No hay Postre :("
                 android:textAlignment="center"
                 android:textColor="#D33E6A"
                 android:textSize="20sp" />
@@ -136,7 +136,7 @@
                 android:layout_height="148dp"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
-                android:text="TextView"
+                android:text="No hay Plato Fuerte :("
                 android:textAlignment="center"
                 android:textColor="#D33E6A"
                 android:textSize="20sp" />
@@ -147,7 +147,7 @@
                 android:layout_height="143dp"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
-                android:text="TextView"
+                android:text="No hay Entrada :("
                 android:textAlignment="center"
                 android:textColor="#D33E6A"
                 android:textSize="20sp" />

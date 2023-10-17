@@ -1,7 +1,10 @@
 package mx.itesm.difoodame.view
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,8 +27,12 @@ class RegistrarseView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrarse_view)
-        iniciarEvento()
-        registrarObservables()
+
+        if( isInternetAvailable(this)){
+            iniciarEvento()
+            registrarObservables()
+        }
+
     }
 
     fun iniciarEvento()
@@ -102,6 +109,11 @@ class RegistrarseView : AppCompatActivity() {
             if (viewModel.response2.value != "NEL"){
                 // Se cambia de pantalla si se registro bien
                 val intent : Intent = Intent(this, LoginView::class.java)
+                val mensajeError = "Registro Exitoso :) \n" +
+                        "Inicia Sesion"
+                val duracion = Toast.LENGTH_LONG
+                val toast = Toast.makeText(applicationContext, mensajeError, duracion)
+                toast.show()
                 startActivity(intent)
                 finish()
             } else {
@@ -114,6 +126,15 @@ class RegistrarseView : AppCompatActivity() {
             }
 
         }
+    }
+
+    fun isInternetAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        // Comprueba la información de la red activa
+        val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
+
+        return networkInfo?.isConnected == true
     }
 
 }

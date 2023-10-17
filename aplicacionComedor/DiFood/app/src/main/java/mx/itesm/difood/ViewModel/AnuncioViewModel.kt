@@ -20,7 +20,7 @@ class AnuncioViewModel : ViewModel() {
 
     private val retroFit by lazy{
         Retrofit.Builder()
-            .baseUrl("http://54.152.103.250:5000/")
+            .baseUrl("https://difood.ddns.net/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

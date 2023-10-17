@@ -1,7 +1,9 @@
 package mx.itesm.difoodame.viewmodel
 
 import LoginInterface
+import android.media.session.MediaSession.Token
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import mx.itesm.difoodame.model.TokenResponse
@@ -51,6 +53,7 @@ class LoginVM : ViewModel()
             // Fallo en la conexion del con el servidor
             override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
                 Log.e("API_TEST", "NO SE PUDO CONECTAR CON EL SERVER")
+                token.value = TokenResponse("ERROR")
 
             }
 

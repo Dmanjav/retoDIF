@@ -163,7 +163,7 @@
         android:layout_marginBottom="100dp"
         android:fontFamily="@font/jockey_one"
         android:lineSpacingExtra="0sp"
-        android:text="Comidas disponibles para donar"
+        android:text="Comidas donadas hoy:"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
@@ -173,7 +173,7 @@
         app:layout_constraintStart_toEndOf="@+id/textView2" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/etDon"
         android:layout_width="88dp"
         android:layout_height="45dp"
         android:layout_marginBottom="132dp"
