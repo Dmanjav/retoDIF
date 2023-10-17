@@ -540,17 +540,18 @@ def app_comedor_registrar_cliente():
     ANIO_NACIMIENTO = JSON.get('añoNacimiento')
     CONDICION_JSON = JSON.get('condicion')
     CONTRASENA_JSON = JSON.get('contraseña')
+    CURP_RESPONSABLE_JSON = JSON.get('curp-responsable')
 
     if not (CURP_JSON and NOMBRE_JSON and
         APELLIDOP_JSON and APELLIDOM_JSON and
         ANIO_NACIMIENTO and
-        CONDICION_JSON and CONTRASENA_JSON):
+        CONDICION_JSON and CONTRASENA_JSON and CURP_RESPONSABLE_JSON):
         return {'error' : 'Bad request',
                 'message' : 'Missing requiered parameter(s)',
                 'details' : '''Missing requiered parameter(s) \'curp\'
                     or \'nombre\' or \'apellidop\' 
                     or \'apellidom\' or \'condicion\'
-                    or \'contraseña\''''}, 400
+                    or \'contraseña\' or \'curp-responsable\''''}, 400
     
     SEXO_JSON = CURP_JSON[10]
     FECHA_NACIMIENTO_JSON = ANIO_NACIMIENTO + '-' + CURP_JSON[6:8] + '-' + CURP_JSON[8:10]
@@ -559,6 +560,7 @@ def app_comedor_registrar_cliente():
         db_connection.registrar_cliente(CURP_JSON,NOMBRE_JSON,APELLIDOP_JSON,
                                         APELLIDOM_JSON,SEXO_JSON,FECHA_NACIMIENTO_JSON,
                                         CONDICION_JSON,generate_password_hash(CONTRASENA_JSON))
+        db_connection.registrar_dependientes(CURP_RESPONSABLE_JSON,CURP_JSON)
     except Exception as e:
         return ({'error' : 'Error del servidor',
                  'message' : 
@@ -710,6 +712,7 @@ def app_clientes_registrar_cliente():
         db_connection.registrar_cliente(CURP_JSON,NOMBRE_JSON,APELLIDOP_JSON,
                                         APELLIDOM_JSON,SEXO_JSON,FECHA_NACIMIENTO_JSON,
                                         CONDICION_JSON,generate_password_hash(CONTRASENA_JSON))
+        db_connection.registrar_dependientes(CURP_JSON,CURP_JSON)
     except Exception as e:
         return ({'error' : 'Error del servidor',
                  'message' : 

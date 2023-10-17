@@ -258,9 +258,13 @@ class connection():
         try:
             INFO_COMEDOR = self.get_token_comedor(token)
         except Exception as e:
+            cursor.close()
+            connection.close()
             return Exception('Token no valido al procesar en BD')
         
         if self.comprobar_existencia_menu_dia(INFO_COMEDOR[1]):
+            cursor.close()
+            connection.close()
             return Exception('Ya hay un menú registrado el día de hoy')
 
         query = '''INSERT INTO Comida (idComedor,fechaRegistro,entrada,plato,postre)
@@ -303,6 +307,8 @@ class connection():
         try:
             INFO_COMEDOR = self.get_token_comedor(token)
         except Exception as e:
+            cursor.close()
+            connection.close()
             return Exception('Token no valido al procesar en BD')
         
         query = '''INSERT INTO Anuncios (idComedor,fechaHora,contenido,cierre)
@@ -324,6 +330,17 @@ class connection():
         cursor.close()
         connection.close()
         return existencia_menu_dia
+    
+    def registrar_dependientes(self,curp_responsable,curp_dependiente):
+        connection = mysql.connector.connect(
+            host='localhost', user=DB_USER, password=DB_PASS, database="APPDIF")
+        cursor = connection.cursor()
+        query = '''INSERT INTO Dependencia (idResponsable,idDependiente)
+            VALUES (%s,%s);'''
+        cursor.execute(query,[curp_responsable,curp_dependiente])
+        connection.commit()
+        cursor.close()
+        connection.close()
 
     # ------------ App clientes queries -----------------
 
