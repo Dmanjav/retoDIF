@@ -260,6 +260,9 @@ class connection():
         except Exception as e:
             return Exception('Token no valido al procesar en BD')
         
+        if self.comprobar_existencia_menu_dia(INFO_COMEDOR[1]):
+            return Exception('Ya hay un menú registrado el día de hoy')
+
         query = '''INSERT INTO Comida (idComedor,fechaRegistro,entrada,plato,postre)
             VALUES (%s,CURDATE(),%s,%s,%s);'''
         cursor.execute(query,[INFO_COMEDOR[1],entrada,plato,postre])
@@ -310,6 +313,17 @@ class connection():
         cursor.close()
         connection.close()
         return result
+    
+    def comprobar_existencia_menu_dia(self,idComedor):
+        connection = mysql.connector.connect(
+            host='localhost', user=DB_USER, password=DB_PASS, database="APPDIF")
+        cursor = connection.cursor()
+        comprobar_existencia = '''SELECT * FROM Pedido where idComedor = %s and fechaRegistro = CURDATE();'''
+        cursor.execute(comprobar_existencia,[idComedor])
+        existencia_menu_dia = cursor.fetchall()
+        cursor.close()
+        connection.close()
+        return existencia_menu_dia
 
     # ------------ App clientes queries -----------------
 
@@ -366,9 +380,7 @@ class connection():
         connection = mysql.connector.connect(
             host='localhost', user=DB_USER, password=DB_PASS, database="APPDIF")
         cursor = connection.cursor()
-        comprobar_existencia = '''SELECT * FROM Pedido where idComedor = %s and fechaRegistro = CURDATE();'''
-        cursor.execute(comprobar_existencia,[idComedor])
-        existencia_menu_dia = cursor.fetchall()
+        existencia_menu_dia = self.comprobar_existencia_menu_dia(idComedor)
         if not existencia_menu_dia:
             query = '''SELECT entrada,plato,postre FROM Comida 
                 where fechaRegistro = CURDATE() and idComedor = %s;'''
@@ -377,6 +389,8 @@ class connection():
             cursor.close()
             connection.close()
             return result
+        cursor.close()
+        connection.close()
         return existencia_menu_dia[0]
     
     def get_pedidos_cliente(self, curp):
