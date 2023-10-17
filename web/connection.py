@@ -366,13 +366,18 @@ class connection():
         connection = mysql.connector.connect(
             host='localhost', user=DB_USER, password=DB_PASS, database="APPDIF")
         cursor = connection.cursor()
-        query = '''SELECT entrada,plato,postre FROM Comida 
-            where fechaRegistro = CURDATE() and idComedor = %s;'''
-        cursor.execute(query,[idComedor])
-        result = cursor.fetchone()
-        cursor.close()
-        connection.close()
-        return result
+        comprobar_existencia = '''SELECT * FROM Pedido where idComedor = %s and fechaRegistro = CURDATE();'''
+        cursor.execute(comprobar_existencia,[idComedor])
+        existencia_menu_dia = cursor.fetchall()
+        if not existencia_menu_dia:
+            query = '''SELECT entrada,plato,postre FROM Comida 
+                where fechaRegistro = CURDATE() and idComedor = %s;'''
+            cursor.execute(query,[idComedor])
+            result = cursor.fetchone()
+            cursor.close()
+            connection.close()
+            return result
+        return existencia_menu_dia[0]
     
     def get_pedidos_cliente(self, curp):
         connection = mysql.connector.connect(
