@@ -627,7 +627,7 @@ def publicar_anuncio():
     CONTENIDO_ANUNCIO_JSON = JSON.get('contenido')
     CIERRE_ANUNCIO_JSON = JSON.get('cierre')
 
-    if not (CONTENIDO_ANUNCIO_JSON and int(CIERRE_ANUNCIO_JSON)):
+    if not (CONTENIDO_ANUNCIO_JSON and CIERRE_ANUNCIO_JSON):
         return {'error' : 'Bad request',
                 'message' : 'Missing requiered parameter(s)',
                 'details' : 'Missing requiered parameter(s) \'contenido\' or \'cierre\''}, 400
