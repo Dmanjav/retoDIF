@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.SeekBar
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import mx.itesm.difoodame.R
@@ -98,6 +99,12 @@ class EncuestaView : AppCompatActivity() {
                     viewModels.registrarEncuesta(encuesta)
 
                     }
+            } else {
+                val mensajeError = "No puedes hacer una encuesta \n" +
+                        "Intentalo mas Tarde"
+                val duracion = Toast.LENGTH_LONG
+                val toast = Toast.makeText(applicationContext, mensajeError, duracion)
+                toast.show()
             }
 
 
