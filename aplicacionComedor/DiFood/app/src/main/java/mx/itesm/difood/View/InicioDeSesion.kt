@@ -43,6 +43,7 @@ class InicioDeSesion : Fragment() {
     private fun registrarEventos() {
         binding.btnInicio.setOnClickListener{
             //Cinco de Mayo
+            binding.btnInicio.isEnabled = false
             val sucursal:String = binding.etSucursal.text.toString()
             val contraseña: String = binding.etContraseA.text.toString()
             val inicioSesionData: InicioSesionPost = InicioSesionPost(sucursal,contraseña)
@@ -56,6 +57,7 @@ class InicioDeSesion : Fragment() {
     fun registrarObservadores(){
         viewModel.token.observe(viewLifecycleOwner){variable ->
             if (variable.token != "Nel"){
+                binding.btnInicio.isEnabled = true
                 val accion = InicioDeSesionDirections.actionInicioDeSesionToPrincipal(variable.token)
                 findNavController().navigate(accion)
             }

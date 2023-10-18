@@ -70,14 +70,14 @@
         android:id="@+id/cbDonacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/corner"
         android:backgroundTint="#D7D7D7"
         android:paddingHorizontal="15dp"
         android:text="Donación"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spnDep" />
+        app:layout_constraintTop_toBottomOf="@+id/btnDep" />
 
     <Button
         android:id="@+id/btnEnvPedido"
@@ -162,7 +162,6 @@
         android:id="@+id/btnDep"
         android:layout_width="68dp"
         android:layout_height="62dp"
-        android:layout_marginTop="60dp"
         android:layout_marginEnd="36dp"
         android:backgroundTint="#A6A6A6"
         android:fontFamily="@font/jockey_one"
@@ -171,9 +170,9 @@
         android:textSize="24sp"
         app:iconTint="#857B7B"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/etCliente" />
+        app:layout_constraintTop_toBottomOf="@+id/spnDep" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

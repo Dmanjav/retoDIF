@@ -2,6 +2,7 @@ package mx.itesm.difood.View
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -60,6 +61,7 @@ class Anuncio : Fragment() {
 
             val anuncio: AnuncioData = AnuncioData(token,
                 binding.etAnuncio.text.toString(),cerrado)
+            Log.d("ApI Test",anuncio.toString())
             viewModel.descargarListaServicios(anuncio)
             registrarObservadores()
 

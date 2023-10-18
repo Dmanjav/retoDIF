@@ -87,7 +87,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etApellidoP" />
 
     <EditText
-        android:id="@+id/etSexo"
+        android:id="@+id/etCurpResp"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
@@ -95,7 +95,7 @@
         android:backgroundTint="#CACACA"
         android:ems="10"
         android:fontFamily="@font/jockey_one"
-        android:hint="Sexo"
+        android:hint="Curp Responsable"
         android:inputType="text"
         android:paddingHorizontal="15dp"
         android:textColor="#95000000"
@@ -131,14 +131,14 @@
         android:backgroundTint="#CACACA"
         android:ems="10"
         android:fontFamily="@font/jockey_one"
-        android:hint="Fecha de nacimiento"
+        android:hint="Año de Nacimiento"
         android:inputType="text"
         android:paddingHorizontal="15dp"
         android:textColor="#95000000"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSexo" />
+        app:layout_constraintTop_toBottomOf="@+id/etCurpResp" />
 
     <EditText
         android:id="@+id/etCurp"
