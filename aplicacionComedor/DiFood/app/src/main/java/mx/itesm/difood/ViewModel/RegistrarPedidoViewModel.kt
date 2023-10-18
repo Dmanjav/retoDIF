@@ -75,7 +75,7 @@ class RegistrarPedidoViewModel : ViewModel() {
 
                             u.forEach{x ->
                                 Log.d("API_Cl",x.toString())
-                                val aux: String = x[0]+" "+x[1]+" "+x[2]
+                                val aux: String = x[0]
                                 listaNom.add(aux)
                             }
                         }

@@ -18,5 +18,7 @@ data class ClienteData(
     @SerializedName("condicion")
     val condicion: String,
     @SerializedName("contraseña")
-    val contraseña: String
+    val contraseña: String,
+    @SerializedName("curp-responsable")
+    val curpResp: String
 )

@@ -57,7 +57,8 @@ class RegistrarCliente : Fragment() {
                 binding.etApellidoM.text.toString(),
                 binding.etFecha.text.toString(),
                 binding.etCondicion.text.toString(),
-                binding.etContra.text.toString())
+                binding.etContra.text.toString(),
+                binding.etCurpResp.text.toString())
             viewModel.descargarListaServicios(cliente)
             registrarObservadores()
         }
