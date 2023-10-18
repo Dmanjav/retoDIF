@@ -87,6 +87,7 @@ class RegistrarseView : AppCompatActivity() {
         // Si el boton de registro es presionado se cambian los campos a MAYUSCULAS para la mejora de procesamiento de datos
         btnRegistrarsee.setOnClickListener{
             val curp = edCurp.text.toString().uppercase()
+            val confirmarCurp = curp.length
             val nombre = edNombre.text.toString().uppercase()
             val apellidop = edPaterno.text.toString().uppercase()
             val apellidom = edMaterno.text.toString().uppercase()
@@ -94,8 +95,15 @@ class RegistrarseView : AppCompatActivity() {
             val contra = edContrasena.text.toString()
             val condicion = condicion.selectedItem.toString()
 
-            // Se hace el llamado para enviar los datos
-            viewModel.enviardatos(curp, nombre,apellidop, apellidom,año,condicion,contra)
+            if (confirmarCurp == 18){
+                viewModel.enviardatos(curp, nombre,apellidop, apellidom,año,condicion,contra)
+            } else {
+                val mensajeError = "Verifica tu CURP"
+                val duracion = Toast.LENGTH_LONG
+                val toast = Toast.makeText(applicationContext, mensajeError, duracion)
+                toast.show()
+            }
+
 
 
         }
