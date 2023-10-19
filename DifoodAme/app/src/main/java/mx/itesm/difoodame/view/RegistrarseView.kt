@@ -118,8 +118,8 @@ class RegistrarseView : AppCompatActivity() {
                 // Se cambia de pantalla si se registro bien
                 val intent : Intent = Intent(this, LoginView::class.java)
                 val mensajeError = "Registro Exitoso :) \n" +
-                        "Inicia Sesion"
-                val duracion = Toast.LENGTH_LONG
+                        "Inicia Sesión"
+                val duracion = Toast.LENGTH_SHORT
                 val toast = Toast.makeText(applicationContext, mensajeError, duracion)
                 toast.show()
                 startActivity(intent)
@@ -128,7 +128,7 @@ class RegistrarseView : AppCompatActivity() {
                 //Arroja un mensaje de error al usuario para que pueda cambiar los datos
                 val mensajeError = "No te pudimos registrar :( \n" +
                         "Verifica tus datos"
-                val duracion = Toast.LENGTH_LONG
+                val duracion = Toast.LENGTH_SHORT
                 val toast = Toast.makeText(applicationContext, mensajeError, duracion)
                 toast.show()
             }

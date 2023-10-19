@@ -8,11 +8,13 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mx.itesm.difoodame.R
 import mx.itesm.difoodame.databinding.ActivityMainBinding
@@ -29,28 +31,13 @@ class LoginView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_view)
-        if (isInternetAvailable(this    )){
-            registrarEventos()
-            registrarObservables()
-        } else{
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Error en conexión")
-                .setMessage("Verifica tu conexión a internet")
-                .setPositiveButton("OK") { dialog, _ ->
-                    // Cerrar el AlertDialog y comenzar la actividad MainActivity
-                    dialog.dismiss()
-                    val enviar = Intent(this, MainActivity::class.java)
-                    startActivity(enviar)
-                }
-                .show()
-        }
-
-
+        registrarEventos()
 
     }
 
     private fun registrarObservables() {
         viewModel.token.observe(this){variable ->
+            val btnLogin: Button = findViewById(R.id.btnIngresar)
             Log.d("API_TEST", "Observables ${variable?.token}")
             if (variable != null){
                 val sharedPref = getSharedPreferences("mySharedPrefs", Context.MODE_PRIVATE)
@@ -63,6 +50,7 @@ class LoginView : AppCompatActivity() {
             } else if (variable == null) {
                 val mensajeError = "CURP o Contraseña Incorrectas, Verificalas :) "
                 val duracion = Toast.LENGTH_LONG
+                btnLogin.visibility = View.VISIBLE
 
                 val toast = Toast.makeText(applicationContext, mensajeError, duracion)
                 toast.show()
@@ -93,6 +81,7 @@ class LoginView : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val curp = edtCurp.text.toString().uppercase()
             val pass =  edtPass.text.toString()
+            btnLogin.visibility = View.INVISIBLE
 
             viewModel.enviardatos(curp,pass)
             registrarObservables()
@@ -105,15 +94,6 @@ class LoginView : AppCompatActivity() {
             }
 
         }
-
-    fun isInternetAvailable(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-        // Comprueba la información de la red activa
-        val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
-
-        return networkInfo?.isConnected == true
-    }
 
 
     }

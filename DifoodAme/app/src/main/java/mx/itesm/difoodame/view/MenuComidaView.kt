@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import mx.itesm.difoodame.R
@@ -84,6 +85,17 @@ class MenuComidaView : AppCompatActivity()
                     Log.d("API_TEST", "EL ENDPOINT ES ESTE: ${endpoint2}")
                     viewModel.descargarMenu(endpoint2)
 
+                } else {
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Inténtalo más tarde.")
+                        .setMessage("Aún no hay menú registrado para hoy.")
+                        .setPositiveButton("OK") { dialog, _ ->
+                            // Cerrar el AlertDialog y comenzar la actividad MainActivity
+                            dialog.dismiss()
+                            val enviar = Intent(this, MenuView::class.java)
+                            startActivity(enviar)
+                        }
+                        .show()
                 }
 
                 //Log.d("API_TEST_ID", "EL ID DEL COMEDOR SELECCIONADO ES: ${id}")

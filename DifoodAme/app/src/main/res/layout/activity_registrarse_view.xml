@@ -188,7 +188,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Indica si padeces de alguna enfermedad"
+            android:text="Indica a qué grupo perteneces."
             android:textAlignment="center"
             android:textColor="#FA656B"
             android:textSize="16sp" />
