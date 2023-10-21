@@ -5,9 +5,10 @@ from secrets import token_hex
 import User
 from werkzeug.security import check_password_hash,generate_password_hash
 from datetime import date, timedelta
+from os import environ
 
 app = Flask(__name__)
-app.secret_key = 'secret_key'
+app.secret_key = environ.get('APPDIF_SECRET_KEY')
 login_manager = LoginManager()
 login_manager.init_app(app)
 
