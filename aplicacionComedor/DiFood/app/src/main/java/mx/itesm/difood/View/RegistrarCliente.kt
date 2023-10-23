@@ -64,7 +64,21 @@ class RegistrarCliente : Fragment() {
                 binding.etCondicion.text.toString(),
                 binding.etContra.text.toString(),
                 binding.etCurpResp.text.toString())
-            viewModel.descargarListaServicios(cliente)
+            if (binding.etCondicion.text.toString() != ""){
+                viewModel.descargarListaServicios(cliente)
+            } else {
+                binding.etCondicion.setText("Ninguna")
+                val cliente: ClienteData = ClienteData(token,binding.etCurp.text.toString(),
+                    binding.etNombre.text.toString(),
+                    binding.etApellidoP.text.toString(),
+                    binding.etApellidoM.text.toString(),
+                    binding.etFecha.text.toString(),
+                    binding.etCondicion.text.toString(),
+                    binding.etContra.text.toString(),
+                    binding.etCurpResp.text.toString())
+                viewModel.descargarListaServicios(cliente)
+            }
+
             registrarObservadores()
         }
     }
