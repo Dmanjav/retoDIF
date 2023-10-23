@@ -17,7 +17,10 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import mx.itesm.difood.ViewModel.RegistrarPedidoViewModel
 import mx.itesm.difood.databinding.FragmentRegistrarPedidoBinding
 import mx.itesm.difood.model.Pedido.Pedido
-
+/**
+ * @author Carlos Alberto Sánchez Calderón
+ * Vista del Registro del pedido
+ */
 class RegistrarPedido : Fragment() {
     private lateinit var binding: FragmentRegistrarPedidoBinding
     var token: String = ""
@@ -96,13 +99,15 @@ class RegistrarPedido : Fragment() {
     }
 
     private fun registrarObservadores() {
+
+        //Si cambia el valor del tokenreponse te cambia de pantalla
         viewModel.tokenResponse.observe(viewLifecycleOwner){
             if(it.idPedido != "Nel"){
                 val accion = RegistrarPedidoDirections.actionRegistrarPedidoToPrincipal(token)
                 findNavController().navigate(accion)
             }
         }
-
+        //si cambia el valor de clientes los despliega en pantalla
         viewModel.clientes.observe(viewLifecycleOwner){
             var arrCliente = it.toTypedArray()
             Log.d("API_Cl2",it.toString())

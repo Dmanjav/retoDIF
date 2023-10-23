@@ -13,6 +13,11 @@ import mx.itesm.difood.ViewModel.RegistrarMenuViewModel
 import mx.itesm.difood.databinding.FragmentRegistrarMenuBinding
 import mx.itesm.difood.model.Menu.MenuData
 
+/**
+ * @author Carlos Alberto Sánchez Calderón
+ * Vista dar de alta Menu
+ */
+
 class RegistrarMenu : Fragment() {
     private  lateinit var binding: FragmentRegistrarMenuBinding
     var token: String = ""
@@ -45,6 +50,7 @@ class RegistrarMenu : Fragment() {
     }
 
     private fun registrarEventos() {
+        //Si se presiona el boton llama al API y da de alta el menu en el comedor con el que se hizo login
         binding.btnRegistrar.setOnClickListener{
             val menuData: MenuData = MenuData(token,binding.etEntrada.text.toString(),
                 binding.etPlato.text.toString(),
@@ -52,6 +58,7 @@ class RegistrarMenu : Fragment() {
             viewModel.descargarListaServicios(menuData)
             registrarObservadores()
         }
+        // te cambia de pantalla
         binding.btnReg.setOnClickListener{
             val accion = RegistrarMenuDirections.actionRegistrarMenuToPrincipal(token)
             findNavController().navigate(accion)
@@ -59,10 +66,13 @@ class RegistrarMenu : Fragment() {
     }
 
     private fun registrarObservadores() {
+
+        //si cambia el valor del token ejecuta el token
         viewModel.tokenResponse.observe(viewLifecycleOwner){
             if(it.token != "Nel"){
                 Log.d("ApI Test","Menu: ${it.token}")
 
+                //Guarda el menu en las preferencias
                 val sharedPref = activity?.getSharedPreferences("mySharedPrefs", Context.MODE_PRIVATE)
                 val editor = sharedPref?.edit()
                 editor?.putString("MenuId",it.token)

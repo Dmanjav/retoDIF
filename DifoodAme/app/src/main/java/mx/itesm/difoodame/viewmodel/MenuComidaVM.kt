@@ -1,19 +1,19 @@
 package mx.itesm.difoodame.viewmodel
 
-import android.telecom.CallEndpoint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import mx.itesm.difoodame.model.Comedor
 import mx.itesm.difoodame.model.ComidasMenu
 import mx.itesm.difoodame.model.ListaComedoresAPI
-import mx.itesm.difoodame.model.TokenResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
+/**
+ * @author Andrés Iván Rodríguez Méndez
+ * Este es el ViewModel del MenuComida
+ */
 class MenuComidaVM : ViewModel()
 {
     // Variables globales que puede consultar su valor el VIEW

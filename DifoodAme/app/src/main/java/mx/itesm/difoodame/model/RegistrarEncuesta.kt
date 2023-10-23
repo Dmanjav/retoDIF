@@ -6,6 +6,11 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Url
+/**
+ * @author Andrés Iván Rodríguez Méndez
+ * Esta es la interface para hacer el registro de la encuesta, primero hace una solicitud a la API y si existe respuesta
+ * envia la encuesta
+ */
 
 interface RegistrarEncuesta
 {

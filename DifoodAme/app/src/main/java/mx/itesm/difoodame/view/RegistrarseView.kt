@@ -18,6 +18,11 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import mx.itesm.difoodame.R
 import mx.itesm.difoodame.viewmodel.RegistrarseVM
 
+/**
+ * @author Andrés Iván Rodríguez Méndez
+ * Esta es la vista de la pantalla del registro
+ */
+
 
 class RegistrarseView : AppCompatActivity() {
 

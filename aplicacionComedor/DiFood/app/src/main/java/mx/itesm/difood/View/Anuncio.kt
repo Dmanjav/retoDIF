@@ -13,7 +13,10 @@ import mx.itesm.difood.R
 import mx.itesm.difood.databinding.FragmentAnuncioBinding
 import mx.itesm.difood.databinding.FragmentPrincipalBinding
 import mx.itesm.difood.model.Anuncio.AnuncioData
-
+/**
+ * @author Carlos Alberto Sánchez Calderón
+ * Vista del Anuncio
+ */
 class Anuncio : Fragment() {
     private  lateinit var binding: FragmentAnuncioBinding
     var token:String = ""
@@ -46,6 +49,8 @@ class Anuncio : Fragment() {
     }
 
     private fun registrarEventos() {
+
+        // Se registran las acciones con los botones
         binding.btnRegresarAnuncio.setOnClickListener{
             val accion = AnuncioDirections.actionAnuncioToPrincipal(token)
             findNavController().navigate(accion)
@@ -69,10 +74,13 @@ class Anuncio : Fragment() {
 
     }
 
+
     private fun registrarObservadores() {
+        // Cuando exista un cambio en el valor del Token ejecuta el codigo
         viewModel.tokenResponse.observe(viewLifecycleOwner){
             if(it.details != "Nel"){
                 val accion = AnuncioDirections.actionAnuncioToPrincipal(token)
+                //Cambia de pantalla
                 findNavController().navigate(accion)
             }
         }

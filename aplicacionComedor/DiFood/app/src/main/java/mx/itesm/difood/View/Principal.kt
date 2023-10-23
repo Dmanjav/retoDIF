@@ -12,7 +12,10 @@ import mx.itesm.difood.ViewModel.PrincipalViewModel
 import mx.itesm.difood.R
 import mx.itesm.difood.databinding.FragmentInicioDeSesionBinding
 import mx.itesm.difood.databinding.FragmentPrincipalBinding
-
+/**
+ * @author Carlos Alberto Sánchez Calderón
+ * Vista del fragmento Principal
+ */
 class Principal : Fragment() {
     private  lateinit var binding: FragmentPrincipalBinding
     var token:String = ""
@@ -38,6 +41,7 @@ class Principal : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(PrincipalViewModel::class.java)
+        //Se hace el endpoint para la llamada del API
         val endpoint = "app/comedor/$token/get-donaciones-dia"
         viewModel.descargarListaServicios(endpoint)
         registrarObservadores()
@@ -50,14 +54,17 @@ class Principal : Fragment() {
     }
 
     private fun registrarObservadores() {
+        //Si hay cambios en la variable donaciones se ejecuta el codigo
         viewModel.donaciones.observe(viewLifecycleOwner){
             if(it.donaciones != "Nel"){
+                //Muestra las donaciones que hay en ese momento
                 binding.etDon.text = it.noDonaciones
             }
         }
     }
 
     private fun registrarEventos() {
+        //Aqui depende del boton que es presionado se cambia de fragmento
         binding.btnPedido.setOnClickListener{
             val accion = PrincipalDirections.actionPrincipalToRegistrarPedido(token)
             findNavController().navigate(accion)

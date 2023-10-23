@@ -15,12 +15,17 @@ import mx.itesm.difoodame.R
 import java.text.SimpleDateFormat
 import java.util.Date
 
+/**
+ * @author Andrés Iván Rodríguez Méndez
+ * Esta es la vista de la pantalla para generar QR
+ */
+
 class GenerarQRView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_generar_qrview)
 
-
+        // Se inicia la parte logica
         iniciarEventos()
     }
 

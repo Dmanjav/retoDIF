@@ -20,10 +20,15 @@ import mx.itesm.difoodame.model.TokenResponse
 import mx.itesm.difoodame.viewmodel.LoginVM
 import mx.itesm.difoodame.viewmodel.MenuComidaVM
 
+/**
+ * @author Andrés Iván Rodríguez Méndez
+ * Esta es la vista de la patalla MenuComida
+ */
+
+
 class MenuComidaView : AppCompatActivity()
 {
     private val viewModel: MenuComidaVM by viewModels()
-    lateinit var mapGlobal : Map<String, Int>
     var miau: Int? = null
     lateinit var token:String
 
@@ -31,6 +36,7 @@ class MenuComidaView : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_comida_view)
 
+        //Se inicia la parte logica
         iniciarObservables()
         iniciarEventos()
 

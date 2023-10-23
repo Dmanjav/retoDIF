@@ -23,12 +23,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import mx.itesm.difoodame.R
 
+/**
+ * @author Andrés Iván Rodríguez Méndez
+ * Esta es la vista de la pantalla de inicio
+ */
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         animaciontext()
+
+        //Verifica si hay conexion a internet en el dispositivo
         if (isInternetAvailable(this    )){
             iniciarEvento()
             verificarQR()
@@ -102,10 +109,10 @@ class MainActivity : AppCompatActivity() {
         return networkInfo?.isConnected == true
     }
 
+    //Instala modulo para el QR
 
     private fun verificarQR()
     {
-
         val moduleInstallClient = ModuleInstall.getClient(this)
         val optionalModuleApi = GmsBarcodeScanning.getClient(this)
 

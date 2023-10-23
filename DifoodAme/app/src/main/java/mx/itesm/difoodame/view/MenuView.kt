@@ -14,6 +14,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import mx.itesm.difoodame.R
 
+/**
+ * @author Andrés Iván Rodríguez Méndez
+ * Esta es la vista del menu
+ */
+
+
 class MenuView : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {

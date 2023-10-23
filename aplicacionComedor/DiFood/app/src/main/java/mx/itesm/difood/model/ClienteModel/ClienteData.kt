@@ -1,7 +1,10 @@
 package mx.itesm.difood.model.ClienteModel
 
 import com.google.gson.annotations.SerializedName
-
+/**
+ * @author Carlos Alberto Sánchez Calderón
+ * Clase Clientes, se usa para el registro
+ */
 data class ClienteData(
     @SerializedName("token")
     val token: String,

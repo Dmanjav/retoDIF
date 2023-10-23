@@ -13,6 +13,10 @@ import mx.itesm.difood.ViewModel.RegistrarClienteViewModel
 import mx.itesm.difood.databinding.FragmentRegistrarClienteBinding
 import mx.itesm.difood.model.ClienteModel.ClienteData
 
+/**
+ * @author Carlos Alberto Sánchez Calderón
+ * Vista del Registro
+ */
 class RegistrarCliente : Fragment() {
     private  lateinit var binding: FragmentRegistrarClienteBinding
     var token:String = ""
@@ -49,6 +53,7 @@ class RegistrarCliente : Fragment() {
             findNavController().navigate(accion)
         }
 
+        //Se llama al API con los datos que ingreso el encargado
         binding.btnCliente.setOnClickListener{
             Log.d("ApI Test","TokenCliente: $token")
             val cliente: ClienteData = ClienteData(token,binding.etCurp.text.toString(),
@@ -65,6 +70,7 @@ class RegistrarCliente : Fragment() {
     }
 
     private fun registrarObservadores() {
+        //si cambia el valor del token te cambia de pantalla
         viewModel.tokenResponse.observe(viewLifecycleOwner){
             if(it.details != "Nel"){
                 val accion = RegistrarClienteDirections.actionRegistrarClienteToPrincipal(token)

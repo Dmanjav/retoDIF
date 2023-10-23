@@ -8,6 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import mx.itesm.difood.R
 import mx.itesm.difood.databinding.ClienteBinding
+/**
+ * @author Carlos Alberto Sánchez Calderón
+ * Adaptador del Cliente, para que se vean todos los clientes
+ */
 
 class AdaptadorCliente(private val contexto: Context, var arrCliente: Array<ClienteLista>)
     : RecyclerView.Adapter<AdaptadorCliente.RenglonCliente>()

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import mx.itesm.difood.model.ListaServiciosAPI
 import mx.itesm.difood.model.Pedido.Pedido
 import mx.itesm.difood.model.Pedido.PedidoId
-import mx.itesm.difood.model.Token
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

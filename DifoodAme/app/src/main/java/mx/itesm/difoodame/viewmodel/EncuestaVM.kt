@@ -7,15 +7,16 @@ import mx.itesm.difoodame.model.ComidasMenu
 import mx.itesm.difoodame.model.Encuesta
 import mx.itesm.difoodame.model.ListaComedoresAPI
 import mx.itesm.difoodame.model.RegistrarEncuesta
-import mx.itesm.difoodame.model.ReponsePedido
-import mx.itesm.difoodame.model.TokenResponse
-import mx.itesm.difoodame.model.Usuario
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
+/**
+ * @author Andrés Iván Rodríguez Méndez
+ * Esta es el ViewModel y se hace la llamada a la API
+ */
+
 
 class EncuestaVM : ViewModel()
 {

@@ -10,6 +10,10 @@ import androidx.navigation.fragment.findNavController
 import mx.itesm.difood.ViewModel.InicioDeSesionViewModel
 import mx.itesm.difood.databinding.FragmentInicioDeSesionBinding
 import mx.itesm.difood.model.InicioSesion.InicioSesionPost
+/**
+ * @author Carlos Alberto Sánchez Calderón
+ * Vista del Inicio de Sesion
+ */
 
 class InicioDeSesion : Fragment() {
     private  lateinit var binding: FragmentInicioDeSesionBinding
@@ -41,13 +45,16 @@ class InicioDeSesion : Fragment() {
     }
 
     private fun registrarEventos() {
+        // si presionan el boton ejecuta el codigo
         binding.btnInicio.setOnClickListener{
             //Cinco de Mayo
             binding.btnInicio.isEnabled = false
+            //Toma los valores de los campos de texto
             val sucursal:String = binding.etSucursal.text.toString()
             val contraseña: String = binding.etContraseA.text.toString()
             val inicioSesionData: InicioSesionPost = InicioSesionPost(sucursal,contraseña)
 
+            //Se hace la llamada a la API
             viewModel.descargarListaServicios(inicioSesionData)
             registrarObservadores()
 
@@ -55,6 +62,7 @@ class InicioDeSesion : Fragment() {
     }
 
     fun registrarObservadores(){
+        //Si hay cambios en el valor del token se ejecuta el codigo
         viewModel.token.observe(viewLifecycleOwner){variable ->
             if (variable.token != "Nel"){
                 binding.btnInicio.isEnabled = true

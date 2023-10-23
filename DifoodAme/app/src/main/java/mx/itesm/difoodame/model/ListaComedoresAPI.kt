@@ -5,6 +5,10 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Url
 
+/**
+ * @author Andrés Iván Rodríguez Méndez
+ * Esta es la interface para poder recibir los datos de la api para los comedores
+ */
 interface ListaComedoresAPI
 {
     @GET  //endpoint

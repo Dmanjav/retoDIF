@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import mx.itesm.difood.model.ListaServiciosAPI
 import mx.itesm.difood.model.Menu.MenuData
 import mx.itesm.difood.model.Menu.MenuID
-import mx.itesm.difood.model.Token
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
