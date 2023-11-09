@@ -331,7 +331,7 @@ function generar_graficas() {
                         "rgba(189, 237, 66, 1)",
                         "rgba(250, 113, 113, 1)",
                         "rgba(255, 255, 0, 1)",
-                        ]
+                    ]
                 },
             ],
         },
@@ -357,7 +357,7 @@ function generar_graficas() {
         if (points.length) {
             const name = chart.data.labels[points[0].index];
             const idSeleccionado = ids[points[0].index];
-            
+
             activeSelection = { name, id: idSeleccionado };
             console.log(activeSelection)
 
@@ -412,12 +412,11 @@ function generar_graficas() {
             evaluaciones.update();
         }
     }
-    comedores.canvas.onclick = function(event) {clickHandler(event, comedores);};
+    comedores.canvas.onclick = function (event) { clickHandler(event, comedores); };
 
     //Comedores con más Ventas
     var top10ventas = new Chart(document.getElementById("myChart3"), {
         type: "bar",
-        // tooltips: false,
         data: {
             labels: top10labels,
             datasets: [
@@ -439,18 +438,19 @@ function generar_graficas() {
                 display: true,
                 text: "Top 10 ventas",
             },
-        },
-        plugins: {
-            datalabels: {
-                display: true,
-                anchor: "center",
-                align: "center",
-                color: "white",
-                formatter: function(value, context) {
-                    return value;
+            plugins: {
+                datalabels: {
+                    display: true,
+                    anchor: "center",
+                    align: "center",
+                    color: "white",
+                    formatter: function (value, context) {
+                        return value;
+                    },
                 },
             },
         },
+
     });
     // top10ventas.canvas.onclick = function(event) {clickHandler(event, top10ventas);};
 
