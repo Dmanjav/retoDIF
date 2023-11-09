@@ -417,6 +417,7 @@ function generar_graficas() {
     //Comedores con más Ventas
     var top10ventas = new Chart(document.getElementById("myChart3"), {
         type: "bar",
+        // tooltips: false,
         data: {
             labels: top10labels,
             datasets: [
@@ -437,6 +438,17 @@ function generar_graficas() {
             title: {
                 display: true,
                 text: "Top 10 ventas",
+            },
+        },
+        plugins: {
+            datalabels: {
+                display: true,
+                anchor: "center",
+                align: "center",
+                color: "white",
+                formatter: function(value, context) {
+                    return value;
+                },
             },
         },
     });
