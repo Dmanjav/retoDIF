@@ -361,11 +361,7 @@ function generar_graficas() {
             activeSelection = { name, id: idSeleccionado };
             console.log(activeSelection)
             
-            
-            
-            document.getElementById('selectedComedor').innerHTML = 'Selected comedor: ' + activeSelection.name;
-
-
+            document.getElementById('selectedComedor').innerHTML = 'Comedor seleccionado: ' + activeSelection.name;
 
             // Gráfica 1
             while (ventasdata.length > 0) {
