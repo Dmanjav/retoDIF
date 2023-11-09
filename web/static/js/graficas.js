@@ -444,6 +444,7 @@ function generar_graficas() {
                     anchor: "center",
                     align: "center",
                     color: "white",
+                    font: {size: 20},
                     formatter: function (value, context) {
                         return value;
                     },
