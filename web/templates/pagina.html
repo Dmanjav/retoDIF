@@ -51,7 +51,8 @@
 
     <div>
         <h1 class="subtitle">Información por comedor</h1>
-        <i><h2 id="selectedComedor">Comedor seleccionado: por favor selecciona un comedor</h2></i>
+        <h2 id="selectedComedor" style="margin-left: 1rem;"><i>Comedor seleccionado: por favor selecciona un comedor</i></h2>
+        <p style="margin-left: 1rem;">La información siguiente es mostrada con los úlitmos 30 días de información.</p>
         <div class="gfx-container">
             <div class="grafico">
                 <h2 class="gr-title">Ventas por día</h2>
@@ -74,6 +75,38 @@
                 <canvas id="myChart11"></canvas>
             </div>
         </div>
+        <br>
+
+        <div class="dateSelection">
+            <select id="month" class="dropdown">
+                <option value="">Selecciona el mes</option>
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12" selected>Diciembre</option>
+            </select>
+        
+            <select id="year" class="dropdown">
+                <option value="">Selecciona el año</option>
+                <option value="2020" selected>2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+            </select>
+        </div>
+
+        <button class="generate" id="btnReport">
+            Generar CSV
+        </button>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>

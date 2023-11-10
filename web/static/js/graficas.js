@@ -599,7 +599,7 @@ function generar_graficas() {
                 {
                     label: "Ventas",
                     data: donacionesdata,
-                    backgroundColor: ["rgba(112, 255, 130, 0.5)", "rgba(255, 112, 166, 0.5)"],
+                    backgroundColor: ["#89FAD0", "#09194F",],//["rgba(112, 255, 130, 0.5)", "rgba(255, 112, 166, 0.5)"],
                 },
             ],
         },
@@ -642,13 +642,13 @@ function generar_graficas() {
                     type: "line",
                     label: "Objetivo de la Meta",
                     data: objetivos,
-                    backgroundColor: "rgba(51, 255, 167, 0.5)",
+                    backgroundColor: ["#89FAD0"], //"rgba(51, 255, 167, 0.5)",
                 },
                 {
                     type: "bar",
                     label: "Venta",
                     data: metasdata,
-                    backgroundColor: "rgba(65, 51, 255, 0.5)",
+                    backgroundColor: "#09194F",// "rgba(65, 51, 255, 0.5)",
                 },
             ],
             labels: metaslabels,
@@ -668,7 +668,7 @@ function generar_graficas() {
                     type: "bar",
                     label: "Promedio de calificaciones",
                     data: evaluacionesdata,
-                    backgroundColor: ["rgba(255, 195, 0, 0.5)", "rgba(255, 87, 51, 0.5)", "rgba(199, 0, 57, 0.5)"],
+                    backgroundColor:  ["#89FAD0", "#6796E5", "#09194F"],// ["rgba(255, 195, 0, 0.5)", "rgba(255, 87, 51, 0.5)", "rgba(199, 0, 57, 0.5)"],
                 },
             ],
             labels: evaluacioneslabels,
@@ -682,3 +682,13 @@ function generar_graficas() {
     });
 }
 
+document.getElementById('btnReport').addEventListener('click', function() {
+    var month = document.getElementById('month').value;
+    var year = document.getElementById('year').value;
+
+    if(month && year) {
+        window.location.href = `yourURL?month=${month}&year=${year}`;
+    } else {
+        alert('Please select both month and year');
+    }
+});
