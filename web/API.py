@@ -329,6 +329,18 @@ def get_califs():
 
     return dict_calificaciones
 
+@app.route('/queries/get-reporte')
+def get_reporte():
+    mes = request.args.get('mes')
+    anio = request.args.get('anio')
+
+    if not (mes or anio):
+        return {'error': 'Bad request',
+                'message': 'Missing required parameter(s)',
+                'details' : 'Missing required parameter(s) \'mes\' or \'anio\''}, 400
+
+    return {'mes':mes,'anio':anio}
+
 # --------- App "Comedor" endpoints --------------
 
 @app.route('/app/comedor/login', methods = ['POST'])
